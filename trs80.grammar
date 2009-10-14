@@ -1,0 +1,29 @@
+%package "dct25.trs80.syntax";
+%class "TRS80Parser";
+
+%import "dct25.trs80.syntaxTree.*";
+
+%terminals NUMBER, CLS;
+
+%goal program;
+
+%typeof clearScreenStatement = "ClearScreenStatement";
+%typeof statement = "Statement";
+%typeof lineNumber = "LineNumber";
+%typeof program = "Program";
+
+program
+	= lineNumber.n statement.s {: return new Program(n, s); :}
+	;
+
+lineNumber
+	= NUMBER.n {: return new LineNumber(n); :}
+	;
+
+statement
+	= clearScreenStatement.s {: return s; :}
+	;
+
+clearScreenStatement
+	= CLS {: return new ClearScreenStatement(); :}
+	;	

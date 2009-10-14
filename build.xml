@@ -1,0 +1,33 @@
+<project name="TRS-80 Emulator" default="Test" basedir=".">
+    <target name="Test">
+        <echo>Test</echo> 
+    </target>
+	
+	<target name="beavertask" unless="beaver.available" description="creates Beaver Ant task">
+	    <taskdef name="beaver" classname="beaver.comp.run.AntTask" classpath="lib/beaver.jar" />
+	    <property name="beaver.available" value="yes"/>
+	</target>
+
+	<target name="jflextask" unless="jflex.available" description="creates JFlex Ant task">
+		<taskdef classname="JFlex.anttask.JFlexTask" name="jflex" classpath="lib/JFlex.jar" />
+	    <property name="jflex.available" value="yes"/>
+	</target>
+	
+	<target name="lexer" depends="jflextask" description="generate lexer">
+		<jflex file = "trs80.flex" destdir="gen" verbose="on" />
+	</target>
+	
+	<target name="parser" depends="beavertask,lexer" description="generate parser">
+	    <beaver file             = "trs80.grammar"
+	            destdir          = "gen"
+	            compress         = "yes"
+	            exportTables     = "yes"
+	            sortTerminals    = "yes"
+	            terminalNames    = "yes"
+	            exportTerminals  = "yes"
+	            useSwitch        = "no"
+	            anonymousActions = "yes"
+	            reportActions    = "yes" />
+	</target>
+
+</project> 
