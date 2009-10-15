@@ -30,4 +30,12 @@
 	            reportActions    = "yes" />
 	</target>
 
+	<target name="compile" depends="parser,lexer">
+		<mkdir dir="bin" />
+		<javac classpath="lib/beaver.jar" destdir="bin">
+			<src path="src" />
+			<src path="gen" />
+		</javac>
+	</target>
+
 </project> 
