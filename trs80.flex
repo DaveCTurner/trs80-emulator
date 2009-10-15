@@ -42,7 +42,7 @@ Number = [:digit:] [:digit:]*
 <YYINITIAL> {
 	{Number}    { return newToken(Terminals.NUMBER, new Integer(yytext())); }
 
-	"CLS"       { return newToken(Terminals.CLS, yytext()); }
+	"CLS"       { return newToken(Terminals.CLS); }
 }
 
 .|\n            { throw new Scanner.Exception("unexpected character '" + yytext() + "'"); }

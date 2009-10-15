@@ -12,4 +12,13 @@ public class ClearScreenStatement extends beaver.Symbol implements Statement {
         super();
         /* Do nothing */
     }
+    
+    
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null) { return false; }
+        if (!(o instanceof ClearScreenStatement)) { return false; }
+               
+        return true;
+    }
 }

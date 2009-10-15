@@ -32,10 +32,36 @@
 
 	<target name="compile" depends="parser,lexer">
 		<mkdir dir="bin" />
-		<javac classpath="lib/beaver.jar" destdir="bin">
+		<copy file="gen/dct25/trs80/syntax/TRS80Parser.spec" todir="bin/dct25/trs80/syntax/" />
+		<javac destdir="bin">
+			<classpath refid="classpath.base" />
 			<src path="src" />
 			<src path="gen" />
 		</javac>
+	</target>
+
+	<path id="classpath.base">
+		<pathelement location="lib/JFlex.jar" />
+		<pathelement location="lib/beaver.jar" />
+	</path>
+
+	<path id="classpath.test">
+		<pathelement location="/usr/share/java/junit4.jar" />
+		<pathelement location="bin" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="test" depends="compile">
+		<javac destdir="bin">
+			<classpath refid="classpath.test" />
+			<src path="test" />
+		</javac>
+
+		<junit>
+			<classpath refid="classpath.test" />
+			<formatter type="plain" usefile="true" />
+			<test name="dct25.trs80.ClearScreenSingleLine" />
+		</junit>
 	</target>
 
 </project> 
