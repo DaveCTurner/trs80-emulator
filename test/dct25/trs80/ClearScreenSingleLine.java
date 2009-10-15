@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
-import org.junit.Assert;
-
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
 
