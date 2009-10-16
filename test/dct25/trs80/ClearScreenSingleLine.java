@@ -34,9 +34,4 @@ public class ClearScreenSingleLine {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
 
-    @org.junit.Test
-    public void shouldFail() {
-        assertTrue(false);
-    }
-
 }
