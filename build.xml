@@ -60,7 +60,11 @@
 		<junit>
 			<classpath refid="classpath.test" />
 			<formatter type="plain" usefile="true" />
-			<test name="dct25.trs80.ClearScreenSingleLine" />
+			<batchtest>
+				<fileset dir="test">
+					<include name="**/*" />
+				</fileset>
+			</batchtest>
 		</junit>
 	</target>
 
