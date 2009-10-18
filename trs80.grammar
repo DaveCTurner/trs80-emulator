@@ -3,18 +3,36 @@
 
 %import "dct25.trs80.syntaxTree.*";
 
-%terminals NUMBER, CLS;
+%terminals NUMBER, CLS, COLON;
 
 %goal program;
 
 %typeof clearScreenStatement = "ClearScreenStatement";
 %typeof statement = "Statement";
+%typeof subsequentStatement = "Statement";
 %typeof lineNumber = "LineNumber";
 %typeof program = "Program";
 
 program
-	= lineNumber.n statement.s {: return new Program(n, s); :}
+	= lineNumber.n statementSequence.s {: return new Program(n, (Statement[]) s.value); :}
 	;
+
+statementSequence
+	= statement.s0 subsequentStatement.s1* {: 
+		Statement[] statements = new Statement[1 + s1.length];
+		statements[0] = s0;
+		for (int i = 0; i < s1.length; i++) {
+			statements[i+1] = s1[i];
+		}
+		return new Symbol(statements);
+	:}
+	;
+
+subsequentStatement
+	= statementSeparator statement
+	;
+
+statementSeparator = COLON;
 
 lineNumber
 	= NUMBER.n {: return new LineNumber(n); :}
@@ -27,4 +45,4 @@ statement
 
 clearScreenStatement
 	= CLS {: return new ClearScreenStatement(); :}
-	;	
+	;

@@ -3,6 +3,7 @@
  */
 package dct25.trs80.syntaxTree;
 
+import beaver.Symbol;
 import dct25.trs80.emulator.Executable;
 import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
 
@@ -12,12 +13,13 @@ import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
  */
 public class Program extends beaver.Symbol {
     private LineNumber _lineNumber;
-    private Statement _statement;
+    private Statement[] _statements;
 
-    public Program (LineNumber lineNumber, Statement statement) {
+    public Program (LineNumber lineNumber, Statement[] statements) {
         super();
         _lineNumber = lineNumber;
-        _statement = statement;
+        _statements = statements;
+        if (null == _statements) { throw new NullPointerException("Statements parameter cannot be null"); }
     }
     
     public String toString() {
@@ -70,10 +72,9 @@ public class Program extends beaver.Symbol {
             if (!(this._lineNumber.equals(other._lineNumber))) { return false; }
         }
 
-        if (this._statement == null) {
-            if (other._statement != null) { return false; }
-        } else {
-            if (!(this._statement.equals(other._statement))) { return false; }
+        if (this._statements.length != other._statements.length) { return false; }
+        for (int i = 0; i < this._statements.length; i++) {
+            if (!(this._statements[i].equals(other._statements[i]))) { return false; }
         }
         
         return true;

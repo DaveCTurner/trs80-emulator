@@ -43,6 +43,8 @@ Number = [:digit:] [:digit:]*
 	{Number}    { return newToken(Terminals.NUMBER, new Integer(yytext())); }
 
 	"CLS"       { return newToken(Terminals.CLS); }
+	
+	":"         { return newToken(Terminals.COLON); }
 }
 
 .|\n            { throw new Scanner.Exception("unexpected character '" + yytext() + "'"); }
