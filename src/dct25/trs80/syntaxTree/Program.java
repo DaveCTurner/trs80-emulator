@@ -41,7 +41,7 @@ public class Program extends beaver.Symbol {
         sb.append(" * Translation of the following TRS-80 BASIC program into Java:\n");
         sb.append(" * \n");
         sb.append(" * ---\n");
-        sb.append("10 CLS\n");
+        sb.append(asBasic());
         sb.append(" * ---\n");
         sb.append(" */\n");
         sb.append("\n");
