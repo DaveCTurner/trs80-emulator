@@ -22,6 +22,7 @@ lineNumber
 
 statement
 	= clearScreenStatement.s {: return s; :}
+	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
 clearScreenStatement
