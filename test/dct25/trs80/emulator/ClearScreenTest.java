@@ -14,10 +14,10 @@ public class ClearScreenTest {
     public void shouldClearScreen() {
         InstrumentedEnvironment env = new InstrumentedEnvironment();
         
-        assertFalse("Should not have cleared screen", env.getScreenCleared());
+        assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
         Executable e = new SingleClearScreenProgram();
         e.execute(env);
-        assertTrue("Should now have cleared screen", env.getScreenCleared());
+        assertEquals("Should now have cleared screen once", 1, env.getScreenClearedCount());
     }
 
     @Test
@@ -26,8 +26,8 @@ public class ClearScreenTest {
         Executable e = clearScreenProgram.compile();
 
         InstrumentedEnvironment env = new InstrumentedEnvironment();
-        assertFalse("Should not have cleared screen", env.getScreenCleared());
+        assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
         e.execute(env);
-        assertTrue("Should now have cleared screen", env.getScreenCleared());
+        assertEquals("Should now have cleared screen once", 1, env.getScreenClearedCount());
     }
 }

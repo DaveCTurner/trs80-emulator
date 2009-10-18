@@ -10,8 +10,6 @@ public class InstrumentedEnvironment implements Environment {
     
     public int getScreenClearedCount() { return screenClearedCount; }
 
-    public boolean getScreenCleared() { return getScreenClearedCount() > 0; }
-    
     public void clearScreen() {
         screenClearedCount += 1;
     }
