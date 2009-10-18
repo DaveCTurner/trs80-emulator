@@ -21,6 +21,12 @@ public class Program extends beaver.Symbol {
         return "TRS-80 Program";
     }
     
+    public String asBasic() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("10 CLS\n");
+        return sb.toString();
+    }
+    
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null) { return false; }
