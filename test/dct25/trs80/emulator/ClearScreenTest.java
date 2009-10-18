@@ -29,7 +29,7 @@ public class ClearScreenTest {
                     new ClearScreenStatement()
                 })});
         
-        Executable e = clearScreenProgram.compile();
+        Executable e = new JavaCompiler().compile(clearScreenProgram);
 
         InstrumentedEnvironment env = new InstrumentedEnvironment();
         assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
