@@ -3,15 +3,17 @@ package dct25.trs80.emulator;
 public class InstrumentedEnvironment implements Environment {
 
     public InstrumentedEnvironment() {
-        screenCleared = false;
+        screenClearedCount = 0;
     }
     
-    private boolean screenCleared;
+    private int screenClearedCount;
     
-    public boolean getScreenCleared() { return screenCleared; }
+    public int getScreenClearedCount() { return screenClearedCount; }
+
+    public boolean getScreenCleared() { return getScreenClearedCount() > 0; }
     
     public void clearScreen() {
-        screenCleared = true;
+        screenClearedCount += 1;
     }
 
 }
