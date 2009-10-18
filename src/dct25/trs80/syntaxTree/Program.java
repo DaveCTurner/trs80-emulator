@@ -18,7 +18,7 @@ public class Program extends beaver.Symbol {
     }
     
     public String toString() {
-        return "10 CLX";
+        return "TRS-80 Program";
     }
     
     public boolean equals(Object o) {
