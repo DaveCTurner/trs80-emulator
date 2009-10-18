@@ -5,7 +5,6 @@ package dct25.trs80;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 

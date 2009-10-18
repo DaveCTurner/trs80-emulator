@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import beaver.Symbol;
-
 import dct25.trs80.syntaxTree.ClearScreenStatement;
 import dct25.trs80.syntaxTree.LineNumber;
 import dct25.trs80.syntaxTree.Program;
