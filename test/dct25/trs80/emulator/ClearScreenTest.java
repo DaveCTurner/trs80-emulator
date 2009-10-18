@@ -23,6 +23,37 @@ public class ClearScreenTest {
     }
 
     @Test
+    public void shouldCreateClassWithCorrectName() throws Exception {
+        Program clearScreenProgram = new Program(
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
+                    new ClearScreenStatement()
+                })});
+        
+        Executable e = new BasicToJavaCompiler("OnTheFlyProgram", "dct25.trs80.examplePrograms.onTheFly")
+            .compile(clearScreenProgram);
+        
+        assertEquals("Check compiled class name",
+                "dct25.trs80.examplePrograms.onTheFly.OnTheFlyProgram",
+                e.getClass().getCanonicalName());
+    }
+
+    @Test
+    public void shouldCreateClassWithCorrectName2() throws Exception {
+        Program clearScreenProgram = new Program(
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
+                    new ClearScreenStatement()
+                })});
+        
+        Executable e = new BasicToJavaCompiler("OnTheFlyProgram2", "dct25.trs80.examplePrograms.onTheFly2")
+            .compile(clearScreenProgram);
+        
+        assertEquals("Check compiled class name",
+                "dct25.trs80.examplePrograms.onTheFly2.OnTheFlyProgram2",
+                e.getClass().getCanonicalName());
+    }
+
+    
+    @Test
     public void shouldClearScreenWithInMemoryClass() throws Exception {
         Program clearScreenProgram = new Program(
                 new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {

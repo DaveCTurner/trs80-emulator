@@ -5,18 +5,22 @@ import dct25.trs80.syntaxTree.Program;
 
 public class BasicToJavaCompiler {
 
+    private String _className;
+    private String _packageName;
+    
     public BasicToJavaCompiler(String className, String packageName) {
-        // Do nothing
+        _className = className;
+        _packageName = packageName;
     }
     
     public Executable compile(Program program) throws Exception {
-        InMemorySourceCompiler compiler = new InMemorySourceCompiler("OnTheFlyProgram", generateCode(program));
+        InMemorySourceCompiler compiler = new InMemorySourceCompiler(_className, generateCode(program));
         return compiler.instantiate();
     }
 
     public String generateCode(Program program) {
         StringBuilder sb = new StringBuilder();
-        sb.append("package dct25.trs80.examplePrograms.onTheFly;\n");
+        sb.append("package "); sb.append(_packageName); sb.append(";\n");
         sb.append("\n");
         sb.append("import dct25.trs80.emulator.Environment;\n");
         sb.append("import dct25.trs80.emulator.Executable;\n");
@@ -29,7 +33,7 @@ public class BasicToJavaCompiler {
         sb.append(" * ---\n");
         sb.append(" */\n");
         sb.append("\n");
-        sb.append("public class OnTheFlyProgram implements Executable {\n");
+        sb.append("public class " + _className + " implements Executable {\n");
         sb.append("\n");
         sb.append("    /**\n");
         sb.append("     * Execute the program.\n");
