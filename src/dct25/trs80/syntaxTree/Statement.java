@@ -8,5 +8,5 @@ package dct25.trs80.syntaxTree;
  *
  */
 public interface Statement {
-
+    public String asBasic();
 }

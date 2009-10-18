@@ -21,4 +21,9 @@ public class ClearScreenStatement extends beaver.Symbol implements Statement {
                
         return true;
     }
+
+
+    public String asBasic() {
+        return "CLS";
+    }
 }

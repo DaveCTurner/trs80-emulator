@@ -27,7 +27,15 @@ public class ProgramLine extends beaver.Symbol {
     
     public String asBasic() {
         StringBuilder sb = new StringBuilder();
-        sb.append("10 CLS\n");
+        sb.append(_lineNumber.toString());
+        for (int i = 0; i < _statements.length; i++) {
+            sb.append(" ");
+            if (i > 0) { 
+                sb.append(": ");
+            }
+            sb.append(_statements[i].asBasic());
+        }
+        sb.append("\n");
         return sb.toString();
     }
     

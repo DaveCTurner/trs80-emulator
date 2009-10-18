@@ -26,7 +26,7 @@ public class Program extends beaver.Symbol {
     public String asBasic() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < _lines.length; i++) {
-            sb.append(_lines[0].asBasic());
+            sb.append(_lines[i].asBasic());
         }
         return sb.toString();
     }
