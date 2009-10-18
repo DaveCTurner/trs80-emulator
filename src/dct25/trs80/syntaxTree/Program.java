@@ -3,6 +3,10 @@
  */
 package dct25.trs80.syntaxTree;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+
 import dct25.trs80.emulator.Executable;
 import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
 
@@ -22,13 +26,21 @@ public class Program extends beaver.Symbol {
     public String toString() {
         return "TRS-80 Program";
     }
-    
+
     public String asBasic() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < _lines.length; i++) {
-            sb.append(_lines[i].asBasic());
+        Writer out = new StringWriter();
+        try {
+            writeAsBasic(out);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return sb.toString();
+        return out.toString();
+    }
+    
+    public void writeAsBasic(Writer out) throws IOException {
+        for (int i = 0; i < _lines.length; i++) {
+            _lines[i].writeAsBasic(out);
+        }
     }
     
     public String asJava() {

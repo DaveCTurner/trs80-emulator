@@ -3,6 +3,10 @@
  */
 package dct25.trs80.syntaxTree;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+
 /**
  * @author dct25
  *
@@ -35,7 +39,18 @@ public class LineNumber extends beaver.Symbol {
         return true;
     }
     
+    public void writeAsBasic(Writer out) throws IOException {
+        out.write(Integer.toString(_number));
+    }
+    
     public String toString() {
-        return Integer.toString(_number);
+        StringWriter out = new StringWriter();
+        try {
+            writeAsBasic(out);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return out.toString();
     }
 }

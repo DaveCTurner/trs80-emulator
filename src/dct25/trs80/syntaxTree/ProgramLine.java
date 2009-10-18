@@ -3,8 +3,9 @@
  */
 package dct25.trs80.syntaxTree;
 
-import dct25.trs80.emulator.Executable;
-import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * @author dct25
@@ -22,49 +23,28 @@ public class ProgramLine extends beaver.Symbol {
     }
     
     public String toString() {
-        return "TRS-80 Program Line: '" + asBasic() + "'";
-    }
-    
-    public String asBasic() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(_lineNumber.toString());
-        for (int i = 0; i < _statements.length; i++) {
-            sb.append(" ");
-            if (i > 0) { 
-                sb.append(": ");
-            }
-            sb.append(_statements[i].asBasic());
+        try {
+            Writer out = new StringWriter();
+            out.write("TRS-80 Program Line: '");
+            writeAsBasic(out);
+            out.write("'");
+            return out.toString();
         }
-        sb.append("\n");
-        return sb.toString();
+        catch (IOException e) {
+            return "An exception occurred in ProgramLine.toString(): " + e.getMessage();
+        }
     }
     
-    public String asJava() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("package dct25.trs80.examplePrograms.onTheFly;\n");
-        sb.append("\n");
-        sb.append("import dct25.trs80.emulator.Environment;\n");
-        sb.append("import dct25.trs80.emulator.Executable;\n");
-        sb.append("\n");
-        sb.append("/**\n");
-        sb.append(" * Translation of the following TRS-80 BASIC program into Java:\n");
-        sb.append(" * \n");
-        sb.append(" * ---\n");
-        sb.append(asBasic());
-        sb.append(" * ---\n");
-        sb.append(" */\n");
-        sb.append("\n");
-        sb.append("public class OnTheFlyProgram implements Executable {\n");
-        sb.append("\n");
-        sb.append("    /**\n");
-        sb.append("     * Execute the program.\n");
-        sb.append("     * @param env The environment in which to execute the program.\n");
-        sb.append("     */\n");
-        sb.append("    public void execute(Environment env) {\n");
-        sb.append("        env.clearScreen();\n");
-        sb.append("    }\n");
-        sb.append("}\n");
-        return sb.toString();
+    public void writeAsBasic(Writer out) throws IOException {
+        out.write(_lineNumber.toString());
+        for (int i = 0; i < _statements.length; i++) {
+            out.write(" ");
+            if (i > 0) { 
+                out.write(": ");
+            }
+            _statements[i].writeAsBasic(out);
+        }
+        out.write("\n");
     }
     
     public boolean equals(Object o) {
@@ -85,10 +65,5 @@ public class ProgramLine extends beaver.Symbol {
         }
         
         return true;
-    }
-
-    public Executable compile() throws Exception {
-        InMemorySourceCompiler compiler = new InMemorySourceCompiler("OnTheFlyProgram", asJava());
-        return (Executable) compiler.instantiate();
     }
 }

@@ -3,6 +3,9 @@
  */
 package dct25.trs80.syntaxTree;
 
+import java.io.IOException;
+import java.io.Writer;
+
 /**
  * @author dct25
  *
@@ -22,8 +25,7 @@ public class ClearScreenStatement extends beaver.Symbol implements Statement {
         return true;
     }
 
-
-    public String asBasic() {
-        return "CLS";
+    public void writeAsBasic(Writer out) throws IOException {
+        out.write("CLS");
     }
 }
