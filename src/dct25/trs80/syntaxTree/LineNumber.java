@@ -8,14 +8,19 @@ package dct25.trs80.syntaxTree;
  *
  */
 public class LineNumber extends beaver.Symbol {
-    public LineNumber(beaver.Symbol n) {
+    int _number;
+    
+    public LineNumber(int n) {
+        _number = n;
+    }
+    
+    public LineNumber(beaver.Symbol n) throws Exception {
         super();
-        System.out.println("Constructing line number:");
-        System.out.println(n);
-        if (null != n) {
-            System.out.println(n.value);
-            System.out.println(n.value.getClass().toString());
+        if (!(n.value instanceof java.lang.Integer)) {
+            throw new Exception("Non-integer line number");
         }
+        
+        _number = ((java.lang.Integer)n.value).intValue();
     }
     
     
@@ -23,6 +28,9 @@ public class LineNumber extends beaver.Symbol {
         if (this == o) { return true; }
         if (o == null) { return false; }
         if (!(o instanceof LineNumber)) { return false; }
+        
+        LineNumber other = (LineNumber) o;
+        if (_number != other._number) { return false; }
                
         return true;
     }

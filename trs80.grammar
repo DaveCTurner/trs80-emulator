@@ -40,7 +40,7 @@ subsequentStatement
 statementSeparator = COLON;
 
 lineNumber
-	= NUMBER.n {: return new LineNumber(n); :}
+	= NUMBER.n {: try { return new LineNumber(n); } catch (java.lang.Exception e) { return null; /* Impossible */ } :}
 	;
 
 statement

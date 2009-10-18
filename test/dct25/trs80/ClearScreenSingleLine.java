@@ -5,7 +5,6 @@ package dct25.trs80;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -20,7 +19,7 @@ import dct25.trs80.syntaxTree.*;
 public class ClearScreenSingleLine {
     
     @org.junit.Test
-    public void shouldParseCLSCommand() throws beaver.Parser.Exception, IOException {
+    public void shouldParseCLSCommand() throws Exception {
         Reader input = new StringReader("10 CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
@@ -28,7 +27,7 @@ public class ClearScreenSingleLine {
         System.out.println(o);
         
         Program expectedProgram = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
                     new ClearScreenStatement()
                 })});
         

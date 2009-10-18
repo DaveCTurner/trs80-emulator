@@ -25,7 +25,7 @@ public class ClearScreenTest {
     @Test
     public void shouldClearScreenWithInMemoryClass() throws Exception {
         Program clearScreenProgram = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
                     new ClearScreenStatement()
                 })});
         

@@ -24,7 +24,7 @@ import dct25.trs80.syntaxTree.Statement;
 public class RepeatedStatementsSingleLine {
 
     @org.junit.Test
-    public void shouldParseTwoCLSCommands() throws beaver.Parser.Exception, IOException {
+    public void shouldParseTwoCLSCommands() throws Exception {
         Reader input = new StringReader("10 CLS: CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
@@ -32,7 +32,7 @@ public class RepeatedStatementsSingleLine {
         System.out.println(o);
 
         Program expectedProgram = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
                     new ClearScreenStatement(), 
                     new ClearScreenStatement()
                 })});
@@ -42,7 +42,7 @@ public class RepeatedStatementsSingleLine {
 
 
     @org.junit.Test
-    public void shouldParseThreeCLSCommands() throws beaver.Parser.Exception, IOException {
+    public void shouldParseThreeCLSCommands() throws Exception {
         Reader input = new StringReader("10 CLS: CLS  :CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
@@ -50,7 +50,7 @@ public class RepeatedStatementsSingleLine {
         System.out.println(o);
 
         Program expectedProgram = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
                     new ClearScreenStatement(), 
                     new ClearScreenStatement(), 
                     new ClearScreenStatement()

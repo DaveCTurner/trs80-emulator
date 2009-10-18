@@ -15,10 +15,10 @@ import dct25.trs80.syntaxTree.Statement;
 public class ProgramToBasic {
 
     @Test
-    public void ShouldConvertCLSToBasicCorrectly() {
+    public void ShouldConvertCLSToBasicCorrectly() throws Exception {
 
         Program p = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
                     new ClearScreenStatement()
                 })});
 

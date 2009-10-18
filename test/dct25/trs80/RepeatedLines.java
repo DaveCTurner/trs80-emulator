@@ -24,7 +24,7 @@ import dct25.trs80.syntaxTree.Statement;
 public class RepeatedLines {
 
     @org.junit.Test
-    public void shouldParseThreeLinesOfCLSCommands() throws beaver.Parser.Exception, IOException {
+    public void shouldParseThreeLinesOfCLSCommands() throws Exception {
         Reader input = new StringReader("10 CLS: CLS\n20 CLS\n30 CLS:CLS :CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
@@ -32,14 +32,14 @@ public class RepeatedLines {
         System.out.println(o);
 
         Program expectedProgram = new Program(new ProgramLine[] {
-                new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
                     new ClearScreenStatement(), 
                     new ClearScreenStatement()
                 }),
-                new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine(new LineNumber(20), new Statement[] {
                     new ClearScreenStatement()
                 }),
-                new ProgramLine(new LineNumber(null), new Statement[] {
+                new ProgramLine(new LineNumber(30), new Statement[] {
                     new ClearScreenStatement(), 
                     new ClearScreenStatement(), 
                     new ClearScreenStatement()
