@@ -3,8 +3,12 @@ package dct25.trs80.emulator;
 import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
 import dct25.trs80.syntaxTree.Program;
 
-public class JavaCompiler {
+public class BasicToJavaCompiler {
 
+    public BasicToJavaCompiler(String className, String packageName) {
+        // Do nothing
+    }
+    
     public Executable compile(Program program) throws Exception {
         InMemorySourceCompiler compiler = new InMemorySourceCompiler("OnTheFlyProgram", generateCode(program));
         return compiler.instantiate();

@@ -29,7 +29,7 @@ public class ClearScreenTest {
                     new ClearScreenStatement()
                 })});
         
-        Executable e = new JavaCompiler().compile(clearScreenProgram);
+        Executable e = new BasicToJavaCompiler("OnTheFlyProgram", "dct25.trs80.examplePrograms.onTheFly").compile(clearScreenProgram);
 
         InstrumentedEnvironment env = new InstrumentedEnvironment();
         assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
