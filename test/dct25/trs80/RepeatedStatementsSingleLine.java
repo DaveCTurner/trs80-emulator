@@ -23,7 +23,7 @@ import dct25.trs80.syntaxTree.Statement;
 public class RepeatedStatementsSingleLine {
     
     @org.junit.Test
-    public void shouldParseCLSCommand() throws beaver.Parser.Exception, IOException {
+    public void shouldParseTwoCLSCommands() throws beaver.Parser.Exception, IOException {
         Reader input = new StringReader("10 CLS: CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
@@ -38,4 +38,21 @@ public class RepeatedStatementsSingleLine {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
 
+    
+    @org.junit.Test
+    public void shouldParseThreeCLSCommands() throws beaver.Parser.Exception, IOException {
+        Reader input = new StringReader("10 CLS: CLS  :CLS");
+        beaver.Scanner scanner = new TRS80Scanner(input);
+        TRS80Parser parser = new TRS80Parser();
+        Object o = parser.parse(scanner);
+        System.out.println(o);
+        
+        Program expectedProgram = new Program(new LineNumber(null), new Statement[] { 
+            new ClearScreenStatement(), 
+            new ClearScreenStatement(), 
+            new ClearScreenStatement() 
+        });
+        
+        assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
 }
