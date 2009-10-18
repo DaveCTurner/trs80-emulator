@@ -20,7 +20,8 @@ class InMemorySourceCompiler {
 
     @SuppressWarnings("deprecation")
     protected void loadClass() throws Exception {
-        ClassPath cp = new ClassPath(System.getProperty("java.class.path"));
+        ClassPath cp = new ClassPath((System.getProperty("java.class.path") 
+                + ":/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar"));
         OutputStream os = System.out;
         BatchEnvironment be = new BatchEnvironment(os, cp);
         be.flags = 0x41004;
