@@ -4,10 +4,12 @@ import java.lang.reflect.*;
 import java.util.*;
 import java.io.*;
 
-import sun.tools.javac.*;  
-import sun.tools.java.*;
+import dct25.trs80.emulator.Executable;
 
-class InMemorySourceCompiler {
+import sun.tools.java.*;
+import sun.tools.javac.*;
+
+public class InMemorySourceCompiler {
     protected String name;
     protected String source;
     protected Class<?> compiledClass;
@@ -21,7 +23,7 @@ class InMemorySourceCompiler {
     @SuppressWarnings("deprecation")
     protected void loadClass() throws Exception {
         ClassPath cp = new ClassPath((System.getProperty("java.class.path") 
-                + ":/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar"));
+                + ":/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar:bin"));
         OutputStream os = System.out;
         BatchEnvironment be = new BatchEnvironment(os, cp);
         be.flags = 0x41004;
@@ -29,7 +31,7 @@ class InMemorySourceCompiler {
         be.minorVersion = 3;
         be.covFile = null;
         be.setCharacterEncoding(null);
-
+        
         be.parseFile(new InMemorySourceClassFile(name+".java", source));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
@@ -51,15 +53,14 @@ class InMemorySourceCompiler {
                 // SourceClass sourceclass1 = (SourceClass) object;
                 baos.reset();
                 sourceclass.compile(baos);
-            }
-            else if (object instanceof BinaryClass) {
-                BinaryClass binaryclass = (BinaryClass) object;
-                binaryclass.write(be, baos);
+            } else {
+                throw new Exception("Class definition is not a SourceClass");
             }
             byte[] b = baos.toByteArray();
-
+            if (0 == b.length) { throw new Exception("Class definition is empty"); }
+            
             InMemorySourceCompilerClassLoader myClassLoader = new InMemorySourceCompilerClassLoader();
-            compiledClass = myClassLoader.getClassFromBytes(name, b);
+            compiledClass = myClassLoader.getClassFromBytes(null, b);
         }
     }
 
@@ -68,10 +69,20 @@ class InMemorySourceCompiler {
         m.invoke(null, new Object[]{null});
     }
 
-    static class InMemorySourceCompilerClassLoader extends ClassLoader
+    class InMemorySourceCompilerClassLoader extends ClassLoader
     {
-        public Class<?> getClassFromBytes(String name, byte[] b) {
+        public InMemorySourceCompilerClassLoader() {
+            super(InMemorySourceCompilerClassLoader.class.getClassLoader());
+        }
+        
+        public Class<?> getClassFromBytes(String name, byte[] b) throws ClassNotFoundException {
             return defineClass(name, b, 0, b.length);
         }
+    }
+
+    public Executable instantiate() throws SecurityException, NoSuchMethodException,
+    IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        Constructor<?> m = compiledClass.getConstructor(new Class[0]);
+        return (Executable) m.newInstance(new Object[0]);
     }
 }

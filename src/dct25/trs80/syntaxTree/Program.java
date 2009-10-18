@@ -3,6 +3,9 @@
  */
 package dct25.trs80.syntaxTree;
 
+import dct25.trs80.emulator.Executable;
+import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
+
 /**
  * @author dct25
  *
@@ -74,5 +77,10 @@ public class Program extends beaver.Symbol {
         }
         
         return true;
+    }
+
+    public Executable compile() throws Exception {
+        InMemorySourceCompiler compiler = new InMemorySourceCompiler("OnTheFlyProgram", asJava());
+        return (Executable) compiler.instantiate();
     }
 }
