@@ -11,10 +11,7 @@ import java.io.StringReader;
 
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
-import dct25.trs80.syntaxTree.ClearScreenStatement;
-import dct25.trs80.syntaxTree.LineNumber;
-import dct25.trs80.syntaxTree.Program;
-import dct25.trs80.syntaxTree.Statement;
+import dct25.trs80.syntaxTree.*;
 
 /**
  * @author dct25
@@ -30,7 +27,10 @@ public class ClearScreenSingleLine {
         Object o = parser.parse(scanner);
         System.out.println(o);
         
-        Program expectedProgram = new Program(new LineNumber(null), new Statement[] { new ClearScreenStatement() });
+        Program expectedProgram = new Program(
+                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                    new ClearScreenStatement()
+                })});
         
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }

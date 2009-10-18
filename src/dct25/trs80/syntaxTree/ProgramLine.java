@@ -10,24 +10,24 @@ import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
  * @author dct25
  *
  */
-public class Program extends beaver.Symbol {
-    private ProgramLine[] _lines;
+public class ProgramLine extends beaver.Symbol {
+    private LineNumber _lineNumber;
+    private Statement[] _statements;
 
-    public Program (ProgramLine[] lines) {
+    public ProgramLine (LineNumber lineNumber, Statement[] statements) {
         super();
-        _lines = lines;
-        if (null == _lines) { throw new NullPointerException("Lines parameter cannot be null"); }
+        _lineNumber = lineNumber;
+        _statements = statements;
+        if (null == _statements) { throw new NullPointerException("Statements parameter cannot be null"); }
     }
     
     public String toString() {
-        return "TRS-80 Program";
+        return "TRS-80 Program Line: '" + asBasic() + "'";
     }
     
     public String asBasic() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < _lines.length; i++) {
-            sb.append(_lines[0].asBasic());
-        }
+        sb.append("10 CLS\n");
         return sb.toString();
     }
     
@@ -62,12 +62,18 @@ public class Program extends beaver.Symbol {
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null) { return false; }
-        if (!(o instanceof Program)) { return false; }
-        Program other = (Program) o;
+        if (!(o instanceof ProgramLine)) { return false; }
+        ProgramLine other = (ProgramLine) o;
         
-        if (this._lines.length != other._lines.length) { return false; }
-        for (int i = 0; i < this._lines.length; i++) {
-            if (!(this._lines[i].equals(other._lines[i]))) { return false; }
+        if (this._lineNumber == null) {
+            if (other._lineNumber != null) { return false; }
+        } else {
+            if (!(this._lineNumber.equals(other._lineNumber))) { return false; }
+        }
+
+        if (this._statements.length != other._statements.length) { return false; }
+        for (int i = 0; i < this._statements.length; i++) {
+            if (!(this._statements[i].equals(other._statements[i]))) { return false; }
         }
         
         return true;

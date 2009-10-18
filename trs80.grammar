@@ -12,9 +12,14 @@
 %typeof subsequentStatement = "Statement";
 %typeof lineNumber = "LineNumber";
 %typeof program = "Program";
+%typeof programLine = "ProgramLine";
 
 program
-	= lineNumber.n statementSequence.s {: return new Program(n, (Statement[]) s.value); :}
+	= programLine.lines+ {: return new Program(lines); :}
+	;
+
+programLine
+	= lineNumber.n statementSequence.s {: return new ProgramLine(n, (Statement[]) s.value); :}
 	;
 
 statementSequence

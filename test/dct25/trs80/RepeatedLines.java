@@ -21,40 +21,30 @@ import dct25.trs80.syntaxTree.Statement;
  * @author dct25
  * 
  */
-public class RepeatedStatementsSingleLine {
+public class RepeatedLines {
 
     @org.junit.Test
-    public void shouldParseTwoCLSCommands() throws beaver.Parser.Exception, IOException {
-        Reader input = new StringReader("10 CLS: CLS");
+    public void shouldParseThreeLinesOfCLSCommands() throws beaver.Parser.Exception, IOException {
+        Reader input = new StringReader("10 CLS: CLS\n20 CLS\n30 CLS:CLS :CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
         Object o = parser.parse(scanner);
         System.out.println(o);
 
-        Program expectedProgram = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+        Program expectedProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(null), new Statement[] {
                     new ClearScreenStatement(), 
                     new ClearScreenStatement()
-                })});
-
-        assertEquals("Check parsed program is as expected", expectedProgram, o);
-    }
-
-
-    @org.junit.Test
-    public void shouldParseThreeCLSCommands() throws beaver.Parser.Exception, IOException {
-        Reader input = new StringReader("10 CLS: CLS  :CLS");
-        beaver.Scanner scanner = new TRS80Scanner(input);
-        TRS80Parser parser = new TRS80Parser();
-        Object o = parser.parse(scanner);
-        System.out.println(o);
-
-        Program expectedProgram = new Program(
-                new ProgramLine[] { new ProgramLine(new LineNumber(null), new Statement[] {
+                }),
+                new ProgramLine(new LineNumber(null), new Statement[] {
+                    new ClearScreenStatement()
+                }),
+                new ProgramLine(new LineNumber(null), new Statement[] {
                     new ClearScreenStatement(), 
                     new ClearScreenStatement(), 
                     new ClearScreenStatement()
-                })});
+                })
+              });
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
