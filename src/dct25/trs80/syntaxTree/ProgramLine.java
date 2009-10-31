@@ -3,7 +3,6 @@
  */
 package dct25.trs80.syntaxTree;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -22,29 +21,20 @@ public class ProgramLine extends beaver.Symbol {
         if (null == _statements) { throw new NullPointerException("Statements parameter cannot be null"); }
     }
     
+    public LineNumber getLineNumber() { return _lineNumber; }
+    
     public String toString() {
         try {
             Writer out = new StringWriter();
             out.write("TRS-80 Program Line: '");
-            writeAsBasic(out);
+            AsBasicVisitor v = new AsBasicVisitor(out);
+            visit(v);
             out.write("'");
             return out.toString();
         }
-        catch (IOException e) {
+        catch (Exception e) {
             return "An exception occurred in ProgramLine.toString(): " + e.getMessage();
         }
-    }
-    
-    public void writeAsBasic(Writer out) throws IOException {
-        _lineNumber.writeAsBasic(out);
-        for (int i = 0; i < _statements.length; i++) {
-            out.write(" ");
-            if (i > 0) { 
-                out.write(": ");
-            }
-            _statements[i].writeAsBasic(out);
-        }
-        out.write("\n");
     }
     
     public boolean equals(Object o) {
@@ -65,5 +55,13 @@ public class ProgramLine extends beaver.Symbol {
         }
         
         return true;
+    }
+
+    public void visit(Visitor v) throws Exception {
+        v.enterProgramLine(this);
+        for (int i = 0; i < _statements.length; i++) {
+            _statements[i].visit(v);
+        }
+        v.leaveProgramLine(this);
     }
 }

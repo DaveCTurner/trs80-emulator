@@ -3,9 +3,6 @@
  */
 package dct25.trs80.syntaxTree;
 
-import java.io.IOException;
-import java.io.Writer;
-
 /**
  * @author dct25
  *
@@ -33,8 +30,9 @@ public class GotoStatement extends beaver.Symbol implements Statement {
         return true;
     }
 
-    public void writeAsBasic(Writer out) throws IOException {
-        out.write("GOTO ");
-        m_target.writeAsBasic(out);
+    public void visit(Visitor v) throws Exception {
+        v.visitGotoStatement(this);
     }
+
+    public LineNumber getTarget() { return m_target; }
 }

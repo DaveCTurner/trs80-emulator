@@ -3,7 +3,6 @@
  */
 package dct25.trs80.syntaxTree;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -27,19 +26,14 @@ public class Program extends beaver.Symbol {
     public String asBasic() {
         Writer out = new StringWriter();
         try {
-            writeAsBasic(out);
-        } catch (IOException e) {
+            AsBasicVisitor v = new AsBasicVisitor(out);
+            visit(v);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return out.toString();
     }
     
-    public void writeAsBasic(Writer out) throws IOException {
-        for (int i = 0; i < _lines.length; i++) {
-            _lines[i].writeAsBasic(out);
-        }
-    }
-
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null) { return false; }
@@ -52,5 +46,13 @@ public class Program extends beaver.Symbol {
         }
         
         return true;
+    }
+    
+    public void visit(Visitor v) throws Exception {
+        v.enterProgram(this);
+        for (int i = 0; i < _lines.length; i++) {
+            _lines[i].visit(v);
+        }
+        v.leaveProgram(this);
     }
 }
