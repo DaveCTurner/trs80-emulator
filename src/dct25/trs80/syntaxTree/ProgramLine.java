@@ -36,7 +36,7 @@ public class ProgramLine extends beaver.Symbol {
     }
     
     public void writeAsBasic(Writer out) throws IOException {
-        out.write(_lineNumber.toString());
+        _lineNumber.writeAsBasic(out);
         for (int i = 0; i < _statements.length; i++) {
             out.write(" ");
             if (i > 0) { 
