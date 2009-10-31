@@ -6,6 +6,7 @@ import org.eclipse.jdt.core.dom.*;
 import org.eclipse.jdt.core.dom.StringLiteral;
 
 import dct25.trs80.syntaxTree.*;
+import dct25.trs80.syntaxTree.ForStatement;
 import dct25.trs80.syntaxTree.Statement;
 
 public class BasicToJavaCompilerVisitor extends AbstractVisitor {
@@ -64,6 +65,24 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         sl.setLiteralValue(ps.getText().withoutQuotes());
 
         setFallThroughToNextStatement(ps, medExecuteBody);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void visitNextStatement(NextStatement ns) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(ns);
+        
+        MethodInvocation entryPointInvocation = _ast.newMethodInvocation();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(entryPointInvocation));
+        entryPointInvocation.setName(_ast.newSimpleName(ns.getLoopStartStatement().getName()));
+
+        setFallThroughToNextStatement(ns, medExecuteBody);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void visitForStatement(ForStatement fs) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(fs);
+
+        setFallThroughToNextStatement(fs, medExecuteBody);
     }
     
     /** Builds a method for the given statement, and returns its body for population. */

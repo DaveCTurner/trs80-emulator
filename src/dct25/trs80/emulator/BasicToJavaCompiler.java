@@ -55,6 +55,7 @@ public class BasicToJavaCompiler {
                 + program.asBasic() + "---");
 
         program.visit(new SetStatementNameVisitor(new StatementNameGenerator()));
+        program.visit(new MatchLoopsVisitor());
         program.visit(new SetNextStatementVisitor());
         
         NumberedStatementsFinder nsf = new NumberedStatementsFinder();
