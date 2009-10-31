@@ -12,4 +12,7 @@ public interface Statement {
     
     public void setName(String name);
     public String getName();
+    
+    public void setNextStatement(Statement next);
+    public Statement getNextStatement();
 }
