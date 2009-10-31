@@ -2,7 +2,7 @@ package dct25.trs80.syntaxTree;
 
 import java.io.Writer;
 
-public class AsBasicVisitor implements Visitor {
+public class AsBasicVisitor extends AbstractVisitor {
 
     private Writer _out;
     
@@ -10,18 +10,10 @@ public class AsBasicVisitor implements Visitor {
         _out = out;
     }
     
-    public void enterProgram(Program p) {
-        // Do nothing
-    }
-
     private int _statementIndexInCurrentLine;
     public void enterProgramLine(ProgramLine pl) throws Exception {
         _out.write(pl.getLineNumber().toString());
         _statementIndexInCurrentLine = 0;
-    }
-
-    public void leaveProgram(Program p) {
-        // Do nothing
     }
 
     public void leaveProgramLine(ProgramLine pl) throws Exception {
