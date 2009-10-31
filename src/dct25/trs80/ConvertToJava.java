@@ -36,7 +36,7 @@ public class ConvertToJava {
             }
         }
         
-        String className = basicFileName.replace('.', '_');
+        String className = basicFileName.replace('.', '_').replace('-', '_');
         BasicToJavaCompiler jc = new BasicToJavaCompiler(className, "dct25.trs80.programs");
         System.out.print(jc.generateCode(p));
     }
