@@ -12,10 +12,10 @@ import dct25.trs80.syntaxTree.ProgramLine;
 import dct25.trs80.syntaxTree.Statement;
 
 
-public class EntryPoint {
+public class NumberedStatements {
 
     @Test
-    public void shouldSetEntryPoint() throws Exception {
+    public void shouldSetNumberedStatements() throws Exception {
         LineNumber l10 = new LineNumber(10);
         LineNumber l20 = new LineNumber(20);
         
@@ -31,13 +31,11 @@ public class EntryPoint {
                         new ProgramLine(l20, new Statement[] { s20, s21, s22 })
                 });
         
-        myProgram.visit(new SetEntryPointVisitor());
-        Statement entryPoint = myProgram.getEntryPoint();
+        NumberedStatementsFinder finder = new NumberedStatementsFinder();
+        myProgram.visit(finder);
         
-        assertSame(s10, entryPoint);
-        assertNotSame(s11, entryPoint);
-        assertNotSame(s20, entryPoint);
-        assertNotSame(s21, entryPoint);
-        assertNotSame(s22, entryPoint);
+        assertEquals("Check entry line", l10, finder.getEntryLine());
+        assertSame("Check line 10", s10, finder.getNumberedStatement(l10));
+        assertSame("Check line 20", s20, finder.getNumberedStatement(l20));
     }
 }
