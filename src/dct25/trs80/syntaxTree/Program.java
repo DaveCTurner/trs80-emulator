@@ -55,4 +55,8 @@ public class Program extends beaver.Symbol {
         }
         v.leaveProgram(this);
     }
+    
+    private Statement _entryPoint;
+    public void setEntryPoint(Statement entryPoint) { _entryPoint = entryPoint; }
+    public Statement getEntryPoint() { return _entryPoint; }
 }
