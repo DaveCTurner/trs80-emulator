@@ -35,6 +35,21 @@ public class PrintStatementTest {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
     
+    @Test
+    public void shouldParsePrintStatementWithComma() throws Exception {
+        Reader input = new StringReader("10 PRINT @ 1204, \"HELLO, WORLD\"");
+        beaver.Scanner scanner = new TRS80Scanner(input);
+        TRS80Parser parser = new TRS80Parser();
+        Object o = parser.parse(scanner);
+
+        Program expectedProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral("\"HELLO, WORLD\""), new IntegerLiteral(1204)) 
+                })
+              });
+
+        assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
     
     @Test
     public void ShouldConvertProgramWithPrintCorrectly() throws Exception {

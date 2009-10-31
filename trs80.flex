@@ -34,7 +34,7 @@ LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 IntegerLiteral = [:digit:] [:digit:]*
-StringLiteral = \"[A-Za-z0-9 ]*\"
+StringLiteral = \"[A-Za-z0-9, ]*\"
 
 %%
 
