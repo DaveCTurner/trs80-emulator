@@ -16,7 +16,9 @@ public class BasicToJavaCompiler {
     }
     
     public Executable compile(Program program) throws Exception {
-        InMemorySourceCompiler compiler = new InMemorySourceCompiler(_className, generateCode(program));
+        String code = generateCode(program);
+        System.out.println(code);
+        InMemorySourceCompiler compiler = new InMemorySourceCompiler(_className, code);
         return compiler.instantiate();
     }
 
@@ -52,7 +54,13 @@ public class BasicToJavaCompiler {
         jdProgramText.setText("Translation of the following TRS-80 Program into Java:\n---\n"
                 + program.asBasic() + "---");
 
-        BasicToJavaCompilerVisitor v = new BasicToJavaCompilerVisitor(ast, tyProgram);
+        program.visit(new SetStatementNameVisitor(new StatementNameGenerator()));
+        program.visit(new SetNextStatementVisitor());
+        
+        NumberedStatementsFinder nsf = new NumberedStatementsFinder();
+        program.visit(nsf);
+        
+        BasicToJavaCompilerVisitor v = new BasicToJavaCompilerVisitor(ast, tyProgram, nsf);
         program.visit(v);
         return cu.toString();
     }

@@ -67,4 +67,19 @@ public class ClearScreenTest {
         e.execute(env);
         assertEquals("Should now have cleared screen once", 1, env.getScreenClearedCount());
     }
+    
+    @Test
+    public void shouldClearScreenTwiceWithInMemoryClass() throws Exception {
+        Program clearScreenProgram = new Program(
+                new ProgramLine[] { new ProgramLine(new LineNumber(10), new Statement[] {
+                    new ClearScreenStatement(), new ClearScreenStatement()
+                })});
+        
+        Executable e = new BasicToJavaCompiler("OnTheFlyProgram", "dct25.trs80.examplePrograms.onTheFly").compile(clearScreenProgram);
+
+        InstrumentedEnvironment env = new InstrumentedEnvironment();
+        assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
+        e.execute(env);
+        assertEquals("Should now have cleared screen twice", 2, env.getScreenClearedCount());
+    }
 }
