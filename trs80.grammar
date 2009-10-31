@@ -3,8 +3,9 @@
 
 %import "dct25.trs80.syntaxTree.*";
 
-%terminals NUMBER, COLON;
-%terminals CLS, GOTO, END;
+%terminals NUMBER, STRINGLITERAL;
+%terminals COLON, AT, COMMA;
+%terminals CLS, GOTO, END, PRINT;
 
 %goal program;
 
@@ -15,6 +16,8 @@
 %typeof lineNumber = "LineNumber";
 %typeof program = "Program";
 %typeof programLine = "ProgramLine";
+%typeof stringLiteral = "StringLiteral";
+%typeof printStatement = "PrintStatement";
 
 program
 	= programLine.lines+ {: return new Program(lines); :}
@@ -49,6 +52,7 @@ statement
 	= clearScreenStatement.s {: return s; :}
 	| gotoStatement.s {: return s; :}
 	| endStatement.s {: return s; :}
+	| printStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -62,4 +66,16 @@ gotoStatement
 
 endStatement
 	= END {: return new EndStatement(); :}
+	;
+
+numericLiteral
+	= NUMBER
+	;
+
+stringLiteral
+	= STRINGLITERAL.s {: return new StringLiteral(s); :}
+	;
+
+printStatement
+	= PRINT AT numericLiteral.n COMMA stringLiteral.s {: return new PrintStatement(s, n); :}
 	;

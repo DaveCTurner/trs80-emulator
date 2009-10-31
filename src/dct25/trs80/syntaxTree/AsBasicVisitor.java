@@ -51,4 +51,9 @@ public class AsBasicVisitor implements Visitor {
         startStatement(es);
         _out.write("END");
     }
+
+    public void visitPrintStatement(PrintStatement ps) throws Exception {
+        startStatement(ps);
+        _out.write("PRINT " + ps.getText().toString());
+    }
 }

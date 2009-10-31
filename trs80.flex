@@ -34,6 +34,7 @@ LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 Number = [:digit:] [:digit:]*
+StringLiteral = \"[A-Za-z0-9 ]*\"
 
 %%
 
@@ -45,8 +46,12 @@ Number = [:digit:] [:digit:]*
 	"CLS"       { return newToken(Terminals.CLS); }
 	"GOTO"      { return newToken(Terminals.GOTO); }
 	"END"		{ return newToken(Terminals.END); }
+	"PRINT"		{ return newToken(Terminals.PRINT); }
 	
 	":"         { return newToken(Terminals.COLON); }
+	","         { return newToken(Terminals.COMMA); }
+	"@"         { return newToken(Terminals.AT); }
+	{StringLiteral}         { return newToken(Terminals.STRINGLITERAL, new String(yytext())); }
 }
 
 .|\n            { throw new Scanner.Exception("unexpected character '" + yytext() + "'"); }
