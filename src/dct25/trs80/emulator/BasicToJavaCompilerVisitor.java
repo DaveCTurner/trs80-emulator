@@ -61,7 +61,7 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         
         StringLiteral sl = _ast.newStringLiteral();
         printInvocation.arguments().add(sl);
-        sl.setLiteralValue(ps.getText().toString());
+        sl.setLiteralValue(ps.getText().withoutQuotes());
 
         setFallThroughToNextStatement(ps, medExecuteBody);
     }
