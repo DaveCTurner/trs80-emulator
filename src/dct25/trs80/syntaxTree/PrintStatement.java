@@ -9,10 +9,12 @@ package dct25.trs80.syntaxTree;
  */
 public class PrintStatement extends beaver.Symbol implements Statement {
     StringLiteral _text;
+    IntegerLiteral _position;
     
-    public PrintStatement(StringLiteral text, beaver.Symbol position) {
+    public PrintStatement(StringLiteral text, IntegerLiteral position) {
         super();
         _text = text;
+        _position = position;
     }
     
     public boolean equals(Object o) {
@@ -26,6 +28,11 @@ public class PrintStatement extends beaver.Symbol implements Statement {
         } else {
             if (!this._text.equals(other._text)) { return false; }
         }
+        if (null == this._position) {
+            if (null != other._position) { return false; }
+        } else {
+            if (!this._position.equals(other._position)) { return false; }
+        }
                
         return true;
     }
@@ -35,6 +42,7 @@ public class PrintStatement extends beaver.Symbol implements Statement {
     }
 
     public StringLiteral getText() { return _text; }
+    public IntegerLiteral getPosition() { return _position; }
 
     private String _name;
     public String getName() { return _name; }

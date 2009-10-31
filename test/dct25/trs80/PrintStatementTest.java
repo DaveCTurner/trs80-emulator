@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
+import dct25.trs80.syntaxTree.IntegerLiteral;
 import dct25.trs80.syntaxTree.LineNumber;
 import dct25.trs80.syntaxTree.PrintStatement;
 import dct25.trs80.syntaxTree.Program;
@@ -27,10 +28,21 @@ public class PrintStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new beaver.Symbol(1204)) 
+                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new IntegerLiteral(1204)) 
                 })
               });
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
+    
+    
+    @Test
+    public void ShouldConvertProgramWithPrintCorrectly() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new IntegerLiteral(1204)) 
+                })});
+
+        assertEquals("Check program text", "10 PRINT @ 1204, \"HELLO WORLD\"\n", p.asBasic());
     }
 }

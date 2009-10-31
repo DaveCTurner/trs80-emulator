@@ -54,6 +54,6 @@ public class AsBasicVisitor implements Visitor {
 
     public void visitPrintStatement(PrintStatement ps) throws Exception {
         startStatement(ps);
-        _out.write("PRINT " + ps.getText().toString());
+        _out.write("PRINT @ " + ps.getPosition() + ", " + ps.getText());
     }
 }
