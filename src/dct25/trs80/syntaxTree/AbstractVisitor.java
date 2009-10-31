@@ -19,4 +19,8 @@ public class AbstractVisitor implements Visitor {
     }
     
     protected void visitStatement(Statement s) throws Exception { }
+
+    public void visitEndStatement(EndStatement es) throws Exception { 
+        visitStatement(es);
+    }
 }

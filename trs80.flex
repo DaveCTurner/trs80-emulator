@@ -43,7 +43,8 @@ Number = [:digit:] [:digit:]*
 	{Number}    { return newToken(Terminals.NUMBER, new Integer(yytext())); }
 
 	"CLS"       { return newToken(Terminals.CLS); }
-	"GOTO"       { return newToken(Terminals.GOTO); }
+	"GOTO"      { return newToken(Terminals.GOTO); }
+	"END"		{ return newToken(Terminals.END); }
 	
 	":"         { return newToken(Terminals.COLON); }
 }

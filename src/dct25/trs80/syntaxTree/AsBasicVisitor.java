@@ -46,4 +46,9 @@ public class AsBasicVisitor implements Visitor {
         startStatement(gs);
         _out.write("GOTO " + gs.getTarget().toString());
     }
+
+    public void visitEndStatement(EndStatement es) throws Exception {
+        startStatement(es);
+        _out.write("END");
+    }
 }

@@ -3,7 +3,8 @@
 
 %import "dct25.trs80.syntaxTree.*";
 
-%terminals NUMBER, COLON, CLS, GOTO;
+%terminals NUMBER, COLON;
+%terminals CLS, GOTO, END;
 
 %goal program;
 
@@ -47,13 +48,18 @@ lineNumber
 statement
 	= clearScreenStatement.s {: return s; :}
 	| gotoStatement.s {: return s; :}
+	| endStatement.s {: return s; :}
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
 clearScreenStatement
 	= CLS {: return new ClearScreenStatement(); :}
 	;
-
+	
 gotoStatement
 	= GOTO lineNumber.n {: return new GotoStatement(n); :}
+	;
+
+endStatement
+	= END {: return new EndStatement(); :}
 	;
