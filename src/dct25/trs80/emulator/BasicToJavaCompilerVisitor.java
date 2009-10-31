@@ -3,6 +3,7 @@ package dct25.trs80.emulator;
 import java.io.StringWriter;
 
 import org.eclipse.jdt.core.dom.*;
+import org.eclipse.jdt.core.dom.StringLiteral;
 
 import dct25.trs80.syntaxTree.*;
 import dct25.trs80.syntaxTree.Statement;
@@ -47,6 +48,22 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         Block medExecuteBody = buildMethodForStatement(es);
 
         setFallThroughToNextStatement(es, medExecuteBody);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void visitPrintStatement(PrintStatement ps) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(ps);
+        
+        MethodInvocation printInvocation = _ast.newMethodInvocation();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(printInvocation));
+        printInvocation.setExpression(_ast.newSimpleName("_env"));
+        printInvocation.setName(_ast.newSimpleName("print"));
+        
+        StringLiteral sl = _ast.newStringLiteral();
+        printInvocation.arguments().add(sl);
+        sl.setLiteralValue(ps.getText().toString());
+
+        setFallThroughToNextStatement(ps, medExecuteBody);
     }
     
     /** Builds a method for the given statement, and returns its body for population. */

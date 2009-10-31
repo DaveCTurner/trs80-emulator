@@ -14,4 +14,13 @@ public class InstrumentedEnvironment implements Environment {
         screenClearedCount += 1;
     }
 
+    
+    public String getPrintedOutput() {
+        return _printed;
+    }
+    private String _printed;
+    public void print(String s) {
+        _printed = s;
+    }
+
 }
