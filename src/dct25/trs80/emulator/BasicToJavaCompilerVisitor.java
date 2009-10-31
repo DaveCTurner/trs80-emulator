@@ -41,6 +41,14 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         setFallThroughToNextStatement(gs, medExecuteBody);
     }
 
+    
+    @SuppressWarnings("unchecked")
+    public void visitEndStatement(EndStatement es) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(es);
+
+        setFallThroughToNextStatement(es, medExecuteBody);
+    }
+    
     /** Builds a method for the given statement, and returns its body for population. */
     @SuppressWarnings("unchecked")
     private Block buildMethodForStatement(Statement s) throws Exception {
