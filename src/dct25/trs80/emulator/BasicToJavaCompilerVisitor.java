@@ -29,6 +29,17 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
 
         setFallThroughToNextStatement(cls, medExecuteBody);
     }
+  
+    @SuppressWarnings("unchecked")
+    public void visitGotoStatement(GotoStatement gs) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(gs);
+        
+        MethodInvocation gotoStatementInvocation = _ast.newMethodInvocation();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
+        gotoStatementInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(gs.getTarget()).getName()));
+
+        setFallThroughToNextStatement(gs, medExecuteBody);
+    }
 
     /** Builds a method for the given statement, and returns its body for population. */
     @SuppressWarnings("unchecked")
@@ -39,7 +50,17 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         medExecute.setReturnType2(_ast.newPrimitiveType(PrimitiveType.VOID));
         medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
         
-        setJavadocForStatement(s, medExecute);
+        Javadoc jdMedExecute = _ast.newJavadoc();
+        medExecute.setJavadoc(jdMedExecute);
+        TagElement jdMedExecuteTextTag = _ast.newTagElement();
+        jdMedExecute.tags().add(jdMedExecuteTextTag);
+        TextElement jdMedExecuteText = _ast.newTextElement();
+        jdMedExecuteTextTag.fragments().add(jdMedExecuteText);
+        
+        StringWriter w = new StringWriter();
+        AsBasicVisitor asBasic = new AsBasicVisitor(w);
+        s.visit(asBasic);
+        jdMedExecuteText.setText(w.toString());
 
         Block medExecuteBody = _ast.newBlock();
         medExecute.setBody(medExecuteBody);
@@ -56,38 +77,7 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
             nextStatementInvocation.setName(_ast.newSimpleName(nextStatement.getName()));
         }
     }
-    
-    @SuppressWarnings("unchecked")
-    public void visitGotoStatement(GotoStatement gs) throws Exception {
-        Block medExecuteBody = buildMethodForStatement(gs);
-        
-        MethodInvocation gotoStatementInvocation = _ast.newMethodInvocation();
-        medExecuteBody.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
-        gotoStatementInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(gs.getTarget()).getName()));
-
-        setFallThroughToNextStatement(gs, medExecuteBody);
-    }
-
-    /**
-     * @param s
-     * @param medExecute
-     * @throws Exception
-     */
-    @SuppressWarnings("unchecked")
-    private void setJavadocForStatement(Statement s, MethodDeclaration medExecute) throws Exception {
-        Javadoc jdMedExecute = _ast.newJavadoc();
-        medExecute.setJavadoc(jdMedExecute);
-        TagElement jdMedExecuteTextTag = _ast.newTagElement();
-        jdMedExecute.tags().add(jdMedExecuteTextTag);
-        TextElement jdMedExecuteText = _ast.newTextElement();
-        jdMedExecuteTextTag.fragments().add(jdMedExecuteText);
-        
-        StringWriter w = new StringWriter();
-        AsBasicVisitor asBasic = new AsBasicVisitor(w);
-        s.visit(asBasic);
-        jdMedExecuteText.setText(w.toString());
-    }
-    
+  
     @SuppressWarnings("unchecked")
     public void leaveProgram(Program p) {
         VariableDeclarationFragment vdfEnv = _ast.newVariableDeclarationFragment();
