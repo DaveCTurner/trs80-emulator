@@ -21,7 +21,7 @@ public class BasicToJavaCompiler {
     }
 
     @SuppressWarnings("unchecked")
-    public String generateCode(Program program) {
+    public String generateCode(Program program) throws Exception {
         AST ast = AST.newAST(AST.JLS3);
         CompilationUnit cu = ast.newCompilationUnit();
         
@@ -51,43 +51,9 @@ public class BasicToJavaCompiler {
         jdProgramTextTag.fragments().add(jdProgramText);
         jdProgramText.setText("Translation of the following TRS-80 Program into Java:\n---\n"
                 + program.asBasic() + "---");
-        
-        MethodDeclaration medExecute = ast.newMethodDeclaration();
-        tyProgram.bodyDeclarations().add(medExecute);
-        medExecute.setName(ast.newSimpleName("execute"));
-        medExecute.setReturnType2(ast.newPrimitiveType(PrimitiveType.VOID));
-        medExecute.modifiers().add(ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
-        
-        Javadoc jdMedExecute = ast.newJavadoc();
-        medExecute.setJavadoc(jdMedExecute);
-        TagElement jdMedExecuteTextTag = ast.newTagElement();
-        jdMedExecute.tags().add(jdMedExecuteTextTag);
-        TextElement jdMedExecuteText = ast.newTextElement();
-        jdMedExecuteTextTag.fragments().add(jdMedExecuteText);
-        jdMedExecuteText.setText("Execute the program");
 
-        TagElement jdMedExecuteParamTag = ast.newTagElement();
-        jdMedExecute.tags().add(jdMedExecuteParamTag);
-        jdMedExecuteParamTag.setTagName(TagElement.TAG_PARAM);
-        TextElement jdMedExecuteParam = ast.newTextElement();
-        jdMedExecuteParamTag.fragments().add(ast.newSimpleName("env"));
-        jdMedExecuteParamTag.fragments().add(jdMedExecuteParam);
-        jdMedExecuteParam.setText(" The environment in which to execute the program.");
-        
-        SingleVariableDeclaration medExecuteParam = ast.newSingleVariableDeclaration();
-        medExecute.parameters().add(medExecuteParam);
-        medExecuteParam.setName(ast.newSimpleName("env"));
-        medExecuteParam.setType(ast.newSimpleType(ast.newSimpleName("Environment")));
-        
-        Block medExecuteBody = ast.newBlock();
-        medExecute.setBody(medExecuteBody);
-        
-        MethodInvocation clsInvocation = ast.newMethodInvocation();
-        Statement clsStatement = ast.newExpressionStatement(clsInvocation);
-        medExecuteBody.statements().add(clsStatement);
-        clsInvocation.setExpression(ast.newSimpleName("env"));
-        clsInvocation.setName(ast.newSimpleName("clearScreen"));
-
+        BasicToJavaCompilerVisitor v = new BasicToJavaCompilerVisitor(ast, tyProgram);
+        program.visit(v);
         return cu.toString();
     }
 
