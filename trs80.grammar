@@ -3,7 +3,7 @@
 
 %import "dct25.trs80.syntaxTree.*";
 
-%terminals NUMBER, STRINGLITERAL;
+%terminals INTEGERLITERAL, STRINGLITERAL;
 %terminals COLON, AT, COMMA;
 %terminals CLS, GOTO, END, PRINT;
 
@@ -17,6 +17,7 @@
 %typeof program = "Program";
 %typeof programLine = "ProgramLine";
 %typeof stringLiteral = "StringLiteral";
+%typeof integerLiteral = "IntegerLiteral";
 %typeof printStatement = "PrintStatement";
 
 program
@@ -45,7 +46,7 @@ subsequentStatement
 statementSeparator = COLON;
 
 lineNumber
-	= NUMBER.n {: try { return new LineNumber(n); } catch (java.lang.Exception e) { return null; /* Impossible */ } :}
+	= integerLiteral.n {: return new LineNumber(n); :}
 	;
 
 statement
@@ -68,8 +69,8 @@ endStatement
 	= END {: return new EndStatement(); :}
 	;
 
-numericLiteral
-	= NUMBER
+integerLiteral
+	= INTEGERLITERAL.i {: return new IntegerLiteral(i); :}
 	;
 
 stringLiteral
@@ -77,5 +78,5 @@ stringLiteral
 	;
 
 printStatement
-	= PRINT AT numericLiteral.n COMMA stringLiteral.s {: return new PrintStatement(s, n); :}
+	= PRINT AT integerLiteral.i COMMA stringLiteral.s {: return new PrintStatement(s, i); :}
 	;

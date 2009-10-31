@@ -33,7 +33,7 @@ import dct25.trs80.syntax.Terminals;
 LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
-Number = [:digit:] [:digit:]*
+IntegerLiteral = [:digit:] [:digit:]*
 StringLiteral = \"[A-Za-z0-9 ]*\"
 
 %%
@@ -41,7 +41,6 @@ StringLiteral = \"[A-Za-z0-9 ]*\"
 {WhiteSpace}+   { /* ignore */ }
 
 <YYINITIAL> {
-	{Number}    { return newToken(Terminals.NUMBER, new Integer(yytext())); }
 
 	"CLS"       { return newToken(Terminals.CLS); }
 	"GOTO"      { return newToken(Terminals.GOTO); }
@@ -51,7 +50,8 @@ StringLiteral = \"[A-Za-z0-9 ]*\"
 	":"         { return newToken(Terminals.COLON); }
 	","         { return newToken(Terminals.COMMA); }
 	"@"         { return newToken(Terminals.AT); }
-	{StringLiteral}         { return newToken(Terminals.STRINGLITERAL, new String(yytext())); }
+	{IntegerLiteral}    { return newToken(Terminals.INTEGERLITERAL, yytext()); }
+	{StringLiteral}     { return newToken(Terminals.STRINGLITERAL, yytext()); }
 }
 
 .|\n            { throw new Scanner.Exception("unexpected character '" + yytext() + "'"); }

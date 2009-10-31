@@ -9,8 +9,6 @@ import org.junit.Test;
 
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
-import dct25.trs80.syntaxTree.ClearScreenStatement;
-import dct25.trs80.syntaxTree.GotoStatement;
 import dct25.trs80.syntaxTree.LineNumber;
 import dct25.trs80.syntaxTree.PrintStatement;
 import dct25.trs80.syntaxTree.Program;

@@ -20,7 +20,7 @@ public class Program extends beaver.Symbol {
     }
     
     public String toString() {
-        return "TRS-80 Program";
+        return asBasic();
     }
 
     public String asBasic() {
