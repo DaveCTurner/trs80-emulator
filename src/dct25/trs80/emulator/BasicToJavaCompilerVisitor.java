@@ -36,7 +36,16 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         clsInvocation.setExpression(_ast.newSimpleName("_env"));
         clsInvocation.setName(_ast.newSimpleName("clearScreen"));
 
-        Statement nextStatement = cls.getNextStatement();
+        setFallThroughToNextStatement(cls, medExecuteBody);
+    }
+
+    /**
+     * @param cls
+     * @param medExecuteBody
+     */
+    @SuppressWarnings("unchecked")
+    private void setFallThroughToNextStatement(Statement s, Block medExecuteBody) {
+        Statement nextStatement = s.getNextStatement();
         if (null != nextStatement) {
             MethodInvocation nextStatementInvocation = _ast.newMethodInvocation();
             medExecuteBody.statements().add(_ast.newExpressionStatement(nextStatementInvocation));
@@ -44,6 +53,26 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         } else {
             medExecuteBody.statements().add(_ast.newReturnStatement());
         }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void visitGotoStatement(GotoStatement gs) throws Exception {
+        MethodDeclaration medExecute = _ast.newMethodDeclaration();
+        _tyProgram.bodyDeclarations().add(medExecute);
+        medExecute.setName(_ast.newSimpleName(gs.getName()));
+        medExecute.setReturnType2(_ast.newPrimitiveType(PrimitiveType.VOID));
+        medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
+        
+        setJavadocForStatement(gs, medExecute);
+
+        Block medExecuteBody = _ast.newBlock();
+        medExecute.setBody(medExecuteBody);
+        
+        MethodInvocation gotoStatementInvocation = _ast.newMethodInvocation();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
+        gotoStatementInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(gs.getTarget()).getName()));
+
+        setFallThroughToNextStatement(gs, medExecuteBody);
     }
 
     /**

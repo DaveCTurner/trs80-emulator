@@ -34,7 +34,7 @@ public class NextStatements {
         myProgram.visit(new SetNextStatementVisitor());
         
         assertSame("Check s10 next statement", s11, s10.getNextStatement());
-        assertSame("Check s11 next statement", s20, s11.getNextStatement());
+        assertSame("Check s11 next statement", null, s11.getNextStatement());
         assertSame("Check s20 next statement", s21, s20.getNextStatement());
         assertSame("Check s21 next statement", s22, s21.getNextStatement());
         assertSame("Check s22 next statement", null, s22.getNextStatement());
