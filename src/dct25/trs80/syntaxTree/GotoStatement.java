@@ -23,8 +23,12 @@ public class GotoStatement extends beaver.Symbol implements Statement {
         if (o == null) { return false; }
         if (!(o instanceof GotoStatement)) { return false; }
         
-        GotoStatement other = (GotoStatement)o; 
-        if (!other.m_target.equals(this.m_target)) { return false; }
+        GotoStatement other = (GotoStatement)o;
+        if (null == this.m_target) {
+            if (null != other.m_target) { return false; }
+        } else {
+            if (!this.m_target.equals(other.m_target)) { return false; }
+        }
                
         return true;
     }
