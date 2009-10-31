@@ -9,4 +9,7 @@ package dct25.trs80.syntaxTree;
  */
 public interface Statement {
     public void visit(Visitor v) throws Exception;
+    
+    public void setName(String name);
+    public String getName();
 }

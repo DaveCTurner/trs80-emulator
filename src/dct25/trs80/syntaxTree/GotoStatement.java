@@ -35,4 +35,8 @@ public class GotoStatement extends beaver.Symbol implements Statement {
     }
 
     public LineNumber getTarget() { return m_target; }
+
+    private String _name;
+    public String getName() { return _name; }
+    public void setName(String name) { _name = name; }
 }
