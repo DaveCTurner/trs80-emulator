@@ -8,4 +8,6 @@ public abstract class IntegerExpression extends beaver.Symbol {
     public static IntegerExpression fromIntegerLiteral(IntegerLiteral i) {
         return new IntegerLiteralExpression(i);
     }
+    
+    public abstract void visit(AbstractIntegerExpressionVisitor v) throws Exception;
 }

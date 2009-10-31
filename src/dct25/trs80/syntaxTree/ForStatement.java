@@ -9,8 +9,13 @@ package dct25.trs80.syntaxTree;
  */
 public class ForStatement extends beaver.Symbol implements Statement {
    
+    private Identifier _loopVariable;
+    private IntegerExpression _lowerBound, _upperBound;
     public ForStatement(Identifier loopVariable, IntegerExpression lowerBound, IntegerExpression upperBound) {
         super();
+        _loopVariable = loopVariable;
+        _lowerBound = lowerBound;
+        _upperBound = upperBound;
     }
     
     public boolean equals(Object o) {
@@ -31,6 +36,10 @@ public class ForStatement extends beaver.Symbol implements Statement {
     public void visit(Visitor v) throws Exception {
         v.visitForStatement(this);
     }
+    
+    public Identifier getLoopVariableIdentifier() { return _loopVariable; }
+    public IntegerExpression getLowerBound() { return _lowerBound; }
+    public IntegerExpression getUpperBound() { return _upperBound; }
     
     private String _name;
     public String getName() { return _name; }

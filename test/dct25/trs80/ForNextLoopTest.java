@@ -43,4 +43,23 @@ public class ForNextLoopTest {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
 
+    
+    @Test
+    public void ShouldConvertProgramWithForNextLoopCorrectly() throws Exception {
+
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new ForStatement(new Identifier("II"),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(10))
+                    ) 
+                }),
+                new ProgramLine(new LineNumber(20), new Statement[] {
+                    new NextStatement()
+                })
+              });
+
+        assertEquals("Check program text", "10 FOR II = (1) TO (10)\n20 NEXT II\n", p.asBasic());
+    }
+    
 }

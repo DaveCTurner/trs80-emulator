@@ -1,6 +1,7 @@
 package dct25.trs80.syntaxTree;
 
 import java.io.Writer;
+import java.util.Stack;
 
 public class AsBasicVisitor extends AbstractVisitor {
 
@@ -8,6 +9,7 @@ public class AsBasicVisitor extends AbstractVisitor {
     
     public AsBasicVisitor(Writer out) {
         _out = out;
+        _forLoopVariables = new Stack<Identifier>();
     }
     
     private int _statementIndexInCurrentLine;
@@ -47,5 +49,28 @@ public class AsBasicVisitor extends AbstractVisitor {
     public void visitPrintStatement(PrintStatement ps) throws Exception {
         startStatement(ps);
         _out.write("PRINT @ " + ps.getPosition() + ", " + ps.getText());
+    }
+
+    public void visitNextStatement(NextStatement ns) throws Exception {
+        startStatement(ns);
+        _out.write("NEXT ");
+        Identifier currentLoopVariable = _forLoopVariables.pop();
+        _out.write(currentLoopVariable.toString());
+    }
+
+    private Stack<Identifier> _forLoopVariables;
+    
+    public void visitForStatement(ForStatement fs) throws Exception {
+        startStatement(fs);
+        _out.write("FOR ");
+        Identifier currentLoopVariable = fs.getLoopVariableIdentifier();
+        _out.write(currentLoopVariable.toString());
+        _out.write(" = ");
+        AbstractIntegerExpressionVisitor v = new IntegerExpressionAsBasicVisitor(_out);
+        fs.getLowerBound().visit(v);
+        _out.write(" TO ");
+        fs.getUpperBound().visit(v);
+        
+        _forLoopVariables.push(currentLoopVariable);
     }
 }
