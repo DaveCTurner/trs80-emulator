@@ -36,4 +36,21 @@ public class Goto {
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
+    
+    @Test
+    public void ShouldConvertProgramWithGotoCorrectly() throws Exception {
+
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new ClearScreenStatement(),
+                    new GotoStatement(new LineNumber(20))
+                }), new ProgramLine(new LineNumber(20), new Statement[] {
+                    new ClearScreenStatement(),
+                    new ClearScreenStatement(),
+                    new ClearScreenStatement()
+                })});
+
+        assertEquals("Check program text", "10 CLS : GOTO 20\n20 CLS : CLS : CLS\n", p.asBasic());
+    }
+    
 }
