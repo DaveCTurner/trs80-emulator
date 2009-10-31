@@ -20,16 +20,7 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
     
     @SuppressWarnings("unchecked")
     public void visitClearScreenStatement(ClearScreenStatement cls) throws Exception {
-        MethodDeclaration medExecute = _ast.newMethodDeclaration();
-        _tyProgram.bodyDeclarations().add(medExecute);
-        medExecute.setName(_ast.newSimpleName(cls.getName()));
-        medExecute.setReturnType2(_ast.newPrimitiveType(PrimitiveType.VOID));
-        medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
-        
-        setJavadocForStatement(cls, medExecute);
-
-        Block medExecuteBody = _ast.newBlock();
-        medExecute.setBody(medExecuteBody);
+        Block medExecuteBody = buildMethodForStatement(cls);
         
         MethodInvocation clsInvocation = _ast.newMethodInvocation();
         medExecuteBody.statements().add(_ast.newExpressionStatement(clsInvocation));
@@ -39,10 +30,23 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         setFallThroughToNextStatement(cls, medExecuteBody);
     }
 
-    /**
-     * @param cls
-     * @param medExecuteBody
-     */
+    /** Builds a method for the given statement, and returns its body for population. */
+    @SuppressWarnings("unchecked")
+    private Block buildMethodForStatement(Statement s) throws Exception {
+        MethodDeclaration medExecute = _ast.newMethodDeclaration();
+        _tyProgram.bodyDeclarations().add(medExecute);
+        medExecute.setName(_ast.newSimpleName(s.getName()));
+        medExecute.setReturnType2(_ast.newPrimitiveType(PrimitiveType.VOID));
+        medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
+        
+        setJavadocForStatement(s, medExecute);
+
+        Block medExecuteBody = _ast.newBlock();
+        medExecute.setBody(medExecuteBody);
+        return medExecuteBody;
+    }
+
+    /** If execution after statement 's' falls through, then set up the fallthrough call here. */
     @SuppressWarnings("unchecked")
     private void setFallThroughToNextStatement(Statement s, Block medExecuteBody) {
         Statement nextStatement = s.getNextStatement();
@@ -50,23 +54,12 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
             MethodInvocation nextStatementInvocation = _ast.newMethodInvocation();
             medExecuteBody.statements().add(_ast.newExpressionStatement(nextStatementInvocation));
             nextStatementInvocation.setName(_ast.newSimpleName(nextStatement.getName()));
-        } else {
-            medExecuteBody.statements().add(_ast.newReturnStatement());
         }
     }
     
     @SuppressWarnings("unchecked")
     public void visitGotoStatement(GotoStatement gs) throws Exception {
-        MethodDeclaration medExecute = _ast.newMethodDeclaration();
-        _tyProgram.bodyDeclarations().add(medExecute);
-        medExecute.setName(_ast.newSimpleName(gs.getName()));
-        medExecute.setReturnType2(_ast.newPrimitiveType(PrimitiveType.VOID));
-        medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
-        
-        setJavadocForStatement(gs, medExecute);
-
-        Block medExecuteBody = _ast.newBlock();
-        medExecute.setBody(medExecuteBody);
+        Block medExecuteBody = buildMethodForStatement(gs);
         
         MethodInvocation gotoStatementInvocation = _ast.newMethodInvocation();
         medExecuteBody.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
