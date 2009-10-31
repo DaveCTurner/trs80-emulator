@@ -71,9 +71,29 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
     public void visitNextStatement(NextStatement ns) throws Exception {
         Block medExecuteBody = buildMethodForStatement(ns);
         
-        MethodInvocation entryPointInvocation = _ast.newMethodInvocation();
-        medExecuteBody.statements().add(_ast.newExpressionStatement(entryPointInvocation));
-        entryPointInvocation.setName(_ast.newSimpleName(ns.getLoopStartStatement().getName()));
+        Assignment incStatement = _ast.newAssignment();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(incStatement));
+        incStatement.setLeftHandSide(_ast.newSimpleName(ns.getLoopStartStatement().getLoopVariableIdentifier().toString()));
+        incStatement.setRightHandSide(_ast.newNumberLiteral("1"));
+        incStatement.setOperator(Assignment.Operator.PLUS_ASSIGN);
+        
+        IfStatement ifStatement = _ast.newIfStatement();
+        medExecuteBody.statements().add(ifStatement);
+        
+        Block thenBlock = _ast.newBlock();
+        ifStatement.setThenStatement(thenBlock);
+        MethodInvocation startAgainInvocation = _ast.newMethodInvocation();
+        startAgainInvocation.setName(_ast.newSimpleName(ns.getLoopStartStatement().getNextStatement().getName()));
+        thenBlock.statements().add(_ast.newExpressionStatement(startAgainInvocation));
+        thenBlock.statements().add(_ast.newReturnStatement());
+        
+        InfixExpression condition = _ast.newInfixExpression();
+        ifStatement.setExpression(condition);
+        condition.setLeftOperand(_ast.newSimpleName(ns.getLoopStartStatement().getLoopVariableIdentifier().toString()));
+        ExpressionCompilerVisitor ecv = new ExpressionCompilerVisitor(_ast);
+        ns.getLoopStartStatement().getUpperBound().visit(ecv);
+        condition.setRightOperand(ecv.getExpression());
+        condition.setOperator(InfixExpression.Operator.LESS_EQUALS);
 
         setFallThroughToNextStatement(ns, medExecuteBody);
     }
@@ -82,6 +102,14 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
     public void visitForStatement(ForStatement fs) throws Exception {
         Block medExecuteBody = buildMethodForStatement(fs);
 
+        Assignment envAssign = _ast.newAssignment();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(envAssign));
+        envAssign.setLeftHandSide(_ast.newSimpleName(fs.getLoopVariableIdentifier().toString()));
+        
+        ExpressionCompilerVisitor ecv = new ExpressionCompilerVisitor(_ast);
+        fs.getLowerBound().visit(ecv);
+        envAssign.setRightHandSide(ecv.getExpression());
+        
         setFallThroughToNextStatement(fs, medExecuteBody);
     }
     

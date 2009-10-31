@@ -1,0 +1,24 @@
+package dct25.trs80.emulator;
+
+import java.util.HashSet;
+
+import dct25.trs80.syntaxTree.AbstractVisitor;
+import dct25.trs80.syntaxTree.ForStatement;
+import dct25.trs80.syntaxTree.Identifier;
+import dct25.trs80.syntaxTree.Program;
+
+public class IdentifierCollectionVisitor extends AbstractVisitor {
+    private HashSet<Identifier> _ids;
+    
+    public void enterProgram(Program p) {
+        _ids = new HashSet<Identifier>();
+    }
+    
+    public void visitForStatement(ForStatement fs) {
+        _ids.add(fs.getLoopVariableIdentifier());
+    }
+    
+    public Identifier[] getIdentifiers() {
+        return _ids.toArray(new Identifier[0]);
+    }
+}

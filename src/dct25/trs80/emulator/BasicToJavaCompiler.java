@@ -3,6 +3,7 @@ package dct25.trs80.emulator;
 import org.eclipse.jdt.core.dom.*;
 
 import dct25.trs80.inMemoryCompiler.InMemorySourceCompiler;
+import dct25.trs80.syntaxTree.Identifier;
 import dct25.trs80.syntaxTree.Program;
 
 public class BasicToJavaCompiler {
@@ -60,6 +61,18 @@ public class BasicToJavaCompiler {
         
         NumberedStatementsFinder nsf = new NumberedStatementsFinder();
         program.visit(nsf);
+        
+        IdentifierCollectionVisitor icv = new IdentifierCollectionVisitor();
+        program.visit(icv);
+        Identifier[] ids = icv.getIdentifiers();
+        
+        for(int i = 0; i < ids.length; i++) {
+            VariableDeclarationFragment vdfEnv = ast.newVariableDeclarationFragment();
+            FieldDeclaration fidEnv = ast.newFieldDeclaration(vdfEnv);
+            tyProgram.bodyDeclarations().add(fidEnv);
+            vdfEnv.setName(ast.newSimpleName(ids[i].toString()));
+            fidEnv.setType(ast.newPrimitiveType(PrimitiveType.INT));
+        }
         
         BasicToJavaCompilerVisitor v = new BasicToJavaCompilerVisitor(ast, tyProgram, nsf);
         program.visit(v);
