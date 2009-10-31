@@ -7,6 +7,7 @@ import java.io.StringReader;
 
 import org.junit.Test;
 
+import dct25.trs80.emulator.MatchLoopsVisitor;
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
 import dct25.trs80.syntaxTree.ForStatement;
@@ -59,6 +60,7 @@ public class ForNextLoopTest {
                 })
               });
 
+        p.visit(new MatchLoopsVisitor());
         assertEquals("Check program text", "10 FOR II = (1) TO (10)\n20 NEXT II\n", p.asBasic());
     }
     

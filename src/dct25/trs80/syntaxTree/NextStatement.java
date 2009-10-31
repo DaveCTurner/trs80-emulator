@@ -34,8 +34,17 @@ public class NextStatement extends beaver.Symbol implements Statement {
     private String _name;
     public String getName() { return _name; }
     public void setName(String name) { _name = name; }
+
+    private ForStatement _loopStart;
+    public ForStatement getLoopStartStatement() { return _loopStart; }
+    public void setLoopStartStatement(ForStatement loopStart) { _loopStart = loopStart; }
     
     private Statement _nextStatement;
     public Statement getNextStatement() { return _nextStatement; }
     public void setNextStatement(Statement next) { _nextStatement = next; }
+    
+    public Identifier getLoopIdentifier() { 
+        if (_loopStart == null) { return null; }
+        return _loopStart.getLoopVariableIdentifier();
+    }
 }
