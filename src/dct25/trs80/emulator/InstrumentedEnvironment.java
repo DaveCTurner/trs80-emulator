@@ -16,11 +16,12 @@ public class InstrumentedEnvironment implements Environment {
 
     
     public String getPrintedOutput() {
-        return _printed;
+        return _printed.toString();
     }
-    private String _printed;
+    private StringBuffer _printed = new StringBuffer();
     public void print(String s) {
-        _printed = s;
+        _printed.append(s);
+        _printed.append("\n");
     }
 
 }

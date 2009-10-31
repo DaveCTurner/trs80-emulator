@@ -28,6 +28,6 @@ public class PrintTest {
         assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
         e.execute(env);
         assertEquals("Should still not have cleared screen", 0, env.getScreenClearedCount());
-        assertEquals("Should have printed 'HELLO WORLD'", "HELLO WORLD", env.getPrintedOutput());
+        assertEquals("Should have printed 'HELLO WORLD'", "HELLO WORLD\n", env.getPrintedOutput());
     }
 }
