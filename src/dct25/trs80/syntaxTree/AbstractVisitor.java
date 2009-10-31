@@ -27,4 +27,12 @@ public class AbstractVisitor implements Visitor {
     public void visitPrintStatement(PrintStatement ps) throws Exception {
         visitStatement(ps);
     }
+
+    public void visitForStatement(ForStatement fs) throws Exception {
+        visitStatement(fs);
+    }
+    
+    public void visitNextStatement(NextStatement ns) throws Exception {
+        visitStatement(ns);
+    }
 }

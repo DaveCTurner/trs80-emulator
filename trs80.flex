@@ -35,6 +35,7 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
 
 IntegerLiteral = [:digit:] [:digit:]*
 StringLiteral = \"[A-Za-z0-9, ]*\"
+Identifier = [A-Z][A-Z]*
 
 %%
 
@@ -46,12 +47,17 @@ StringLiteral = \"[A-Za-z0-9, ]*\"
 	"GOTO"      { return newToken(Terminals.GOTO); }
 	"END"		{ return newToken(Terminals.END); }
 	"PRINT"		{ return newToken(Terminals.PRINT); }
+	"FOR"		{ return newToken(Terminals.FOR); }
+	"TO"		{ return newToken(Terminals.TO); }
+	"NEXT"		{ return newToken(Terminals.NEXT); }
 	
+	"="         { return newToken(Terminals.EQUALS); }
 	":"         { return newToken(Terminals.COLON); }
 	","         { return newToken(Terminals.COMMA); }
 	"@"         { return newToken(Terminals.AT); }
 	{IntegerLiteral}    { return newToken(Terminals.INTEGERLITERAL, yytext()); }
 	{StringLiteral}     { return newToken(Terminals.STRINGLITERAL, yytext()); }
+	{Identifier}		{ return newToken(Terminals.IDENTIFIER, yytext()); }
 }
 
 .|\n            { throw new Scanner.Exception("unexpected character '" + yytext() + "'"); }

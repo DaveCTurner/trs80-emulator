@@ -8,5 +8,7 @@ public interface Visitor {
     public void visitClearScreenStatement(ClearScreenStatement cls) throws Exception;
     public void visitGotoStatement(GotoStatement gs) throws Exception;
     public void visitEndStatement(EndStatement es) throws Exception;
+    public void visitForStatement(ForStatement fs) throws Exception;
+    public void visitNextStatement(NextStatement ns) throws Exception;
     public void visitPrintStatement(PrintStatement ps) throws Exception;
 }
