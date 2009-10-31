@@ -37,5 +37,7 @@ public class NumberedStatements {
         assertEquals("Check entry line", l10, finder.getEntryLine());
         assertSame("Check line 10", s10, finder.getNumberedStatement(l10));
         assertSame("Check line 20", s20, finder.getNumberedStatement(l20));
+        assertSame("Check line 20 again", s20, finder.getNumberedStatement(new LineNumber(20)));
+        assertSame("Check nonexistent line 30", null, finder.getNumberedStatement(new LineNumber(30)));
     }
 }

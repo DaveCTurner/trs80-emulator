@@ -35,6 +35,10 @@ public class LineNumber extends beaver.Symbol {
         return true;
     }
     
+    public int hashCode() {
+        return _number;
+    }
+    
     public String toString() {
         return Integer.toString(_number);
     }
