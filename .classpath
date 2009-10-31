@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="lib/beaver.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/jvm/java-6-openjdk/lib/tools.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.jdt.core_3.2.3.v_686_R32x.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

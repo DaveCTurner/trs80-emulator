@@ -43,6 +43,8 @@
 	<path id="classpath.base">
 		<pathelement location="lib/JFlex.jar" />
 		<pathelement location="lib/beaver.jar" />
+		<pathelement location="/usr/lib/eclipse/plugins/org.eclipse.jdt.core_3.2.3.v_686_R32x.jar" />
+		<pathelement location="/usr/lib/eclipse/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar" />
 	</path>
 
 	<path id="classpath.test">
