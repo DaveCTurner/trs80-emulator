@@ -430,7 +430,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     }
   
     @SuppressWarnings("unchecked")
-    public void leaveProgram(Program p) {
+    public void enterProgram(Program p) {
         VariableDeclarationFragment vdfEnv = _ast.newVariableDeclarationFragment();
         FieldDeclaration fidEnv = _ast.newFieldDeclaration(vdfEnv);
         _tyProgram.bodyDeclarations().add(fidEnv);
