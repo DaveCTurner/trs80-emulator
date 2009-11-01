@@ -1,5 +1,6 @@
 package dct25.trs80.emulator;
 
+import dct25.trs80.syntaxTree.OnGotoStatement;
 import dct25.trs80.syntaxTree.SyntaxTreeVisitor;
 import dct25.trs80.syntaxTree.EndStatement;
 import dct25.trs80.syntaxTree.GotoStatement;
@@ -9,6 +10,11 @@ public class SetNextStatementVisitor extends SyntaxTreeVisitor {
     private Statement _previousStatement;
     
     public void visitGotoStatement(GotoStatement s) {
+        visitStatement(s);
+        _previousStatement = null; // No fall-through.
+    }
+    
+    public void enterOnGotoStatement(OnGotoStatement s) {
         visitStatement(s);
         _previousStatement = null; // No fall-through.
     }

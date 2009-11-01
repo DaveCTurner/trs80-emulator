@@ -126,6 +126,29 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         _expressionStack.push(_currentExpression);
     }
 
+    
+    @SuppressWarnings("unchecked")
+    public void leaveOnGotoStatement(OnGotoStatement ogs) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(ogs);
+        
+        SwitchStatement ss = _ast.newSwitchStatement();
+        medExecuteBody.statements().add(ss);
+        ss.setExpression(_currentExpression);
+        
+        for (int i = 1; i <= ogs.getTargetCount(); i++) {
+            SwitchCase sc = _ast.newSwitchCase();
+            sc.setExpression(_ast.newNumberLiteral(Integer.toString(i)));
+            ss.statements().add(sc);
+
+            MethodInvocation targetInvocation = _ast.newMethodInvocation();
+            targetInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(ogs.getTarget(i)).getName()));
+            ss.statements().add(_ast.newExpressionStatement(targetInvocation));
+            ss.statements().add(_ast.newReturnStatement());
+        }
+
+        setFallThroughToNextStatement(ogs, medExecuteBody);
+    }
+    
     @SuppressWarnings("unchecked")
     public void visitInputStatement(InputStatement is) throws Exception {
         Block medExecuteBody = buildMethodForStatement(is);
