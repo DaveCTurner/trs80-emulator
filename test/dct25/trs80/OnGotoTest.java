@@ -88,7 +88,7 @@ public class OnGotoTest {
                 new ProgramLine(new LineNumber(50), new Statement[] {
                     new ClearScreenStatement()
                 })
-              });
+        });
 
         assertEquals("Check parsed program is as expected", 
                 "10 X=(3)\n20 ON (X) GOTO 30, 40, 50\n30 CLS\n40 CLS\n50 CLS\n", p.asBasic());
