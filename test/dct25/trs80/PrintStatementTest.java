@@ -51,6 +51,23 @@ public class PrintStatementTest {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
     
+    
+    @Test
+    public void shouldParsePrintStatementWithNoLocation() throws Exception {
+        Reader input = new StringReader("10 PRINT \"HELLO, WORLD\"");
+        beaver.Scanner scanner = new TRS80Scanner(input);
+        TRS80Parser parser = new TRS80Parser();
+        Object o = parser.parse(scanner);
+
+        Program expectedProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral("\"HELLO, WORLD\""), null) 
+                })
+              });
+
+        assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
+    
     @Test
     public void ShouldConvertProgramWithPrintCorrectly() throws Exception {
         Program p = new Program(new ProgramLine[] {
@@ -59,5 +76,15 @@ public class PrintStatementTest {
                 })});
 
         assertEquals("Check program text", "10 PRINT @ 1204, \"HELLO WORLD\"\n", p.asBasic());
+    }
+    
+    @Test
+    public void ShouldConvertProgramWithPrintWithNoLocationCorrectly() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), null) 
+                })});
+
+        assertEquals("Check program text", "10 PRINT \"HELLO WORLD\"\n", p.asBasic());
     }
 }

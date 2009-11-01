@@ -92,6 +92,7 @@ stringLiteral
 
 printStatement
 	= PRINT AT integerLiteral.i COMMA stringLiteral.s {: return new PrintStatement(s, i); :}
+	| PRINT stringLiteral.s {: return new PrintStatement(s, null); :}
 	;
 
 identifier

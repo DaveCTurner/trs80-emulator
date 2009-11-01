@@ -46,7 +46,12 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
 
     public void visitPrintStatement(PrintStatement ps) throws Exception {
         startStatement(ps);
-        _out.write("PRINT @ " + ps.getPosition() + ", " + ps.getText());
+        IntegerLiteral position = ps.getPosition();
+        if (null == position) {
+            _out.write("PRINT " + ps.getText());
+        } else {
+            _out.write("PRINT @ " + position + ", " + ps.getText());
+        }
     }
 
     public void visitNextStatement(NextStatement ns) throws Exception {
