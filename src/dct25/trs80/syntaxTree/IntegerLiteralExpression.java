@@ -15,4 +15,19 @@ public class IntegerLiteralExpression extends IntegerExpression {
     public String toString() {
         return _i.toString();
     }
+    
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null) { return false; }
+        if (!(o instanceof IntegerLiteralExpression)) { return false; }
+        
+        IntegerLiteralExpression other = (IntegerLiteralExpression)o;
+        if (null == this._i) {
+            if (null != other._i) { return false; }
+        } else {
+            if (!this._i.equals(other._i)) { return false; }
+        }
+               
+        return true;
+    }
 }

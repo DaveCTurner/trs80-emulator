@@ -51,7 +51,12 @@ Identifier = [A-Z][A-Z]*
 	"TO"		{ return newToken(Terminals.TO); }
 	"NEXT"		{ return newToken(Terminals.NEXT); }
 	"INPUT"		{ return newToken(Terminals.INPUT); }
+	"IF"		{ return newToken(Terminals.IF); }
+	"THEN"		{ return newToken(Terminals.THEN); }
+
+	"AND"		{ return newToken(Terminals.AND); }
 	
+	"<>"		{ return newToken(Terminals.NOTEQUALS); }
 	"="         { return newToken(Terminals.EQUALS); }
 	";"         { return newToken(Terminals.SEMICOLON); }
 	":"         { return newToken(Terminals.COLON); }

@@ -39,4 +39,8 @@ public class AbstractVisitor implements Visitor {
     public void visitInputStatement(InputStatement is) throws Exception {
         visitStatement(is);
     }
+
+    public void visitIfStatement(IfStatement is) throws Exception {
+        visitStatement(is);
+    }
 }

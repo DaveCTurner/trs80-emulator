@@ -4,8 +4,10 @@
 %import "dct25.trs80.syntaxTree.*";
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
-%terminals COLON, AT, COMMA, EQUALS, SEMICOLON;
-%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT;
+%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS;
+%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN;
+%terminals AND;
+%right AND;
 
 %goal program;
 
@@ -20,10 +22,12 @@
 %typeof integerLiteral = "IntegerLiteral";
 %typeof printStatement = "PrintStatement";
 %typeof integerExpression = "IntegerExpression";
+%typeof booleanExpression = "BooleanExpression";
 %typeof identifier = "Identifier";
 %typeof forStatement = "ForStatement";
 %typeof nextStatement = "NextStatement";
 %typeof inputStatement = "InputStatement";
+%typeof ifStatement = "IfStatement";
 
 program
 	= programLine.lines+ {: return new Program(lines); :}
@@ -62,6 +66,7 @@ statement
 	| forStatement
 	| nextStatement
 	| inputStatement
+	| ifStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -109,4 +114,13 @@ nextStatement
 	
 inputStatement
 	= INPUT stringLiteral.s SEMICOLON identifier.i1 COMMA identifier.i2 {: return new InputStatement(s, i1, i2); :}
+	;
+		
+ifStatement
+	= IF booleanExpression.c THEN lineNumber.n {: return new IfStatement(c, n); :}
+	;
+
+booleanExpression
+	= integerExpression.i1 NOTEQUALS integerExpression.i2 {: return new NotEqualsExpression(i1, i2); :}
+	| booleanExpression.b1 AND booleanExpression.b2 {: return new Conjunction(b1, b2); :}
 	;

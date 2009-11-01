@@ -77,7 +77,7 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         incStatement.setRightHandSide(_ast.newNumberLiteral("1"));
         incStatement.setOperator(Assignment.Operator.PLUS_ASSIGN);
         
-        IfStatement ifStatement = _ast.newIfStatement();
+        org.eclipse.jdt.core.dom.IfStatement ifStatement = _ast.newIfStatement();
         medExecuteBody.statements().add(ifStatement);
         
         Block thenBlock = _ast.newBlock();
