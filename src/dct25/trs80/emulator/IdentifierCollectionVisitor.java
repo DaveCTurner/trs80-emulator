@@ -2,6 +2,7 @@ package dct25.trs80.emulator;
 
 import java.util.HashSet;
 
+import dct25.trs80.syntaxTree.AssignmentStatement;
 import dct25.trs80.syntaxTree.SyntaxTreeVisitor;
 import dct25.trs80.syntaxTree.ForStatement;
 import dct25.trs80.syntaxTree.Identifier;
@@ -22,6 +23,10 @@ public class IdentifierCollectionVisitor extends SyntaxTreeVisitor {
     public void visitInputStatement(InputStatement is) {
         _ids.add(is.getIdentifier1());
         _ids.add(is.getIdentifier2());
+    }
+    
+    public void enterAssignmentStatement(AssignmentStatement as) {
+        _ids.add(as.getAssignee());
     }
     
     public Identifier[] getIdentifiers() {

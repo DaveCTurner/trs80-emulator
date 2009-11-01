@@ -214,6 +214,18 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         _currentExpression = e;
     }
     
+    @SuppressWarnings("unchecked")
+    public void leaveAssignmentStatement(AssignmentStatement as) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(as);
+
+        Assignment currentAssignmentStatement = _ast.newAssignment();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(currentAssignmentStatement));
+        currentAssignmentStatement.setLeftHandSide(_ast.newSimpleName(as.getAssignee().toString()));
+        currentAssignmentStatement.setRightHandSide(parenthesize(_currentExpression));
+
+        setFallThroughToNextStatement(as, medExecuteBody);
+    }
+    
     /** Builds a method for the given statement, and returns its body for population. */
     @SuppressWarnings("unchecked")
     private Block buildMethodForStatement(Statement s) throws Exception {
