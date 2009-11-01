@@ -144,7 +144,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
             MethodInvocation targetInvocation = _ast.newMethodInvocation();
             targetInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(ogs.getTarget(i)).getName()));
             ss.statements().add(_ast.newExpressionStatement(targetInvocation));
-            ss.statements().add(_ast.newReturnStatement());
+            ss.statements().add(_ast.newBreakStatement());
         }
 
         setFallThroughToNextStatement(ogs, medExecuteBody);
