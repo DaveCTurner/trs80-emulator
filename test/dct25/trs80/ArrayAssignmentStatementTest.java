@@ -55,4 +55,34 @@ public class ArrayAssignmentStatementTest {
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
+    
+
+    @Test
+    public void shouldPrintArrayAssignmentStatement() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new DimStatement(
+                            new ArrayElement(new Identifier("H"),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2)),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
+                            ),
+                            new ArrayElement(new Identifier("Z"),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(3))
+                            )
+                    )
+                }),
+                new ProgramLine(new LineNumber(20), new Statement[] {
+                    new ArrayAssignmentStatement(
+                            new ArrayElement(new Identifier("H"),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2))
+                            ),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(42))
+                    )
+                })
+        });
+
+        assertEquals("Check parsed program is as expected", "10 DIM H((2),(4)), Z((1),(3))\n20 H((1),(2))=(42)\n", p.asBasic());
+    }
 }

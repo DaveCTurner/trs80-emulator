@@ -190,4 +190,13 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
     public void leaveRandomNumberExpression(RandomNumberExpression rne) throws Exception {
         _out.write(")");
     }
+    
+    
+    public void enterArrayAssignmentStatement(ArrayAssignmentStatement as) throws Exception {
+        startStatement(as);
+    }
+    
+    public void visitedArrayAssignee(ArrayAssignmentStatement as) throws Exception {
+        _out.write("=");
+    }
 }
