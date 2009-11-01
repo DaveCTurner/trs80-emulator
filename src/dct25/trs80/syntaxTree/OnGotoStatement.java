@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class OnGotoStatement extends beaver.Symbol implements Statement {
+public class OnGotoStatement extends AbstractStatement {
     IntegerExpression _expression;
     LineNumber[] _targets;
     
@@ -52,12 +52,4 @@ public class OnGotoStatement extends beaver.Symbol implements Statement {
 
     public LineNumber getTarget(int i) { return _targets[i-1]; }
     public int getTargetCount() { return _targets.length; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

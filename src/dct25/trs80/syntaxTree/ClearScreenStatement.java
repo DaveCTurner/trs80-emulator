@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class ClearScreenStatement extends beaver.Symbol implements Statement {
+public class ClearScreenStatement extends AbstractStatement {
     public ClearScreenStatement() {
         super();
         /* Do nothing */
@@ -25,12 +25,4 @@ public class ClearScreenStatement extends beaver.Symbol implements Statement {
     public void visit(SyntaxTreeVisitor v) throws Exception {
         v.visitClearScreenStatement(this);
     }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-    
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

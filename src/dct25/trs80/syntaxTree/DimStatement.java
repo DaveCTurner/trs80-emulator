@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class DimStatement extends beaver.Symbol implements Statement {
+public class DimStatement extends AbstractStatement {
     ArrayElement[] _arrays;
     
     public DimStatement(ArrayElement ar1, ArrayElement ar2) {
@@ -44,12 +44,4 @@ public class DimStatement extends beaver.Symbol implements Statement {
     }
 
     public ArrayElement getArray(int i) { return _arrays[i]; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

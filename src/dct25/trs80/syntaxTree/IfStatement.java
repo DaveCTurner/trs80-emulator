@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class IfStatement extends beaver.Symbol implements Statement {
+public class IfStatement extends AbstractStatement {
     BooleanExpression _condition;
     LineNumber _target;
     
@@ -46,12 +46,4 @@ public class IfStatement extends beaver.Symbol implements Statement {
 
     public BooleanExpression getCondition() { return _condition; }
     public LineNumber getTarget() { return _target; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

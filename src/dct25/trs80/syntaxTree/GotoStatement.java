@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class GotoStatement extends beaver.Symbol implements Statement {
+public class GotoStatement extends AbstractStatement {
     LineNumber m_target;
     
     public GotoStatement(LineNumber target) {
@@ -35,12 +35,4 @@ public class GotoStatement extends beaver.Symbol implements Statement {
     }
 
     public LineNumber getTarget() { return m_target; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

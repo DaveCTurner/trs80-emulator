@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class ScalarAssignmentStatement extends beaver.Symbol implements Statement {
+public class ScalarAssignmentStatement extends AbstractStatement {
     Identifier _assignee;
     IntegerExpression _value;
     
@@ -45,12 +45,4 @@ public class ScalarAssignmentStatement extends beaver.Symbol implements Statemen
 
     public Identifier getAssignee() { return _assignee; }
     public IntegerExpression getValue() { return _value; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

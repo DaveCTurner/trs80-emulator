@@ -15,4 +15,10 @@ public interface Statement {
     
     public void setNextStatement(Statement next);
     public Statement getNextStatement();
+    
+    public void addNextStatement(Statement next);
+    public Statement[] getNextStatements();
+    
+    public void addPrecedingStatement(Statement preceding);
+    public Statement[] getPrecedingStatements();
 }

@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class InputStatement extends beaver.Symbol implements Statement {
+public class InputStatement extends AbstractStatement {
     StringLiteral _prompt;
     Identifier _identifier1;
     Identifier _identifier2;
@@ -51,12 +51,4 @@ public class InputStatement extends beaver.Symbol implements Statement {
     public StringLiteral getPrompt() { return _prompt; }
     public Identifier getIdentifier1() { return _identifier1; }
     public Identifier getIdentifier2() { return _identifier2; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class ForStatement extends beaver.Symbol implements Statement {
+public class ForStatement extends AbstractStatement {
    
     private Identifier _loopVariable;
     private IntegerExpression _lowerBound, _upperBound;
@@ -45,12 +45,4 @@ public class ForStatement extends beaver.Symbol implements Statement {
     public Identifier getLoopVariableIdentifier() { return _loopVariable; }
     public IntegerExpression getLowerBound() { return _lowerBound; }
     public IntegerExpression getUpperBound() { return _upperBound; }
-    
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }

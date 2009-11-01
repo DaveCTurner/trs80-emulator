@@ -7,7 +7,7 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class PrintStatement extends beaver.Symbol implements Statement {
+public class PrintStatement extends AbstractStatement {
     StringLiteral _text;
     IntegerLiteral _position;
     boolean _newLine;
@@ -55,12 +55,4 @@ public class PrintStatement extends beaver.Symbol implements Statement {
     public StringLiteral getText() { return _text; }
     public IntegerLiteral getPosition() { return _position; }
     public boolean getNewLine() { return _newLine; }
-
-    private String _name;
-    public String getName() { return _name; }
-    public void setName(String name) { _name = name; }
-
-    private Statement _nextStatement;
-    public Statement getNextStatement() { return _nextStatement; }
-    public void setNextStatement(Statement next) { _nextStatement = next; }
 }
