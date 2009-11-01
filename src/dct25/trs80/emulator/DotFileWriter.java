@@ -16,7 +16,7 @@ public class DotFileWriter extends SyntaxTreeVisitor {
 
     public void visitStatement(Statement s) {
         Statement[] nextStatements = s.getNextStatements();
-        _out.println(s.getName() + ";");
+        _out.println(s.getName() + "[label=\"" + s.getShortName() + "\"];");
         for (int i = 0; i < nextStatements.length; i++) {
             _out.println(s.getName() + " -> " + nextStatements[i].getName() + ";");
         }

@@ -3,6 +3,8 @@
  */
 package dct25.trs80.syntaxTree;
 
+import dct25.trs80.emulator.StatementNameGenerator;
+
 /**
  * @author dct25
  *
@@ -10,8 +12,8 @@ package dct25.trs80.syntaxTree;
 public interface Statement {
     public void visit(SyntaxTreeVisitor v) throws Exception;
     
-    public void setName(String name);
     public String getName();
+    public String getShortName();
     
     public void setNextStatement(Statement next);
     public Statement getNextStatement();
@@ -21,4 +23,7 @@ public interface Statement {
     
     public void addPrecedingStatement(Statement preceding);
     public Statement[] getPrecedingStatements();
+
+    public void setPosition(LineNumber lineNumber, int statementIndex);
+    public void setNameGenerator(StatementNameGenerator ng);
 }

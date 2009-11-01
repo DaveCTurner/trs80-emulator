@@ -25,7 +25,8 @@ public class SetStatementNameVisitor extends SyntaxTreeVisitor {
     }
     
     protected void visitStatement(Statement s) {
-        s.setName(_nameGenerator.getStatementName(m_currentLineNumber, m_currentStatementIndex));
+        s.setNameGenerator(_nameGenerator);
+        s.setPosition(m_currentLineNumber, m_currentStatementIndex);
         m_currentStatementIndex += 1;
     }
 }
