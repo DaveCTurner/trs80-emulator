@@ -98,6 +98,11 @@ public class SyntaxTreeVisitor {
     public void visitedRightOperandOfIntegerDifference(IntegerDifferenceExpression ide) throws Exception { }
     public void leaveIntegerDifferenceExpression(IntegerDifferenceExpression ide) throws Exception { }
     
+    /* IntegerProductExpression have two subcomponents: the two subsidiary integer expressions */
+    public void enterIntegerProductExpression(IntegerProductExpression ipe) throws Exception { }
+    public void visitedLeftOperandOfIntegerProduct(IntegerProductExpression ipe) throws Exception { }
+    public void visitedRightOperandOfIntegerProduct(IntegerProductExpression ipe) throws Exception { }
+    public void leaveIntegerProductExpression(IntegerProductExpression ipe) throws Exception { }
     
     public void enterArrayElement(ArrayElement element) throws Exception { }
     public void visitingArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }

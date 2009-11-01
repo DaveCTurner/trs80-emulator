@@ -169,6 +169,18 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         closeParenthesis();
     }
     
+    public void enterIntegerProductExpression(IntegerProductExpression ipe) throws Exception {
+        openParenthesis();
+    }
+    
+    public void visitedLeftOperandOfIntegerProduct(IntegerProductExpression ipe) throws Exception {
+        _out.write("*");
+    }
+    
+    public void leaveIntegerProductExpression(IntegerProductExpression ipe) throws Exception {
+        closeParenthesis();
+    }
+    
     private void openParenthesis() throws Exception {
         _out.write("(");
     }

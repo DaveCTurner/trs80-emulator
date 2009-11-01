@@ -6,7 +6,8 @@
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
 %terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS;
 %terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND, LPRINT, ON;
-%terminals AND, PLUS, MINUS;
+%terminals AND, PLUS, MINUS, TIMES;
+%left TIMES;
 %left AND, PLUS, MINUS;
 
 %goal program;
@@ -116,6 +117,7 @@ integerExpression
 	| integerLiteral.i {: return IntegerExpression.fromIntegerLiteral(i); :}
 	| integerExpression.i1 PLUS integerExpression.i2 {: return IntegerExpression.sum(i1, i2); :}
 	| integerExpression.i1 MINUS integerExpression.i2 {: return IntegerExpression.difference(i1, i2); :}
+	| integerExpression.i1 TIMES integerExpression.i2 {: return IntegerExpression.product(i1, i2); :}
 	| RND OPENPARENTHESIS integerExpression.i CLOSEPARENTHESIS {: return IntegerExpression.randomNumber(i); :}
 	;
 
