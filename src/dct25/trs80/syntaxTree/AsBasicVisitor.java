@@ -161,4 +161,18 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
     public void leaveArrayElement(ArrayElement ae) throws Exception {
         _out.write(")");
     }
+    
+    public void enterAssignmentStatement(AssignmentStatement as) throws Exception {
+        startStatement(as);
+        _out.write(as.getAssignee().toString());
+        _out.write("=");
+    }
+    
+    public void enterRandomNumberExpression(RandomNumberExpression rne) throws Exception {
+        _out.write("RND(");
+    }
+
+    public void leaveRandomNumberExpression(RandomNumberExpression rne) throws Exception {
+        _out.write(")");
+    }
 }

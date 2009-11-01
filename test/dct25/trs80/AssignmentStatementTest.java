@@ -60,4 +60,35 @@ public class AssignmentStatementTest {
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
+    
+    @Test
+    public void shouldOutputAssignmentStatement() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new AssignmentStatement(
+                            new Identifier("Q"),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1))
+                    )
+                })
+        });
+
+        assertEquals("Check program text is as expected", "10 Q=(1)\n", p.asBasic());
+    }
+    
+
+    @Test
+    public void shouldOutputAssignmentStatementWithRandomNumber() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new AssignmentStatement(
+                            new Identifier("Q"),
+                            IntegerExpression.randomNumber(
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
+                            )
+                    )
+                })
+        });
+
+        assertEquals("Check program text is as expected", "10 Q=RND((4))\n", p.asBasic());
+    }
 }
