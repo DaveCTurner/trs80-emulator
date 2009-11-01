@@ -92,5 +92,9 @@ public class SyntaxTreeVisitor {
         visitStatement(statement);
     }
     public void leaveAssignmentStatement(AssignmentStatement statement) throws Exception { }
+    
+    /* Random number expressions have one subcomponent: the argument */
+    public void enterRandomNumberExpression(RandomNumberExpression rne) throws Exception { }
+    public void leaveRandomNumberExpression(RandomNumberExpression rne) throws Exception { }
 
 }

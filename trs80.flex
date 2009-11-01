@@ -54,6 +54,7 @@ Identifier = [A-Z][A-Z]*
 	"IF"		{ return newToken(Terminals.IF); }
 	"THEN"		{ return newToken(Terminals.THEN); }
 	"DIM"		{ return newToken(Terminals.DIM); }
+	"RND"		{ return newToken(Terminals.RND); }
 
 	"AND"		{ return newToken(Terminals.AND); }
 	

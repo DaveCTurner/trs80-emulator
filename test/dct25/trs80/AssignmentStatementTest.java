@@ -38,4 +38,26 @@ public class AssignmentStatementTest {
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
+    
+
+    @Test
+    public void shouldParseAssignmentStatementWithRandomNumber() throws Exception {
+        Reader input = new StringReader("10 Q=RND(4)\n");
+        beaver.Scanner scanner = new TRS80Scanner(input);
+        TRS80Parser parser = new TRS80Parser();
+        Object o = parser.parse(scanner);
+
+        Program expectedProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new AssignmentStatement(
+                            new Identifier("Q"),
+                            IntegerExpression.randomNumber(
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
+                            )
+                    )
+                })
+        });
+
+        assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
 }

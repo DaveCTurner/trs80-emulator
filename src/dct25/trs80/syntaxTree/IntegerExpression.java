@@ -10,4 +10,8 @@ public abstract class IntegerExpression extends beaver.Symbol {
     }
     
     public abstract void visit(SyntaxTreeVisitor v) throws Exception;
+
+    public static IntegerExpression randomNumber(IntegerExpression i) {
+        return new RandomNumberExpression(i);
+    }
 }
