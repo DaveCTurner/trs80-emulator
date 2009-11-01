@@ -3,6 +3,7 @@ package dct25.trs80;
 import java.io.*;
 
 import dct25.trs80.emulator.BasicToJavaCompiler;
+import dct25.trs80.emulator.DotFileWriter;
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
 import dct25.trs80.syntaxTree.Program;
@@ -43,6 +44,10 @@ public class ConvertToJava {
         String className = basicFileName.replace('.', '_').replace('-', '_');
         BasicToJavaCompiler jc = new BasicToJavaCompiler(className, "dct25.trs80.programs");
         System.out.print(jc.generateCode(p));
+
+        System.out.println("/*");
+        p.visit(new DotFileWriter(System.out));
+        System.out.println("*/");
     }
 
 }
