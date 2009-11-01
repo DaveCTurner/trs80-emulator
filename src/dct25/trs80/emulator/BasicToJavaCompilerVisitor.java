@@ -256,6 +256,19 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         _currentExpression = e;
     }
     
+    public void visitedLeftOperandOfIntegerProduct(IntegerProductExpression ipe) throws Exception {
+        _expressionStack.push(_currentExpression);
+    }
+
+    public void visitedRightOperandOfIntegerProduct(IntegerProductExpression ipe) throws Exception {
+        InfixExpression e = _ast.newInfixExpression();
+        e.setLeftOperand(parenthesize(_expressionStack.pop()));
+        e.setRightOperand(parenthesize(_currentExpression));
+        e.setOperator(InfixExpression.Operator.TIMES);
+        _currentExpression = e;
+    }
+    
+    
     public void visitedLeftOperandOfEqualsExpression(EqualsExpression ee) throws Exception {
         _expressionStack.push(_currentExpression);
     }
