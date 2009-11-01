@@ -113,6 +113,35 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         setFallThroughToNextStatement(fs, medExecuteBody);
     }
     
+    
+    @SuppressWarnings("unchecked")
+    public void visitInputStatement(InputStatement is) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(is);
+        
+        MethodInvocation printInvocation = _ast.newMethodInvocation();
+        medExecuteBody.statements().add(_ast.newExpressionStatement(printInvocation));
+        printInvocation.setExpression(_ast.newSimpleName("_env"));
+        printInvocation.setName(_ast.newSimpleName("print"));
+        
+        StringLiteral sl = _ast.newStringLiteral();
+        printInvocation.arguments().add(sl);
+        sl.setLiteralValue(is.getPrompt().withoutQuotes());
+        
+        Identifier[] identifiers = new Identifier[] { is.getIdentifier1(), is.getIdentifier2() };
+        
+        for (int i = 0; i < identifiers.length; i++) {
+            Assignment idAssign = _ast.newAssignment();
+            medExecuteBody.statements().add(_ast.newExpressionStatement(idAssign));
+            idAssign.setLeftHandSide(_ast.newSimpleName(identifiers[i].toString()));
+            MethodInvocation getInvocation = _ast.newMethodInvocation();
+            idAssign.setRightHandSide(getInvocation);
+            getInvocation.setExpression(_ast.newSimpleName("_env"));
+            getInvocation.setName(_ast.newSimpleName("getInput"));
+        }
+
+        setFallThroughToNextStatement(is, medExecuteBody);
+    }
+    
     /** Builds a method for the given statement, and returns its body for population. */
     @SuppressWarnings("unchecked")
     private Block buildMethodForStatement(Statement s) throws Exception {

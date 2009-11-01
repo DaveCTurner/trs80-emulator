@@ -5,6 +5,7 @@ import java.util.HashSet;
 import dct25.trs80.syntaxTree.AbstractVisitor;
 import dct25.trs80.syntaxTree.ForStatement;
 import dct25.trs80.syntaxTree.Identifier;
+import dct25.trs80.syntaxTree.InputStatement;
 import dct25.trs80.syntaxTree.Program;
 
 public class IdentifierCollectionVisitor extends AbstractVisitor {
@@ -16,6 +17,11 @@ public class IdentifierCollectionVisitor extends AbstractVisitor {
     
     public void visitForStatement(ForStatement fs) {
         _ids.add(fs.getLoopVariableIdentifier());
+    }
+    
+    public void visitInputStatement(InputStatement is) {
+        _ids.add(is.getIdentifier1());
+        _ids.add(is.getIdentifier2());
     }
     
     public Identifier[] getIdentifiers() {

@@ -1,5 +1,8 @@
 package dct25.trs80.emulator;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class InstrumentedEnvironment implements Environment {
 
     public InstrumentedEnvironment() {
@@ -24,4 +27,12 @@ public class InstrumentedEnvironment implements Environment {
         _printed.append("\n");
     }
 
+    private Queue<Integer> _inputValues = new LinkedList<Integer>();
+    public void addInputValue(int i) {
+        _inputValues.add(i);
+    }
+
+    public int getInput() {
+        return _inputValues.remove();
+    }
 }
