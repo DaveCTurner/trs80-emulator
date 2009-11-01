@@ -73,7 +73,13 @@ public class SyntaxTreeVisitor {
     public void visitedLeftOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
     public void visitedRightOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
     public void leaveNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
-    
+
+    /* EqualsExpressions have two subcomponents: the two subsidiary integer expressions */
+    public void enterEqualsExpression(EqualsExpression ee) throws Exception { }
+    public void visitedLeftOperandOfEqualsExpression(EqualsExpression ee) throws Exception { }
+    public void visitedRightOperandOfEqualsExpression(EqualsExpression ee) throws Exception { }
+    public void leaveEqualsExpression(EqualsExpression ee) throws Exception { }
+
     public void enterArrayElement(ArrayElement element) throws Exception { }
     public void visitingArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
     public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }

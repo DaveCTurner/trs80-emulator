@@ -22,7 +22,7 @@ import dct25.trs80.syntaxTree.Statement;
 public class IfStatementTest {
 
     @Test
-    public void shouldParsePrintStatement() throws Exception {
+    public void shouldParseIfStatement() throws Exception {
         Reader input = new StringReader("10 IF 1<>1 AND 2<>2 THEN 30\n20 CLS\n30 CLS");
         beaver.Scanner scanner = new TRS80Scanner(input);
         TRS80Parser parser = new TRS80Parser();
@@ -33,6 +33,37 @@ public class IfStatementTest {
                     new IfStatement(BooleanExpression.conjunction(BooleanExpression.notEquals(
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1))
+                    ), BooleanExpression.notEquals(
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2)),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2))
+                    )), new LineNumber(30))
+                }),
+                
+                new ProgramLine(new LineNumber(20), new Statement[] {
+                    new ClearScreenStatement()
+                }),
+                
+                new ProgramLine(new LineNumber(30), new Statement[] {
+                    new ClearScreenStatement()
+                })
+        });
+
+        assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
+    
+
+    @Test
+    public void shouldParseIfStatementWithEquality() throws Exception {
+        Reader input = new StringReader("10 IF 1=4 AND 2<>2 THEN 30\n20 CLS\n30 CLS");
+        beaver.Scanner scanner = new TRS80Scanner(input);
+        TRS80Parser parser = new TRS80Parser();
+        Object o = parser.parse(scanner);
+
+        Program expectedProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new IfStatement(BooleanExpression.conjunction(BooleanExpression.equals(
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
                     ), BooleanExpression.notEquals(
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2)),
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2))

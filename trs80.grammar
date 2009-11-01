@@ -129,6 +129,7 @@ ifStatement
 
 booleanExpression
 	= integerExpression.i1 NOTEQUALS integerExpression.i2 {: return new NotEqualsExpression(i1, i2); :}
+	| integerExpression.i1 EQUALS integerExpression.i2 {: return new EqualsExpression(i1, i2); :}
 	| booleanExpression.b1 AND booleanExpression.b2 {: return new Conjunction(b1, b2); :}
 	;
 

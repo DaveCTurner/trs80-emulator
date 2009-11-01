@@ -10,4 +10,8 @@ public abstract class BooleanExpression extends beaver.Symbol {
     }
     
     public abstract void visit(SyntaxTreeVisitor v) throws Exception;
+
+    public static BooleanExpression equals(IntegerExpression i1, IntegerExpression i2) {
+        return new EqualsExpression(i1, i2);
+    }
 }
