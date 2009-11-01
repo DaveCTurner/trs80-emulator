@@ -91,6 +91,9 @@ public class SyntaxTreeVisitor {
     public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
     public void leaveArrayElement(ArrayElement element) throws Exception { }
 
+    public void enterArrayElementExpression(ArrayElementExpression ae) throws Exception { }
+    public void leaveArrayElementExpression(ArrayElementExpression ae) throws Exception { }
+    
     /* Dim statements have one subcomponent for each array declaration */
     public void enterDimStatement(DimStatement statement) throws Exception { 
         visitStatement(statement);

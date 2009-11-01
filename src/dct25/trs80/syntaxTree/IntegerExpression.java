@@ -18,4 +18,8 @@ public abstract class IntegerExpression extends beaver.Symbol {
     public static IntegerExpression sum(IntegerExpression i1, IntegerExpression i2) {
         return new IntegerSumExpression(i1, i2);
     }
+    
+    public static IntegerExpression fromArrayElement(ArrayElement ae) {
+        return new ArrayElementExpression(ae);
+    }
 }
