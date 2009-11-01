@@ -11,12 +11,15 @@ public class ArrayElement extends beaver.Symbol {
     Identifier _identifier;
 
     IntegerExpression[] _subscripts;
+    boolean _isDeclaration = false;
 
     public ArrayElement(Identifier identifier, IntegerExpression subscript1, IntegerExpression subscript2) {
         super();
         _identifier = identifier;
         _subscripts = new IntegerExpression[] { subscript1, subscript2 };
     }
+    
+    public void setDeclaration() { _isDeclaration = true; }
 
     public boolean equals(Object o) {
         if (this == o) { return true; }
@@ -47,7 +50,11 @@ public class ArrayElement extends beaver.Symbol {
             _subscripts[i].visit(v);
             v.visitedArrayElementSubscript(this, i);
         }
-        v.leaveArrayElement(this);
+        if (_isDeclaration) {
+            v.leaveArrayDeclaration(this);
+        } else {
+            v.leaveArrayElement(this);
+        }
     }
 
     public Identifier getIdentifier() {
@@ -56,5 +63,9 @@ public class ArrayElement extends beaver.Symbol {
 
     public IntegerExpression getSubscript(int dimensionIndex) {
         return _subscripts[dimensionIndex];
+    }
+
+    public int getDimensionCount() {
+        return _subscripts.length;
     }
 }

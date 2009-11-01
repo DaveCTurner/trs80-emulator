@@ -13,6 +13,7 @@ public class DimStatement extends beaver.Symbol implements Statement {
     public DimStatement(ArrayElement ar1, ArrayElement ar2) {
         super();
         _arrays = new ArrayElement[] { ar1, ar2 };
+        for (int i = 0; i < _arrays.length; i++) { _arrays[i].setDeclaration(); }
     }
     
     public boolean equals(Object o) {

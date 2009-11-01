@@ -90,6 +90,7 @@ public class SyntaxTreeVisitor {
     public void visitingArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
     public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
     public void leaveArrayElement(ArrayElement element) throws Exception { }
+    public void leaveArrayDeclaration(ArrayElement element) throws Exception { leaveArrayElement(element); }
 
     public void enterArrayElementExpression(ArrayElementExpression ae) throws Exception { }
     public void leaveArrayElementExpression(ArrayElementExpression ae) throws Exception { }

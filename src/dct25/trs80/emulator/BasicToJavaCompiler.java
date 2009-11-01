@@ -65,7 +65,6 @@ public class BasicToJavaCompiler {
         IdentifierCollectionVisitor icv = new IdentifierCollectionVisitor();
         program.visit(icv);
         Identifier[] ids = icv.getIdentifiers();
-        
         for(int i = 0; i < ids.length; i++) {
             VariableDeclarationFragment vdfEnv = ast.newVariableDeclarationFragment();
             FieldDeclaration fidEnv = ast.newFieldDeclaration(vdfEnv);
@@ -73,10 +72,20 @@ public class BasicToJavaCompiler {
             vdfEnv.setName(ast.newSimpleName(ids[i].toString()));
             fidEnv.setType(ast.newPrimitiveType(PrimitiveType.INT));
         }
-        
-        BasicToJavaCompilerVisitor v = new BasicToJavaCompilerVisitor(ast, tyProgram, nsf);
+
+        ArrayNameGenerator arrayNameGenerator = new ArrayNameGenerator();
+
+        ArrayIdentifier[] aids = icv.getArrayIdentifiers();
+        for(int i = 0; i < aids.length; i++) {
+            VariableDeclarationFragment vdfEnv = ast.newVariableDeclarationFragment();
+            FieldDeclaration fidEnv = ast.newFieldDeclaration(vdfEnv);
+            tyProgram.bodyDeclarations().add(fidEnv);
+            vdfEnv.setName(ast.newSimpleName(arrayNameGenerator.buildArrayName(aids[i].id)));
+            fidEnv.setType(ast.newArrayType(ast.newPrimitiveType(PrimitiveType.INT), aids[i].dim));
+        }
+
+        BasicToJavaCompilerVisitor v = new BasicToJavaCompilerVisitor(ast, tyProgram, nsf, arrayNameGenerator);
         program.visit(v);
         return cu.toString();
     }
-
 }

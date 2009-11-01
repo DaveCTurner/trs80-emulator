@@ -15,11 +15,14 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     private AST _ast;
     private TypeDeclaration _tyProgram;
     private NumberedStatementsFinder _nsf;
+    private ArrayNameGenerator _ang;
     
-    public BasicToJavaCompilerVisitor(AST ast, TypeDeclaration tyProgram, NumberedStatementsFinder nsf) {
+    public BasicToJavaCompilerVisitor(AST ast, TypeDeclaration tyProgram, NumberedStatementsFinder nsf,
+            ArrayNameGenerator ang) {
         _ast = ast;
         _tyProgram = tyProgram;
         _nsf = nsf;
+        _ang = ang;
     }
     
     @SuppressWarnings("unchecked")
@@ -252,6 +255,78 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         currentAssignmentStatement.setRightHandSide(parenthesize(_currentExpression));
 
         setFallThroughToNextStatement(as, medExecuteBody);
+    }
+    
+    public void visitedArrayElementSubscript(ArrayElement ae, int dimensionIndex) throws Exception {
+        _expressionStack.push(_currentExpression);
+    }
+    
+    public void leaveArrayElement(ArrayElement ae) throws Exception {
+        Expression e = _ast.newSimpleName(_ang.buildArrayName(ae.getIdentifier()));
+        Expression[] subscripts = new Expression[ae.getDimensionCount()];
+        
+        for (int i = ae.getDimensionCount() - 1; i >= 0; i--) {
+            subscripts[i] = _expressionStack.pop();
+        }
+        for (int i = 0; i < ae.getDimensionCount(); i++) {
+            ArrayAccess e2 = _ast.newArrayAccess();
+            e2.setArray(e);
+            e2.setIndex(parenthesize(subscripts[i]));
+            e = e2;
+        }
+        _currentExpression = e;
+    }
+    
+    public void visitedArrayAssignee(ArrayAssignmentStatement aas) throws Exception {
+        _expressionStack.push(_currentExpression);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void leaveArrayAssignmentStatement(ArrayAssignmentStatement aas) throws Exception {
+        Block blk = buildMethodForStatement(aas);
+        
+        Assignment assign = _ast.newAssignment();
+        blk.statements().add(_ast.newExpressionStatement(assign));
+        assign.setLeftHandSide(_expressionStack.pop());
+        assign.setRightHandSide(parenthesize(_currentExpression));
+        
+        setFallThroughToNextStatement(aas, blk);
+    }
+
+    public void enterDimStatement(DimStatement ds) throws Exception {
+        _currentDimStatementBlock = buildMethodForStatement(ds);
+    }
+    
+    private Block _currentArrayDeclarationBlock;
+    @SuppressWarnings("unchecked")
+    public void leaveArrayDeclaration(ArrayElement ae) throws Exception {
+        _currentArrayDeclarationBlock = _ast.newBlock();
+        
+        Assignment assign = _ast.newAssignment();
+        _currentArrayDeclarationBlock.statements().add(_ast.newExpressionStatement(assign));
+        assign.setLeftHandSide(_ast.newSimpleName(_ang.buildArrayName(ae.getIdentifier())));
+        
+        ArrayCreation creation = _ast.newArrayCreation();
+        assign.setRightHandSide(creation);
+        
+        Expression[] subscripts = new Expression[ae.getDimensionCount()];
+        for (int i = ae.getDimensionCount() - 1; i >= 0; i--) {
+            subscripts[i] = _expressionStack.pop();
+        }
+        for (int i = 0; i < ae.getDimensionCount(); i++) {
+            creation.dimensions().add(subscripts[i]);
+        }
+        creation.setType(_ast.newArrayType(_ast.newPrimitiveType(PrimitiveType.INT), ae.getDimensionCount()));
+    }
+    
+    private Block _currentDimStatementBlock;
+    @SuppressWarnings("unchecked")
+    public void visitedDimStatementArray(DimStatement ds, int arrayNumber) throws Exception {
+        _currentDimStatementBlock.statements().add(_currentArrayDeclarationBlock);
+    }
+    
+    public void leaveDimStatement(DimStatement ds) throws Exception {
+        setFallThroughToNextStatement(ds, _currentDimStatementBlock);
     }
     
     /** Builds a method for the given statement, and returns its body for population. */
