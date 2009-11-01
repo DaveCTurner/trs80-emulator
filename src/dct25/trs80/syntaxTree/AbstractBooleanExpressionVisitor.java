@@ -7,4 +7,10 @@ public class AbstractBooleanExpressionVisitor {
     public void leaveConjunction(Conjunction c) throws Exception { }
 
     public void visitNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
+    
+    private AbstractIntegerExpressionVisitor _integerExpressionVisitor;
+    public void setIntegerExpressionVisitor(AbstractIntegerExpressionVisitor v) { 
+        _integerExpressionVisitor = v;
+    }
+    public AbstractIntegerExpressionVisitor getIntegerExpressionVisitor() { return _integerExpressionVisitor; }
 }

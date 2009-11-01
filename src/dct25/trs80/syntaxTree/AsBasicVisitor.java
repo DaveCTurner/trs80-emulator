@@ -77,4 +77,12 @@ public class AsBasicVisitor extends AbstractVisitor {
         _out.write("INPUT " + is.getPrompt() + "; ");
         _out.write(is.getIdentifier1() + "," + is.getIdentifier2());
     }
+    
+    public void visitIfStatement(IfStatement is) throws Exception {
+        startStatement(is);
+        _out.write("IF ");
+        AbstractBooleanExpressionVisitor v = new BooleanExpressionAsBasicVisitor(_out);
+        is.getCondition().visit(v);
+        _out.write(" THEN " + is.getTarget().toString());
+    }
 }
