@@ -4,8 +4,8 @@
 %import "dct25.trs80.syntaxTree.*";
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
-%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS;
-%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN;
+%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS;
+%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM;
 %terminals AND;
 %right AND;
 
@@ -28,6 +28,8 @@
 %typeof nextStatement = "NextStatement";
 %typeof inputStatement = "InputStatement";
 %typeof ifStatement = "IfStatement";
+%typeof dimStatement = "DimStatement";
+%typeof arrayElement = "ArrayElement";
 
 program
 	= programLine.lines+ {: return new Program(lines); :}
@@ -67,6 +69,7 @@ statement
 	| nextStatement
 	| inputStatement
 	| ifStatement
+	| dimStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -124,4 +127,12 @@ ifStatement
 booleanExpression
 	= integerExpression.i1 NOTEQUALS integerExpression.i2 {: return new NotEqualsExpression(i1, i2); :}
 	| booleanExpression.b1 AND booleanExpression.b2 {: return new Conjunction(b1, b2); :}
+	;
+
+dimStatement
+	= DIM arrayElement.a1 COMMA arrayElement.a2 {: return new DimStatement(a1, a2); :}
+	;
+
+arrayElement
+	= identifier.aid OPENPARENTHESIS integerExpression.i1 COMMA integerExpression.i2 CLOSEPARENTHESIS {: return new ArrayElement(aid, i1, i2); :}
 	;

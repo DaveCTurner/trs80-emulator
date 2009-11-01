@@ -73,5 +73,13 @@ public class SyntaxTreeVisitor {
     public void visitedLeftOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
     public void visitedRightOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
     public void leaveNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
+    
+    public void enterArrayElement(ArrayElement element) { }
+    public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) { }
+    public void leaveArrayElement(ArrayElement element) { }
+
+    public void enterDimStatement(DimStatement statement) { }
+    public void visitedDimStatementArray(DimStatement statement, int dimensionIndex) { }
+    public void leaveDimStatement(DimStatement statement) { }
 
 }
