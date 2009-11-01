@@ -99,6 +99,13 @@ public class SyntaxTreeVisitor {
     }
     public void leaveScalarAssignmentStatement(ScalarAssignmentStatement statement) throws Exception { }
     
+    /* Array assignments have two subcomponent: the array element and the value expression */
+    public void enterArrayAssignmentStatement(ArrayAssignmentStatement statement) throws Exception {
+        visitStatement(statement);
+    }
+    public void visitedArrayAssignee(ArrayAssignmentStatement statement) throws Exception { }
+    public void leaveArrayAssignmentStatement(ArrayAssignmentStatement statement) throws Exception { }
+    
     /* Random number expressions have one subcomponent: the argument */
     public void enterRandomNumberExpression(RandomNumberExpression rne) throws Exception { }
     public void leaveRandomNumberExpression(RandomNumberExpression rne) throws Exception { }

@@ -72,6 +72,7 @@ statement
 	| ifStatement
 	| dimStatement
 	| scalarAssignmentStatement
+	| arrayAssignmentStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -145,4 +146,8 @@ arrayElement
 
 scalarAssignmentStatement
 	= identifier.target EQUALS integerExpression.value {: return new ScalarAssignmentStatement(target, value); :}
+	;
+	
+arrayAssignmentStatement
+	= arrayElement.target EQUALS integerExpression.value {: return new ArrayAssignmentStatement(target, value); :}
 	;
