@@ -177,7 +177,7 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         _out.write(")");
     }
     
-    public void enterAssignmentStatement(AssignmentStatement as) throws Exception {
+    public void enterScalarAssignmentStatement(ScalarAssignmentStatement as) throws Exception {
         startStatement(as);
         _out.write(as.getAssignee().toString());
         _out.write("=");

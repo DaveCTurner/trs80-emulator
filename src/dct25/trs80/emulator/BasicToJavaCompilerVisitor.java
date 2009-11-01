@@ -232,7 +232,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     }
     
     @SuppressWarnings("unchecked")
-    public void leaveAssignmentStatement(AssignmentStatement as) throws Exception {
+    public void leaveScalarAssignmentStatement(ScalarAssignmentStatement as) throws Exception {
         Block medExecuteBody = buildMethodForStatement(as);
 
         Assignment currentAssignmentStatement = _ast.newAssignment();

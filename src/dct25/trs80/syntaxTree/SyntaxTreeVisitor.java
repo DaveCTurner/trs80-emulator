@@ -94,10 +94,10 @@ public class SyntaxTreeVisitor {
     public void leaveDimStatement(DimStatement statement) throws Exception { }
     
     /* Assignments have one subcomponent: the value expression */
-    public void enterAssignmentStatement(AssignmentStatement statement) throws Exception {
+    public void enterScalarAssignmentStatement(ScalarAssignmentStatement statement) throws Exception {
         visitStatement(statement);
     }
-    public void leaveAssignmentStatement(AssignmentStatement statement) throws Exception { }
+    public void leaveScalarAssignmentStatement(ScalarAssignmentStatement statement) throws Exception { }
     
     /* Random number expressions have one subcomponent: the argument */
     public void enterRandomNumberExpression(RandomNumberExpression rne) throws Exception { }

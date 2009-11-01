@@ -7,11 +7,11 @@ package dct25.trs80.syntaxTree;
  * @author dct25
  *
  */
-public class AssignmentStatement extends beaver.Symbol implements Statement {
+public class ScalarAssignmentStatement extends beaver.Symbol implements Statement {
     Identifier _assignee;
     IntegerExpression _value;
     
-    public AssignmentStatement(Identifier assignee, IntegerExpression value) {
+    public ScalarAssignmentStatement(Identifier assignee, IntegerExpression value) {
         super();
         _assignee = assignee;
         _value = value;
@@ -20,9 +20,9 @@ public class AssignmentStatement extends beaver.Symbol implements Statement {
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null) { return false; }
-        if (!(o instanceof AssignmentStatement)) { return false; }
+        if (!(o instanceof ScalarAssignmentStatement)) { return false; }
         
-        AssignmentStatement other = (AssignmentStatement)o;
+        ScalarAssignmentStatement other = (ScalarAssignmentStatement)o;
         if (null == this._assignee) {
             if (null != other._assignee) { return false; }
         } else {
@@ -38,9 +38,9 @@ public class AssignmentStatement extends beaver.Symbol implements Statement {
     }
 
     public void visit(SyntaxTreeVisitor v) throws Exception {
-        v.enterAssignmentStatement(this);
+        v.enterScalarAssignmentStatement(this);
         _value.visit(v);
-        v.leaveAssignmentStatement(this);
+        v.leaveScalarAssignmentStatement(this);
     }
 
     public Identifier getAssignee() { return _assignee; }

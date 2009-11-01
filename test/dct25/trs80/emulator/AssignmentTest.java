@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dct25.trs80.syntaxTree.AssignmentStatement;
+import dct25.trs80.syntaxTree.ScalarAssignmentStatement;
 import dct25.trs80.syntaxTree.ClearScreenStatement;
 import dct25.trs80.syntaxTree.ForStatement;
 import dct25.trs80.syntaxTree.Identifier;
@@ -22,7 +22,7 @@ public class AssignmentTest {
     public void shouldSkipLine() throws Exception {
         Program loopProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new AssignmentStatement(
+                    new ScalarAssignmentStatement(
                             new Identifier("Q"),
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(7))
                     )

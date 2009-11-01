@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dct25.trs80.syntax.TRS80Parser;
 import dct25.trs80.syntax.TRS80Scanner;
-import dct25.trs80.syntaxTree.AssignmentStatement;
+import dct25.trs80.syntaxTree.ScalarAssignmentStatement;
 import dct25.trs80.syntaxTree.Identifier;
 import dct25.trs80.syntaxTree.IntegerExpression;
 import dct25.trs80.syntaxTree.IntegerLiteral;
@@ -29,7 +29,7 @@ public class AssignmentStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new AssignmentStatement(
+                    new ScalarAssignmentStatement(
                             new Identifier("Q"),
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1))
                     )
@@ -49,7 +49,7 @@ public class AssignmentStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new AssignmentStatement(
+                    new ScalarAssignmentStatement(
                             new Identifier("Q"),
                             IntegerExpression.randomNumber(
                                     IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
@@ -65,7 +65,7 @@ public class AssignmentStatementTest {
     public void shouldOutputAssignmentStatement() throws Exception {
         Program p = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new AssignmentStatement(
+                    new ScalarAssignmentStatement(
                             new Identifier("Q"),
                             IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1))
                     )
@@ -80,7 +80,7 @@ public class AssignmentStatementTest {
     public void shouldOutputAssignmentStatementWithRandomNumber() throws Exception {
         Program p = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new AssignmentStatement(
+                    new ScalarAssignmentStatement(
                             new Identifier("Q"),
                             IntegerExpression.randomNumber(
                                     IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
