@@ -49,4 +49,22 @@ public class PrintTest {
         assertEquals("Should still not have cleared screen", 0, env.getScreenClearedCount());
         assertEquals("Should have printed 'HELLO WORLD/AND WELCOME'", "HELLO WORLD\nAND WELCOME\n", env.getPrintedOutput());
     }
+    
+    @Test
+    public void shouldPrintNoNewLines() throws Exception {
+        Program clearScreenProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral("HELLO WORLD"), new IntegerLiteral(1010), false),
+                    new PrintStatement(new StringLiteral("AND WELCOME"), new IntegerLiteral(2010), false)
+                }),
+        });
+        
+        Executable e = new BasicToJavaCompiler("OnTheFlyProgram", "dct25.trs80.examplePrograms.onTheFly").compile(clearScreenProgram);
+
+        InstrumentedEnvironment env = new InstrumentedEnvironment();
+        assertEquals("Should not have cleared screen", 0, env.getScreenClearedCount());
+        e.execute(env);
+        assertEquals("Should still not have cleared screen", 0, env.getScreenClearedCount());
+        assertEquals("Should have printed 'HELLO WORLDAND WELCOME'", "HELLO WORLDAND WELCOME", env.getPrintedOutput());
+    }
 }

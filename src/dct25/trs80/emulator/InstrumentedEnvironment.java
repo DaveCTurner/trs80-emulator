@@ -22,9 +22,9 @@ public class InstrumentedEnvironment implements Environment {
         return _printed.toString();
     }
     private StringBuffer _printed = new StringBuffer();
-    public void print(String s) {
+    public void print(String s, boolean newLine) {
         _printed.append(s);
-        _printed.append("\n");
+        if (newLine) { _printed.append("\n"); }
     }
 
     private Queue<Integer> _inputValues = new LinkedList<Integer>();

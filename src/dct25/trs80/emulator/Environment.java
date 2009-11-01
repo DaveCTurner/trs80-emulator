@@ -10,6 +10,6 @@ package dct25.trs80.emulator;
  */
 public interface Environment {
     public void clearScreen();
-    public void print(String s);
+    public void print(String s, boolean newLine);
     public int getInput();
 }

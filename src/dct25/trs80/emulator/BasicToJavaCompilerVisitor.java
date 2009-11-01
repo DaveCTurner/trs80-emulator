@@ -66,6 +66,8 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         printInvocation.arguments().add(sl);
         sl.setLiteralValue(ps.getText().toString());
 
+        printInvocation.arguments().add(_ast.newBooleanLiteral(ps.getNewLine()));
+
         setFallThroughToNextStatement(ps, medExecuteBody);
     }
     
@@ -133,6 +135,8 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         StringLiteral sl = _ast.newStringLiteral();
         printInvocation.arguments().add(sl);
         sl.setLiteralValue(is.getPrompt().toString());
+        
+        printInvocation.arguments().add(_ast.newBooleanLiteral(true));
         
         Identifier[] identifiers = new Identifier[] { is.getIdentifier1(), is.getIdentifier2() };
         
