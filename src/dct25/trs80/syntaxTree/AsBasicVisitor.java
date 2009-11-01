@@ -116,6 +116,18 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         closeParenthesis();
     }
     
+    public void enterEqualsExpression(EqualsExpression ee) throws Exception {
+        openParenthesis();
+    }
+    
+    public void visitedLeftOperandOfEqualsExpression(EqualsExpression ee) throws Exception {
+        _out.write("=");
+    }
+    
+    public void leaveEqualsExpression(EqualsExpression ee) throws Exception {
+        closeParenthesis();
+    }
+    
     private void openParenthesis() throws Exception {
         _out.write("(");
     }
