@@ -212,8 +212,11 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         gotoStatementInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(is.getTarget()).getName()));
         thenBlock.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
         thenBlock.statements().add(_ast.newReturnStatement());
+        
+        Block elseBlock = _ast.newBlock();
+        ifStatement.setElseStatement(elseBlock);
 
-        setFallThroughToNextStatement(is, medExecuteBody);
+        setFallThroughToNextStatement(is, elseBlock);
     }
     
     public void visitedIfStatementCondition(IfStatement is) throws Exception {
