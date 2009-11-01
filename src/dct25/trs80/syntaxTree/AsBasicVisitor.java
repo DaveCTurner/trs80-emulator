@@ -39,6 +39,20 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         _out.write("GOTO " + gs.getTarget().toString());
     }
 
+    public void enterOnGotoStatement(OnGotoStatement ogs) throws Exception {
+        startStatement(ogs);
+        _out.write("ON ");
+    }
+
+    public void leaveOnGotoStatement(OnGotoStatement ogs) throws Exception {
+        _out.write(" GOTO ");
+        for (int i = 1; i <= ogs.getTargetCount(); i++) {
+            if (i != 1) { _out.write(", "); }
+            _out.write(ogs.getTarget(i).toString());
+        }
+    }
+
+    
     public void visitEndStatement(EndStatement es) throws Exception {
         startStatement(es);
         _out.write("END");
