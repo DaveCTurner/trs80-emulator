@@ -92,7 +92,6 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         MethodInvocation startAgainInvocation = _ast.newMethodInvocation();
         startAgainInvocation.setName(_ast.newSimpleName(ns.getLoopStartStatement().getNextStatement().getName()));
         thenBlock.statements().add(_ast.newExpressionStatement(startAgainInvocation));
-        thenBlock.statements().add(_ast.newReturnStatement());
         
         InfixExpression condition = _ast.newInfixExpression();
         ifStatement.setExpression(condition);
@@ -100,7 +99,9 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         condition.setRightOperand(parenthesize(_expressionStack.pop()));
         condition.setOperator(InfixExpression.Operator.LESS_EQUALS);
 
-        setFallThroughToNextStatement(ns, medExecuteBody);
+        Block elseBlock = _ast.newBlock();
+        ifStatement.setElseStatement(elseBlock);
+        setFallThroughToNextStatement(ns, elseBlock);
     }
 
     private Assignment _currentForStatementLowerBoundAssignment;
@@ -211,7 +212,6 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         MethodInvocation gotoStatementInvocation = _ast.newMethodInvocation();
         gotoStatementInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(is.getTarget()).getName()));
         thenBlock.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
-        thenBlock.statements().add(_ast.newReturnStatement());
         
         Block elseBlock = _ast.newBlock();
         ifStatement.setElseStatement(elseBlock);
