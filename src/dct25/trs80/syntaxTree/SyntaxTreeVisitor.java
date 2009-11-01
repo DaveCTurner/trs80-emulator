@@ -80,11 +80,18 @@ public class SyntaxTreeVisitor {
     public void visitedRightOperandOfEqualsExpression(EqualsExpression ee) throws Exception { }
     public void leaveEqualsExpression(EqualsExpression ee) throws Exception { }
 
-    /* EqualsExpressions have two subcomponents: the two subsidiary integer expressions */
+    /* IntegerSumExpressions have two subcomponents: the two subsidiary integer expressions */
     public void enterIntegerSumExpression(IntegerSumExpression ise) throws Exception { }
     public void visitedLeftOperandOfIntegerSum(IntegerSumExpression ise) throws Exception { }
     public void visitedRightOperandOfIntegerSum(IntegerSumExpression ise) throws Exception { }
     public void leaveIntegerSumExpression(IntegerSumExpression ise) throws Exception { }
+    
+    /* IntegerDifferenceExpression have two subcomponents: the two subsidiary integer expressions */
+    public void enterIntegerDifferenceExpression(IntegerDifferenceExpression ide) throws Exception { }
+    public void visitedLeftOperandOfIntegerDifference(IntegerDifferenceExpression ide) throws Exception { }
+    public void visitedRightOperandOfIntegerDifference(IntegerDifferenceExpression ide) throws Exception { }
+    public void leaveIntegerDifferenceExpression(IntegerDifferenceExpression ide) throws Exception { }
+    
     
     public void enterArrayElement(ArrayElement element) throws Exception { }
     public void visitingArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }

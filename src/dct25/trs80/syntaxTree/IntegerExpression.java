@@ -22,4 +22,8 @@ public abstract class IntegerExpression extends beaver.Symbol {
     public static IntegerExpression fromArrayElement(ArrayElement ae) {
         return new ArrayElementExpression(ae);
     }
+
+    public static IntegerExpression difference(IntegerExpression i1, IntegerExpression i2) {
+        return new IntegerDifferenceExpression(i1, i2);
+    }
 }
