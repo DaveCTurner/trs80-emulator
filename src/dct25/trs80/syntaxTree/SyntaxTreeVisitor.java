@@ -74,12 +74,16 @@ public class SyntaxTreeVisitor {
     public void visitedRightOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
     public void leaveNotEqualsExpression(NotEqualsExpression ne) throws Exception { }
     
-    public void enterArrayElement(ArrayElement element) { }
-    public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) { }
-    public void leaveArrayElement(ArrayElement element) { }
+    public void enterArrayElement(ArrayElement element) throws Exception { }
+    public void visitingArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
+    public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
+    public void leaveArrayElement(ArrayElement element) throws Exception { }
 
-    public void enterDimStatement(DimStatement statement) { }
-    public void visitedDimStatementArray(DimStatement statement, int dimensionIndex) { }
-    public void leaveDimStatement(DimStatement statement) { }
+    public void enterDimStatement(DimStatement statement) throws Exception { 
+        visitStatement(statement);
+    }
+    public void visitingDimStatementArray(DimStatement statement, int dimensionIndex) throws Exception { }
+    public void visitedDimStatementArray(DimStatement statement, int dimensionIndex) throws Exception { }
+    public void leaveDimStatement(DimStatement statement) throws Exception { }
 
 }

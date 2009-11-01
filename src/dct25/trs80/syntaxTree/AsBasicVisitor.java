@@ -135,4 +135,30 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         _out.write(i.toString());
         closeParenthesis();
     }
+    
+    public void enterDimStatement(DimStatement ds) throws Exception {
+        startStatement(ds);
+        _out.write("DIM ");
+    }
+    
+    public void visitingDimStatementArray(DimStatement ds, int arrayNumber) throws Exception {
+        if (0 != arrayNumber) {
+            _out.write(", ");
+        }
+    }
+    
+    public void enterArrayElement(ArrayElement ae) throws Exception {
+        _out.write(ae.getIdentifier().toString());
+        _out.write("(");
+    }
+    
+    public void visitingArrayElementSubscript(ArrayElement ae, int dimensionIndex) throws Exception {
+        if (0 != dimensionIndex) {
+            _out.write(",");
+        }
+    }
+
+    public void leaveArrayElement(ArrayElement ae) throws Exception {
+        _out.write(")");
+    }
 }

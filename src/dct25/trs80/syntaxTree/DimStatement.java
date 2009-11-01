@@ -35,6 +35,7 @@ public class DimStatement extends beaver.Symbol implements Statement {
     public void visit(SyntaxTreeVisitor v) throws Exception {
         v.enterDimStatement(this);
         for (int i = 0; i < _arrays.length; i++) {
+            v.visitingDimStatementArray(this, i);
             _arrays[i].visit(v);
             v.visitedDimStatementArray(this, i);
         }

@@ -43,6 +43,7 @@ public class ArrayElement extends beaver.Symbol {
     public void visit(SyntaxTreeVisitor v) throws Exception {
         v.enterArrayElement(this);
         for (int i = 0; i < _subscripts.length; i++) {
+            v.visitingArrayElementSubscript(this, i);
             _subscripts[i].visit(v);
             v.visitedArrayElementSubscript(this, i);
         }

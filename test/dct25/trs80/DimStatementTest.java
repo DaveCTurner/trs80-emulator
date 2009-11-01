@@ -46,4 +46,24 @@ public class DimStatementTest {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
     
+    @Test
+    public void shouldConvertProgramWithDimStatementCorrectly() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new DimStatement(
+                            new ArrayElement(new Identifier("H"),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2)),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(4))
+                            ),
+                            new ArrayElement(new Identifier("V"),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(3)),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(6))
+                            )
+                    )
+                })
+        });
+
+        assertEquals("Check program text", "10 DIM H((2),(4)), V((3),(6))\n", p.asBasic());
+    }
+    
 }
