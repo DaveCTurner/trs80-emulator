@@ -4,7 +4,7 @@
 %import "dct25.trs80.syntaxTree.*";
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
-%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS;
+%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS, PLUS;
 %terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND, LPRINT;
 %terminals AND;
 %right AND;
@@ -110,6 +110,7 @@ identifier
 integerExpression
 	= identifier.i {: return IntegerExpression.fromIdentifier(i); :}
 	| integerLiteral.i {: return IntegerExpression.fromIntegerLiteral(i); :}
+	| integerExpression.i1 PLUS integerExpression.i2 {: return IntegerExpression.sum(i1, i2); :}
 	| RND OPENPARENTHESIS integerExpression.i CLOSEPARENTHESIS {: return IntegerExpression.randomNumber(i); :}
 	;
 

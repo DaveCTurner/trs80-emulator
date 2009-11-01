@@ -14,4 +14,8 @@ public abstract class IntegerExpression extends beaver.Symbol {
     public static IntegerExpression randomNumber(IntegerExpression i) {
         return new RandomNumberExpression(i);
     }
+    
+    public static IntegerExpression sum(IntegerExpression i1, IntegerExpression i2) {
+        return new IntegerSumExpression(i1, i2);
+    }
 }
