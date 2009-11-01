@@ -5,7 +5,7 @@
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
 %terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS;
-%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND;
+%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND, LPRINT;
 %terminals AND;
 %right AND;
 
@@ -98,6 +98,8 @@ stringLiteral
 printStatement
 	= PRINT AT integerLiteral.i COMMA stringLiteral.s {: return new PrintStatement(s, i); :}
 	| PRINT stringLiteral.s {: return new PrintStatement(s, null); :}
+	| LPRINT stringLiteral.s SEMICOLON {: return new PrintStatement(s, false); :}
+	| LPRINT stringLiteral.s {: return new PrintStatement(s, true); :}
 	;
 
 identifier

@@ -47,6 +47,7 @@ Identifier = [A-Z][A-Z]*
 	"GOTO"      { return newToken(Terminals.GOTO); }
 	"END"		{ return newToken(Terminals.END); }
 	"PRINT"		{ return newToken(Terminals.PRINT); }
+	"LPRINT"	{ return newToken(Terminals.LPRINT); }
 	"FOR"		{ return newToken(Terminals.FOR); }
 	"TO"		{ return newToken(Terminals.TO); }
 	"NEXT"		{ return newToken(Terminals.NEXT); }
