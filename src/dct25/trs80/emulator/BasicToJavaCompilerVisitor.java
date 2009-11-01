@@ -87,21 +87,21 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         org.eclipse.jdt.core.dom.IfStatement ifStatement = _ast.newIfStatement();
         medExecuteBody.statements().add(ifStatement);
         
-        Block thenBlock = _ast.newBlock();
-        ifStatement.setThenStatement(thenBlock);
+        Block elseBlock = _ast.newBlock();
+        ifStatement.setElseStatement(elseBlock);
         MethodInvocation startAgainInvocation = _ast.newMethodInvocation();
         startAgainInvocation.setName(_ast.newSimpleName(ns.getLoopStartStatement().getNextStatement().getName()));
-        thenBlock.statements().add(_ast.newExpressionStatement(startAgainInvocation));
+        elseBlock.statements().add(_ast.newExpressionStatement(startAgainInvocation));
         
         InfixExpression condition = _ast.newInfixExpression();
         ifStatement.setExpression(condition);
         condition.setLeftOperand(_ast.newSimpleName(ns.getLoopStartStatement().getLoopVariableIdentifier().toString()));
         condition.setRightOperand(parenthesize(_expressionStack.pop()));
-        condition.setOperator(InfixExpression.Operator.LESS_EQUALS);
+        condition.setOperator(InfixExpression.Operator.GREATER);
 
-        Block elseBlock = _ast.newBlock();
-        ifStatement.setElseStatement(elseBlock);
-        setFallThroughToNextStatement(ns, elseBlock);
+        Block thenBlock = _ast.newBlock();
+        ifStatement.setThenStatement(thenBlock);
+        setFallThroughToNextStatement(ns, thenBlock);
     }
 
     private Assignment _currentForStatementLowerBoundAssignment;
