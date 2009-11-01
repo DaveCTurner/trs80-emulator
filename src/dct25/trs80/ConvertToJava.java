@@ -36,6 +36,10 @@ public class ConvertToJava {
             }
         }
         
+        System.out.println("/*");
+        System.out.print(p.asBasic());
+        System.out.println("*/");
+        
         String className = basicFileName.replace('.', '_').replace('-', '_');
         BasicToJavaCompiler jc = new BasicToJavaCompiler(className, "dct25.trs80.programs");
         System.out.print(jc.generateCode(p));
