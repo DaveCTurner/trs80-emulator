@@ -50,8 +50,10 @@ Identifier = [A-Z][A-Z]*
 	"FOR"		{ return newToken(Terminals.FOR); }
 	"TO"		{ return newToken(Terminals.TO); }
 	"NEXT"		{ return newToken(Terminals.NEXT); }
+	"INPUT"		{ return newToken(Terminals.INPUT); }
 	
 	"="         { return newToken(Terminals.EQUALS); }
+	";"         { return newToken(Terminals.SEMICOLON); }
 	":"         { return newToken(Terminals.COLON); }
 	","         { return newToken(Terminals.COMMA); }
 	"@"         { return newToken(Terminals.AT); }

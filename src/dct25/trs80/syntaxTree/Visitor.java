@@ -11,4 +11,5 @@ public interface Visitor {
     public void visitForStatement(ForStatement fs) throws Exception;
     public void visitNextStatement(NextStatement ns) throws Exception;
     public void visitPrintStatement(PrintStatement ps) throws Exception;
+    public void visitInputStatement(InputStatement is) throws Exception;
 }

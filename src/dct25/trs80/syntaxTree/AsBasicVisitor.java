@@ -71,4 +71,10 @@ public class AsBasicVisitor extends AbstractVisitor {
         _out.write(" TO ");
         fs.getUpperBound().visit(v);
     }
+    
+    public void visitInputStatement(InputStatement is) throws Exception {
+        startStatement(is);
+        _out.write("INPUT " + is.getPrompt() + "; ");
+        _out.write(is.getIdentifier1() + "," + is.getIdentifier2());
+    }
 }

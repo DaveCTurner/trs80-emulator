@@ -4,8 +4,8 @@
 %import "dct25.trs80.syntaxTree.*";
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
-%terminals COLON, AT, COMMA, EQUALS;
-%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT;
+%terminals COLON, AT, COMMA, EQUALS, SEMICOLON;
+%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT;
 
 %goal program;
 
@@ -23,6 +23,7 @@
 %typeof identifier = "Identifier";
 %typeof forStatement = "ForStatement";
 %typeof nextStatement = "NextStatement";
+%typeof inputStatement = "InputStatement";
 
 program
 	= programLine.lines+ {: return new Program(lines); :}
@@ -60,6 +61,7 @@ statement
 	| printStatement
 	| forStatement
 	| nextStatement
+	| inputStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -103,4 +105,8 @@ forStatement
 nextStatement
 	= NEXT identifier.i {: return new NextStatement(i); :}
 	| NEXT				{: return new NextStatement(); :}
+	;
+	
+inputStatement
+	= INPUT stringLiteral.s SEMICOLON identifier.i1 COMMA identifier.i2 {: return new InputStatement(s, i1, i2); :}
 	;
