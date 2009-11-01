@@ -39,9 +39,9 @@ Identifier = [A-Z][A-Z]*
 
 %%
 
-{WhiteSpace}+   { /* ignore */ }
-
 <YYINITIAL> {
+
+	{WhiteSpace}+   { /* ignore */ }
 
 	"CLS"       { return newToken(Terminals.CLS); }
 	"GOTO"      { return newToken(Terminals.GOTO); }
