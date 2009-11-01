@@ -21,6 +21,12 @@ public class SyntaxTreeVisitor {
         visitStatement(gs);
     }
     
+    /* ON ? GOTO ?, ? has one subcomponent: the expression */
+    public void enterOnGotoStatement(OnGotoStatement ogs) throws Exception {
+        visitStatement(ogs);
+    }
+    public void leaveOnGotoStatement(OnGotoStatement ogs) throws Exception { }
+    
     /* END is terminal */
     public void visitEndStatement(EndStatement es) throws Exception { 
         visitStatement(es);

@@ -5,7 +5,7 @@
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
 %terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS;
-%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND, LPRINT;
+%terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND, LPRINT, ON;
 %terminals AND, PLUS, MINUS;
 %left AND, PLUS, MINUS;
 
@@ -16,6 +16,7 @@
 %typeof statement = "Statement";
 %typeof subsequentStatement = "Statement";
 %typeof lineNumber = "LineNumber";
+%typeof subsequentLineNumber = "LineNumber";
 %typeof program = "Program";
 %typeof programLine = "ProgramLine";
 %typeof stringLiteral = "StringLiteral";
@@ -31,6 +32,7 @@
 %typeof dimStatement = "DimStatement";
 %typeof arrayElement = "ArrayElement";
 %typeof scalarAssignmentStatement = "ScalarAssignmentStatement";
+%typeof onGotoStatement = "OnGotoStatement";
 
 program
 	= programLine.lines+ {: return new Program(lines); :}
@@ -73,6 +75,7 @@ statement
 	| dimStatement
 	| scalarAssignmentStatement
 	| arrayAssignmentStatement
+	| onGotoStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -153,4 +156,18 @@ scalarAssignmentStatement
 	
 arrayAssignmentStatement
 	= arrayElement.target EQUALS integerExpression.value {: return new ArrayAssignmentStatement(target, value); :}
+	;
+
+onGotoStatement
+	= ON integerExpression.e GOTO lineNumber.n0 subsequentLineNumber.ns* {: 
+		LineNumber[] targets = new LineNumber[1 + ns.length];
+		targets[0] = n0;
+		for (int i = 0; i < ns.length; i++) {
+			targets[i+1] = ns[i];
+		}
+		return new OnGotoStatement(e, targets); :}
+	;
+
+subsequentLineNumber
+	= COMMA lineNumber
 	;
