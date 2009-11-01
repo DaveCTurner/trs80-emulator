@@ -8,6 +8,7 @@ import org.eclipse.jdt.core.dom.StringLiteral;
 
 import dct25.trs80.syntaxTree.*;
 import dct25.trs80.syntaxTree.ForStatement;
+import dct25.trs80.syntaxTree.IfStatement;
 import dct25.trs80.syntaxTree.Statement;
 
 public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
@@ -19,7 +20,6 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         _ast = ast;
         _tyProgram = tyProgram;
         _nsf = nsf;
-        _forStatementsUpperBounds = new Stack<Expression>();
     }
     
     @SuppressWarnings("unchecked")
@@ -92,14 +92,14 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         InfixExpression condition = _ast.newInfixExpression();
         ifStatement.setExpression(condition);
         condition.setLeftOperand(_ast.newSimpleName(ns.getLoopStartStatement().getLoopVariableIdentifier().toString()));
-        condition.setRightOperand(_forStatementsUpperBounds.pop());
+        condition.setRightOperand(_expressionStack.pop());
         condition.setOperator(InfixExpression.Operator.LESS_EQUALS);
 
         setFallThroughToNextStatement(ns, medExecuteBody);
     }
 
     private Assignment _currentForStatementLowerBoundAssignment;
-    private Stack<Expression> _forStatementsUpperBounds;
+    private Stack<Expression> _expressionStack = new Stack<Expression>();
     
     @SuppressWarnings("unchecked")
     public void enterForStatement(ForStatement fs) throws Exception {
@@ -118,7 +118,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     }
 
     public void visitedUpperBoundInForStatement(ForStatement fs) throws Exception {
-        _forStatementsUpperBounds.push(_currentExpression);
+        _expressionStack.push(_currentExpression);
     }
 
     @SuppressWarnings("unchecked")
@@ -152,12 +152,66 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     
     private Expression _currentExpression;
     
+    private Expression parenthesize(Expression e) {
+        ParenthesizedExpression pe = _ast.newParenthesizedExpression();
+        pe.setExpression(e);
+        return pe;
+    }
+    
     public void visitIntegerLiteralExpression(IntegerLiteralExpression i) {
         _currentExpression = _ast.newNumberLiteral(i.toString());
     }
 
     public void visitIntegerIdentifierExpression(IntegerIdentifierExpression ii) {
         _currentExpression = _ast.newName(ii.toString());
+    }
+
+    private org.eclipse.jdt.core.dom.IfStatement _currentIfStatement;
+
+    @SuppressWarnings("unchecked")
+    public void enterIfStatement(IfStatement is) throws Exception {
+        Block medExecuteBody = buildMethodForStatement(is);
+        
+        org.eclipse.jdt.core.dom.IfStatement ifStatement = _ast.newIfStatement();
+        medExecuteBody.statements().add(ifStatement);
+        _currentIfStatement = ifStatement;
+        
+        Block thenBlock = _ast.newBlock();
+        ifStatement.setThenStatement(thenBlock);
+        MethodInvocation gotoStatementInvocation = _ast.newMethodInvocation();
+        gotoStatementInvocation.setName(_ast.newSimpleName(_nsf.getNumberedStatement(is.getTarget()).getName()));
+        thenBlock.statements().add(_ast.newExpressionStatement(gotoStatementInvocation));
+        thenBlock.statements().add(_ast.newReturnStatement());
+
+        setFallThroughToNextStatement(is, medExecuteBody);
+    }
+    
+    public void visitedIfStatementCondition(IfStatement is) throws Exception {
+        _currentIfStatement.setExpression(parenthesize(_currentExpression));
+    }
+    
+    public void visitedLeftOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception {
+        _expressionStack.push(_currentExpression);
+    }
+
+    public void visitedRightOperandOfNotEqualsExpression(NotEqualsExpression ne) throws Exception {
+        InfixExpression e = _ast.newInfixExpression();
+        e.setLeftOperand(parenthesize(_expressionStack.pop()));
+        e.setRightOperand(parenthesize(_currentExpression));
+        e.setOperator(InfixExpression.Operator.NOT_EQUALS);
+        _currentExpression = e;
+    }
+    
+    public void visitedLeftOperandOfConjunction(Conjunction c) throws Exception {
+        _expressionStack.push(_currentExpression);
+    }
+
+    public void visitedRightOperandOfConjunction(Conjunction c) throws Exception {
+        InfixExpression e = _ast.newInfixExpression();
+        e.setLeftOperand(parenthesize(_expressionStack.pop()));
+        e.setRightOperand(parenthesize(_currentExpression));
+        e.setOperator(InfixExpression.Operator.CONDITIONAL_AND);
+        _currentExpression = e;
     }
     
     /** Builds a method for the given statement, and returns its body for population. */
