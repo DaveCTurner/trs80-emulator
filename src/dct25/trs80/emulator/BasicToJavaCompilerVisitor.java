@@ -92,7 +92,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         InfixExpression condition = _ast.newInfixExpression();
         ifStatement.setExpression(condition);
         condition.setLeftOperand(_ast.newSimpleName(ns.getLoopStartStatement().getLoopVariableIdentifier().toString()));
-        condition.setRightOperand(_expressionStack.pop());
+        condition.setRightOperand(parenthesize(_expressionStack.pop()));
         condition.setOperator(InfixExpression.Operator.LESS_EQUALS);
 
         setFallThroughToNextStatement(ns, medExecuteBody);
@@ -114,7 +114,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     }
 
     public void visitedLowerBoundInForStatement(ForStatement fs) throws Exception {
-        _currentForStatementLowerBoundAssignment.setRightHandSide(_currentExpression);
+        _currentForStatementLowerBoundAssignment.setRightHandSide(parenthesize(_currentExpression));
     }
 
     public void visitedUpperBoundInForStatement(ForStatement fs) throws Exception {
