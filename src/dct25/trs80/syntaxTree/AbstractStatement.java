@@ -20,11 +20,17 @@ public abstract class AbstractStatement extends Symbol implements Statement {
 
     public Statement getNextStatement() { return _nextStatement; }
 
-    public void setNextStatement(Statement next) { _nextStatement = next; }
+    public void setNextStatement(Statement next) {
+        _nextStatement = next;
+        addNextStatement(next);
+    }
 
     private LinkedList<Statement> _precedingStatements = new LinkedList<Statement>();
 
-    public void addNextStatement(Statement next) { _nextStatements.add(next); }
+    public void addNextStatement(Statement next) {
+        _nextStatements.add(next);
+        next.addPrecedingStatement(this);
+    }
 
     private static Statement[] arrayFromList(LinkedList<Statement> linkedList) {
         Statement [] rv = new Statement[linkedList.size()];

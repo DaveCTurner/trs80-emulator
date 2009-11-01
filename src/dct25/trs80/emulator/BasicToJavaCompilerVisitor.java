@@ -418,8 +418,20 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         jdMedExecuteTextTag.fragments().add(jdMedExecuteText);
         
         StringWriter w = new StringWriter();
+        Statement [] precedingStatements = s.getPrecedingStatements();
+        for (int i = 0; i < precedingStatements.length; i++) {
+            w.write(" ");
+            w.write(precedingStatements[i].getName());
+        }
+        w.write(" -> ");
         AsBasicVisitor asBasic = new AsBasicVisitor(w);
         s.visit(asBasic);
+        w.write(" -> ");
+        Statement [] nextStatements = s.getNextStatements();
+        for (int i = 0; i < nextStatements.length; i++) {
+            w.write(" ");
+            w.write(nextStatements[i].getName());
+        }
         jdMedExecuteText.setText(w.toString());
 
         Block medExecuteBody = _ast.newBlock();

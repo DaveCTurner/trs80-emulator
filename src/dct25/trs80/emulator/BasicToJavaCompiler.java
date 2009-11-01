@@ -58,9 +58,10 @@ public class BasicToJavaCompiler {
         program.visit(new SetStatementNameVisitor(new StatementNameGenerator()));
         program.visit(new MatchLoopsVisitor());
         program.visit(new SetNextStatementVisitor());
-        
+
         NumberedStatementsFinder nsf = new NumberedStatementsFinder();
         program.visit(nsf);
+        program.visit(new SetStatementLinksVisitor(nsf));
         
         IdentifierCollectionVisitor icv = new IdentifierCollectionVisitor();
         program.visit(icv);
