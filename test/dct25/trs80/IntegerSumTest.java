@@ -41,4 +41,21 @@ public class IntegerSumTest {
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
+    
+    @Test
+    public void shouldOutputAssignmentStatement() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new ScalarAssignmentStatement(
+                            new Identifier("Q"),
+                            IntegerExpression.sum(
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                                    IntegerExpression.fromIntegerLiteral(new IntegerLiteral(5))
+                            )
+                    )
+                })
+        });
+
+        assertEquals("Check program text is as expected", "10 Q=((1)+(5))\n", p.asBasic());
+    }
 }

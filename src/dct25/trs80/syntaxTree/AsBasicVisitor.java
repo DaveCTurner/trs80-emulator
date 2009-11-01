@@ -131,6 +131,18 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         closeParenthesis();
     }
     
+    public void enterIntegerSumExpression(IntegerSumExpression ise) throws Exception {
+        openParenthesis();
+    }
+    
+    public void visitedLeftOperandOfIntegerSum(IntegerSumExpression ise) throws Exception {
+        _out.write("+");
+    }
+    
+    public void leaveIntegerSumExpression(IntegerSumExpression ise) throws Exception {
+        closeParenthesis();
+    }
+    
     private void openParenthesis() throws Exception {
         _out.write("(");
     }
