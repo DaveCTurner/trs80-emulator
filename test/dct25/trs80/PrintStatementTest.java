@@ -28,7 +28,7 @@ public class PrintStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new IntegerLiteral(1204)) 
+                    new PrintStatement(new StringLiteral("HELLO WORLD"), new IntegerLiteral(1204)) 
                 })
               });
 
@@ -44,7 +44,7 @@ public class PrintStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO, WORLD\""), new IntegerLiteral(1204)) 
+                    new PrintStatement(new StringLiteral("HELLO, WORLD"), new IntegerLiteral(1204)) 
                 })
               });
 
@@ -61,7 +61,7 @@ public class PrintStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO, WORLD\""), null) 
+                    new PrintStatement(new StringLiteral("HELLO, WORLD"), null) 
                 })
               });
 
@@ -72,7 +72,7 @@ public class PrintStatementTest {
     public void ShouldConvertProgramWithPrintCorrectly() throws Exception {
         Program p = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new IntegerLiteral(1204)) 
+                    new PrintStatement(new StringLiteral("HELLO WORLD"), new IntegerLiteral(1204)) 
                 })});
 
         assertEquals("Check program text", "10 PRINT @ 1204, \"HELLO WORLD\"\n", p.asBasic());
@@ -82,7 +82,7 @@ public class PrintStatementTest {
     public void ShouldConvertProgramWithPrintWithNoLocationCorrectly() throws Exception {
         Program p = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), null) 
+                    new PrintStatement(new StringLiteral("HELLO WORLD"), null) 
                 })});
 
         assertEquals("Check program text", "10 PRINT \"HELLO WORLD\"\n", p.asBasic());

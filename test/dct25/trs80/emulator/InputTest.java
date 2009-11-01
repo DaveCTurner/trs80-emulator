@@ -23,7 +23,7 @@ public class InputTest {
     public void shouldSkipLine() throws Exception {
         Program loopProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new InputStatement(new StringLiteral("\"GIVE ME VALUES\""), new Identifier("X"), new Identifier("Y")), 
+                    new InputStatement(new StringLiteral("GIVE ME VALUES"), new Identifier("X"), new Identifier("Y")), 
                 }),
                 new ProgramLine(new LineNumber(20), new Statement[] {
                     new ForStatement(new Identifier("JJ"),

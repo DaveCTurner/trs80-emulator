@@ -18,7 +18,7 @@ public class PrintTest {
     public void shouldPrintText() throws Exception {
         Program clearScreenProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new IntegerLiteral(1010))
+                    new PrintStatement(new StringLiteral("HELLO WORLD"), new IntegerLiteral(1010))
                 }),
         });
         
@@ -36,8 +36,8 @@ public class PrintTest {
     public void shouldPrintTwoLinesOfText() throws Exception {
         Program clearScreenProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new PrintStatement(new StringLiteral("\"HELLO WORLD\""), new IntegerLiteral(1010)),
-                    new PrintStatement(new StringLiteral("\"AND WELCOME\""), new IntegerLiteral(2010))
+                    new PrintStatement(new StringLiteral("HELLO WORLD"), new IntegerLiteral(1010)),
+                    new PrintStatement(new StringLiteral("AND WELCOME"), new IntegerLiteral(2010))
                 }),
         });
         

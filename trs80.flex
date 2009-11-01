@@ -19,6 +19,7 @@ import dct25.trs80.syntax.Terminals;
 %unicode
 %line
 %column
+%state QQSTRING
 %{
 	private Symbol newToken(short id)
 	{
@@ -34,7 +35,6 @@ LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 IntegerLiteral = [:digit:] [:digit:]*
-StringLiteral = \"[A-Za-z0-9,. ]*\"
 Identifier = [A-Z][A-Z]*
 
 %%
@@ -58,6 +58,10 @@ Identifier = [A-Z][A-Z]*
 
 	"AND"		{ return newToken(Terminals.AND); }
 	
+	{IntegerLiteral}    { return newToken(Terminals.INTEGERLITERAL, yytext()); }
+	\"			{ yybegin(QQSTRING); }
+	{Identifier}		{ return newToken(Terminals.IDENTIFIER, yytext()); }
+
 	"<>"		{ return newToken(Terminals.NOTEQUALS); }
 	"("			{ return newToken(Terminals.OPENPARENTHESIS); }
 	")"			{ return newToken(Terminals.CLOSEPARENTHESIS); }
@@ -66,9 +70,11 @@ Identifier = [A-Z][A-Z]*
 	":"         { return newToken(Terminals.COLON); }
 	","         { return newToken(Terminals.COMMA); }
 	"@"         { return newToken(Terminals.AT); }
-	{IntegerLiteral}    { return newToken(Terminals.INTEGERLITERAL, yytext()); }
-	{StringLiteral}     { return newToken(Terminals.STRINGLITERAL, yytext()); }
-	{Identifier}		{ return newToken(Terminals.IDENTIFIER, yytext()); }
+}
+
+<QQSTRING> {
+	[^\"]*		{ return newToken(Terminals.STRINGLITERAL, yytext()); }
+	\"			{ yybegin(YYINITIAL); }
 }
 
 .|\n            { throw new Scanner.Exception("unexpected character '" + yytext() + "'"); }

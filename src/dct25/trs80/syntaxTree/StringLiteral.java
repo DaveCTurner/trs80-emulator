@@ -19,15 +19,6 @@ public class StringLiteral extends beaver.Symbol {
         _text = new String(n.value.toString());
     }
     
-    public String withoutQuotes() {
-        if (_text.startsWith("\"") && _text.endsWith("\"")) {
-            return _text.substring(1, _text.length()-1);
-        } else {
-            return _text;
-        }
-    }
-    
-    
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null) { return false; }

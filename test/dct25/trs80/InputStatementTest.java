@@ -28,7 +28,7 @@ public class InputStatementTest {
 
         Program expectedProgram = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new InputStatement(new StringLiteral("\"GIVE ME VALUES\""), new Identifier("X"), new Identifier("Y")), 
+                    new InputStatement(new StringLiteral("GIVE ME VALUES"), new Identifier("X"), new Identifier("Y")), 
                 })
         });
 
@@ -40,7 +40,7 @@ public class InputStatementTest {
 
         Program p = new Program(new ProgramLine[] {
                 new ProgramLine(new LineNumber(10), new Statement[] {
-                    new InputStatement(new StringLiteral("\"GIVE ME VALUES\""), new Identifier("X"), new Identifier("Y")), 
+                    new InputStatement(new StringLiteral("GIVE ME VALUES"), new Identifier("X"), new Identifier("Y")), 
                 })
         });
 

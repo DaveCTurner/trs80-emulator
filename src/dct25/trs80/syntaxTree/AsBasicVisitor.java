@@ -48,9 +48,9 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         startStatement(ps);
         IntegerLiteral position = ps.getPosition();
         if (null == position) {
-            _out.write("PRINT " + ps.getText());
+            _out.write("PRINT \"" + ps.getText() + '"');
         } else {
-            _out.write("PRINT @ " + position + ", " + ps.getText());
+            _out.write("PRINT @ " + position + ", \"" + ps.getText() + '"');
         }
     }
 
@@ -79,7 +79,7 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
     
     public void visitInputStatement(InputStatement is) throws Exception {
         startStatement(is);
-        _out.write("INPUT " + is.getPrompt() + "; ");
+        _out.write("INPUT \"" + is.getPrompt() + "\"; ");
         _out.write(is.getIdentifier1() + "," + is.getIdentifier2());
     }
     
