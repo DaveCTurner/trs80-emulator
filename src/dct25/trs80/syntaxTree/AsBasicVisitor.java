@@ -143,6 +143,18 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         closeParenthesis();
     }
     
+    public void enterIntegerDifferenceExpression(IntegerDifferenceExpression ide) throws Exception {
+        openParenthesis();
+    }
+    
+    public void visitedLeftOperandOfIntegerDifference(IntegerDifferenceExpression ide) throws Exception {
+        _out.write("-");
+    }
+    
+    public void leaveIntegerDifferenceExpression(IntegerDifferenceExpression ide) throws Exception {
+        closeParenthesis();
+    }
+    
     private void openParenthesis() throws Exception {
         _out.write("(");
     }

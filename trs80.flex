@@ -72,6 +72,7 @@ Identifier = [A-Z][A-Z]*
 	","         { return newToken(Terminals.COMMA); }
 	"@"         { return newToken(Terminals.AT); }
 	"+"         { return newToken(Terminals.PLUS); }
+	"-"         { return newToken(Terminals.MINUS); }
 }
 
 <QQSTRING> {
