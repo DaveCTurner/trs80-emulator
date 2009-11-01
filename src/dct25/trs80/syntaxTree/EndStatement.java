@@ -22,7 +22,7 @@ public class EndStatement extends beaver.Symbol implements Statement {
         return true;
     }
 
-    public void visit(Visitor v) throws Exception {
+    public void visit(SyntaxTreeVisitor v) throws Exception {
         v.visitEndStatement(this);
     }
 

@@ -8,7 +8,7 @@ public class IntegerIdentifierExpression extends IntegerExpression {
         _i = i;
     }
 
-    public void visit(AbstractIntegerExpressionVisitor v) throws Exception {
+    public void visit(SyntaxTreeVisitor v) throws Exception {
         v.visitIntegerIdentifierExpression(this);
     }
     

@@ -1,6 +1,7 @@
 package dct25.trs80.emulator;
 
 import java.io.StringWriter;
+import java.util.Stack;
 
 import org.eclipse.jdt.core.dom.*;
 import org.eclipse.jdt.core.dom.StringLiteral;
@@ -9,7 +10,7 @@ import dct25.trs80.syntaxTree.*;
 import dct25.trs80.syntaxTree.ForStatement;
 import dct25.trs80.syntaxTree.Statement;
 
-public class BasicToJavaCompilerVisitor extends AbstractVisitor {
+public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
     private AST _ast;
     private TypeDeclaration _tyProgram;
     private NumberedStatementsFinder _nsf;
@@ -18,6 +19,7 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         _ast = ast;
         _tyProgram = tyProgram;
         _nsf = nsf;
+        _forStatementsUpperBounds = new Stack<Expression>();
     }
     
     @SuppressWarnings("unchecked")
@@ -90,30 +92,35 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         InfixExpression condition = _ast.newInfixExpression();
         ifStatement.setExpression(condition);
         condition.setLeftOperand(_ast.newSimpleName(ns.getLoopStartStatement().getLoopVariableIdentifier().toString()));
-        ExpressionCompilerVisitor ecv = new ExpressionCompilerVisitor(_ast);
-        ns.getLoopStartStatement().getUpperBound().visit(ecv);
-        condition.setRightOperand(ecv.getExpression());
+        condition.setRightOperand(_forStatementsUpperBounds.pop());
         condition.setOperator(InfixExpression.Operator.LESS_EQUALS);
 
         setFallThroughToNextStatement(ns, medExecuteBody);
     }
+
+    private Assignment _currentForStatementLowerBoundAssignment;
+    private Stack<Expression> _forStatementsUpperBounds;
     
     @SuppressWarnings("unchecked")
-    public void visitForStatement(ForStatement fs) throws Exception {
+    public void enterForStatement(ForStatement fs) throws Exception {
         Block medExecuteBody = buildMethodForStatement(fs);
 
         Assignment envAssign = _ast.newAssignment();
         medExecuteBody.statements().add(_ast.newExpressionStatement(envAssign));
         envAssign.setLeftHandSide(_ast.newSimpleName(fs.getLoopVariableIdentifier().toString()));
-        
-        ExpressionCompilerVisitor ecv = new ExpressionCompilerVisitor(_ast);
-        fs.getLowerBound().visit(ecv);
-        envAssign.setRightHandSide(ecv.getExpression());
+        _currentForStatementLowerBoundAssignment = envAssign;
         
         setFallThroughToNextStatement(fs, medExecuteBody);
     }
-    
-    
+
+    public void visitedLowerBoundInForStatement(ForStatement fs) throws Exception {
+        _currentForStatementLowerBoundAssignment.setRightHandSide(_currentExpression);
+    }
+
+    public void visitedUpperBoundInForStatement(ForStatement fs) throws Exception {
+        _forStatementsUpperBounds.push(_currentExpression);
+    }
+
     @SuppressWarnings("unchecked")
     public void visitInputStatement(InputStatement is) throws Exception {
         Block medExecuteBody = buildMethodForStatement(is);
@@ -140,6 +147,17 @@ public class BasicToJavaCompilerVisitor extends AbstractVisitor {
         }
 
         setFallThroughToNextStatement(is, medExecuteBody);
+    }
+    
+    
+    private Expression _currentExpression;
+    
+    public void visitIntegerLiteralExpression(IntegerLiteralExpression i) {
+        _currentExpression = _ast.newNumberLiteral(i.toString());
+    }
+
+    public void visitIntegerIdentifierExpression(IntegerIdentifierExpression ii) {
+        _currentExpression = _ast.newName(ii.toString());
     }
     
     /** Builds a method for the given statement, and returns its body for population. */

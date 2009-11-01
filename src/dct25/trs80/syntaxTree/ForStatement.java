@@ -33,8 +33,13 @@ public class ForStatement extends beaver.Symbol implements Statement {
         return true;
     }
 
-    public void visit(Visitor v) throws Exception {
-        v.visitForStatement(this);
+    public void visit(SyntaxTreeVisitor v) throws Exception {
+        v.enterForStatement(this);
+        _lowerBound.visit(v);
+        v.visitedLowerBoundInForStatement(this);
+        _upperBound.visit(v);
+        v.visitedUpperBoundInForStatement(this);
+        v.leaveForStatement(this);
     }
     
     public Identifier getLoopVariableIdentifier() { return _loopVariable; }

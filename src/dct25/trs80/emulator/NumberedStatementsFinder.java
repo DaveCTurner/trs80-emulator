@@ -2,13 +2,13 @@ package dct25.trs80.emulator;
 
 import java.util.HashMap;
 
-import dct25.trs80.syntaxTree.AbstractVisitor;
+import dct25.trs80.syntaxTree.SyntaxTreeVisitor;
 import dct25.trs80.syntaxTree.LineNumber;
 import dct25.trs80.syntaxTree.Program;
 import dct25.trs80.syntaxTree.ProgramLine;
 import dct25.trs80.syntaxTree.Statement;
 
-public class NumberedStatementsFinder extends AbstractVisitor {
+public class NumberedStatementsFinder extends SyntaxTreeVisitor {
 
     private HashMap<LineNumber, Statement> _numberedStatements;
     private LineNumber _entryPoint;

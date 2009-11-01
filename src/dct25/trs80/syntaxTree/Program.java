@@ -48,7 +48,7 @@ public class Program extends beaver.Symbol {
         return true;
     }
     
-    public void visit(Visitor v) throws Exception {
+    public void visit(SyntaxTreeVisitor v) throws Exception {
         v.enterProgram(this);
         for (int i = 0; i < _lines.length; i++) {
             _lines[i].visit(v);

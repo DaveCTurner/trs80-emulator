@@ -2,12 +2,12 @@ package dct25.trs80.emulator;
 
 import java.util.Stack;
 
-import dct25.trs80.syntaxTree.AbstractVisitor;
+import dct25.trs80.syntaxTree.SyntaxTreeVisitor;
 import dct25.trs80.syntaxTree.ForStatement;
 import dct25.trs80.syntaxTree.NextStatement;
 import dct25.trs80.syntaxTree.Program;
 
-public class MatchLoopsVisitor extends AbstractVisitor {
+public class MatchLoopsVisitor extends SyntaxTreeVisitor {
     private Stack<ForStatement> _loopStarts = new Stack<ForStatement>();
 
     public void leaveProgram(Program p) throws Exception {
@@ -20,7 +20,7 @@ public class MatchLoopsVisitor extends AbstractVisitor {
         ns.setLoopStartStatement(_loopStarts.pop());
     }
 
-    public void visitForStatement(ForStatement fs) {
+    public void enterForStatement(ForStatement fs) {
         _loopStarts.push(fs);
     }
 }

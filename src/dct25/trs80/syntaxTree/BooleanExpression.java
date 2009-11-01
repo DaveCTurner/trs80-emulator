@@ -9,5 +9,5 @@ public abstract class BooleanExpression extends beaver.Symbol {
         return new NotEqualsExpression(i1, i2);
     }
     
-    public abstract void visit(AbstractBooleanExpressionVisitor v) throws Exception;
+    public abstract void visit(SyntaxTreeVisitor v) throws Exception;
 }

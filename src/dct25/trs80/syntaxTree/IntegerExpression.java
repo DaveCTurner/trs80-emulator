@@ -9,5 +9,5 @@ public abstract class IntegerExpression extends beaver.Symbol {
         return new IntegerLiteralExpression(i);
     }
     
-    public abstract void visit(AbstractIntegerExpressionVisitor v) throws Exception;
+    public abstract void visit(SyntaxTreeVisitor v) throws Exception;
 }

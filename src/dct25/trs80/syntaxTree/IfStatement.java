@@ -37,8 +37,11 @@ public class IfStatement extends beaver.Symbol implements Statement {
         return true;
     }
 
-    public void visit(Visitor v) throws Exception {
-        v.visitIfStatement(this);
+    public void visit(SyntaxTreeVisitor v) throws Exception {
+        v.enterIfStatement(this);
+        _condition.visit(v);
+        v.visitedIfStatementCondition(this);
+        v.leaveIfStatement(this);
     }
 
     public BooleanExpression getCondition() { return _condition; }

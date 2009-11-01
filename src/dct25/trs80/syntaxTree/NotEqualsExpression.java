@@ -9,8 +9,13 @@ public class NotEqualsExpression extends BooleanExpression {
         _i2 = i2;
     }
 
-    public void visit(AbstractBooleanExpressionVisitor v) throws Exception {
-        v.visitNotEqualsExpression(this);
+    public void visit(SyntaxTreeVisitor v) throws Exception {
+        v.enterNotEqualsExpression(this);
+        _i1.visit(v);
+        v.visitedLeftOperandOfNotEqualsExpression(this);
+        _i2.visit(v);
+        v.visitedRightOperandOfNotEqualsExpression(this);
+        v.leaveNotEqualsExpression(this);
     }
     
     public IntegerExpression getLeftExpression() { return _i1; }

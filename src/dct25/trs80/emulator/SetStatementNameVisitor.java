@@ -3,10 +3,10 @@ package dct25.trs80.emulator;
 import dct25.trs80.syntaxTree.LineNumber;
 import dct25.trs80.syntaxTree.ProgramLine;
 import dct25.trs80.syntaxTree.Statement;
-import dct25.trs80.syntaxTree.AbstractVisitor;
+import dct25.trs80.syntaxTree.SyntaxTreeVisitor;
 
 
-public class SetStatementNameVisitor extends AbstractVisitor {
+public class SetStatementNameVisitor extends SyntaxTreeVisitor {
 
     private StatementNameGenerator _nameGenerator;
     public SetStatementNameVisitor(StatementNameGenerator nameGenerator) {

@@ -1,11 +1,11 @@
 package dct25.trs80.emulator;
 
-import dct25.trs80.syntaxTree.AbstractVisitor;
+import dct25.trs80.syntaxTree.SyntaxTreeVisitor;
 import dct25.trs80.syntaxTree.EndStatement;
 import dct25.trs80.syntaxTree.GotoStatement;
 import dct25.trs80.syntaxTree.Statement;
 
-public class SetNextStatementVisitor extends AbstractVisitor {
+public class SetNextStatementVisitor extends SyntaxTreeVisitor {
     private Statement _previousStatement;
     
     public void visitGotoStatement(GotoStatement s) {

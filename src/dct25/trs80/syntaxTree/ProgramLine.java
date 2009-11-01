@@ -57,7 +57,7 @@ public class ProgramLine extends beaver.Symbol {
         return true;
     }
 
-    public void visit(Visitor v) throws Exception {
+    public void visit(SyntaxTreeVisitor v) throws Exception {
         v.enterProgramLine(this);
         for (int i = 0; i < _statements.length; i++) {
             _statements[i].visit(v);

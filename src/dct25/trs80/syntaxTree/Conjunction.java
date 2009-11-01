@@ -9,11 +9,12 @@ public class Conjunction extends BooleanExpression {
         _i2 = i2;
     }
 
-    public void visit(AbstractBooleanExpressionVisitor v) throws Exception {
+    public void visit(SyntaxTreeVisitor v) throws Exception {
         v.enterConjunction(this);
         _i1.visit(v);
-        v.visitConjunction(this);
+        v.visitedLeftOperandOfConjunction(this);
         _i2.visit(v);
+        v.visitedRightOperandOfConjunction(this);
         v.leaveConjunction(this);
     }
     
