@@ -79,11 +79,18 @@ public class SyntaxTreeVisitor {
     public void visitedArrayElementSubscript(ArrayElement element, int dimensionIndex) throws Exception { }
     public void leaveArrayElement(ArrayElement element) throws Exception { }
 
+    /* Dim statements have one subcomponent for each array declaration */
     public void enterDimStatement(DimStatement statement) throws Exception { 
         visitStatement(statement);
     }
     public void visitingDimStatementArray(DimStatement statement, int dimensionIndex) throws Exception { }
     public void visitedDimStatementArray(DimStatement statement, int dimensionIndex) throws Exception { }
     public void leaveDimStatement(DimStatement statement) throws Exception { }
+    
+    /* Assignments have one subcomponent: the value expression */
+    public void enterAssignmentStatement(AssignmentStatement statement) throws Exception {
+        visitStatement(statement);
+    }
+    public void leaveAssignmentStatement(AssignmentStatement statement) throws Exception { }
 
 }

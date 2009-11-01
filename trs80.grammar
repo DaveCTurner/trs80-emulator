@@ -30,6 +30,7 @@
 %typeof ifStatement = "IfStatement";
 %typeof dimStatement = "DimStatement";
 %typeof arrayElement = "ArrayElement";
+%typeof assignmentStatement = "AssignmentStatement";
 
 program
 	= programLine.lines+ {: return new Program(lines); :}
@@ -70,6 +71,7 @@ statement
 	| inputStatement
 	| ifStatement
 	| dimStatement
+	| assignmentStatement
 	| error {: throw new java.lang.Error("statement error"); :}
 	;
 
@@ -135,4 +137,8 @@ dimStatement
 
 arrayElement
 	= identifier.aid OPENPARENTHESIS integerExpression.i1 COMMA integerExpression.i2 CLOSEPARENTHESIS {: return new ArrayElement(aid, i1, i2); :}
+	;
+
+assignmentStatement
+	= identifier.target EQUALS integerExpression.value {: return new AssignmentStatement(target, value); :}
 	;
