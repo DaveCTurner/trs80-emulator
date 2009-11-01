@@ -399,7 +399,7 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         _tyProgram.bodyDeclarations().add(medExecute);
         medExecute.setName(_ast.newSimpleName(s.getName()));
         medExecute.setReturnType2(_ast.newPrimitiveType(PrimitiveType.VOID));
-        medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PUBLIC_KEYWORD));
+        medExecute.modifiers().add(_ast.newModifier(Modifier.ModifierKeyword.PRIVATE_KEYWORD));
         
         Javadoc jdMedExecute = _ast.newJavadoc();
         medExecute.setJavadoc(jdMedExecute);
