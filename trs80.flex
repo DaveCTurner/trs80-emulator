@@ -65,6 +65,7 @@ Identifier = [A-Z][A-Z]*
 	{Identifier}		{ return newToken(Terminals.IDENTIFIER, yytext()); }
 
 	"<>"		{ return newToken(Terminals.NOTEQUALS); }
+	"<"			{ return newToken(Terminals.LESSTHAN); }
 	"("			{ return newToken(Terminals.OPENPARENTHESIS); }
 	")"			{ return newToken(Terminals.CLOSEPARENTHESIS); }
 	"="         { return newToken(Terminals.EQUALS); }

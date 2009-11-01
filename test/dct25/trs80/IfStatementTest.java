@@ -134,4 +134,55 @@ public class IfStatementTest {
 
         assertEquals("Check program text", "10 IF (((1)=(4)) AND ((2)<>(2))) THEN 30\n20 CLS\n30 CLS\n", p.asBasic());
     }
+    
+
+    @Test
+    public void shouldParseInequality() throws Exception {
+        Reader input = new StringReader("10 IF 1<2 THEN 30\n20 CLS\n30 CLS");
+        beaver.Scanner scanner = new TRS80Scanner(input);
+        TRS80Parser parser = new TRS80Parser();
+        Object o = parser.parse(scanner);
+
+        Program expectedProgram = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new IfStatement(BooleanExpression.lessThan(
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2))
+                    ), new LineNumber(30))
+                }),
+                
+                new ProgramLine(new LineNumber(20), new Statement[] {
+                    new ClearScreenStatement()
+                }),
+                
+                new ProgramLine(new LineNumber(30), new Statement[] {
+                    new ClearScreenStatement()
+                })
+        });
+
+        assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
+    
+
+    @Test
+    public void shouldPrintInequality() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new IfStatement(BooleanExpression.lessThan(
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(1)),
+                            IntegerExpression.fromIntegerLiteral(new IntegerLiteral(2))
+                    ), new LineNumber(30))
+                }),
+                
+                new ProgramLine(new LineNumber(20), new Statement[] {
+                    new ClearScreenStatement()
+                }),
+                
+                new ProgramLine(new LineNumber(30), new Statement[] {
+                    new ClearScreenStatement()
+                })
+        });
+
+        assertEquals("Check parsed program is as expected", "10 IF ((1)<(2)) THEN 30\n20 CLS\n30 CLS\n", p.asBasic());
+    }
 }

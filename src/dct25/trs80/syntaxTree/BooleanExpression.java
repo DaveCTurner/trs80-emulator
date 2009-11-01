@@ -14,4 +14,8 @@ public abstract class BooleanExpression extends beaver.Symbol {
     public static BooleanExpression equals(IntegerExpression i1, IntegerExpression i2) {
         return new EqualsExpression(i1, i2);
     }
+
+    public static BooleanExpression lessThan(IntegerExpression i1, IntegerExpression i2) {
+        return new LessThanExpression(i1, i2);
+    }
 }

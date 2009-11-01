@@ -4,7 +4,7 @@
 %import "dct25.trs80.syntaxTree.*";
 
 %terminals INTEGERLITERAL, STRINGLITERAL, IDENTIFIER;
-%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, OPENPARENTHESIS, CLOSEPARENTHESIS;
+%terminals COLON, AT, COMMA, EQUALS, SEMICOLON, NOTEQUALS, LESSTHAN, OPENPARENTHESIS, CLOSEPARENTHESIS;
 %terminals CLS, GOTO, END, PRINT, FOR, TO, NEXT, INPUT, IF, THEN, DIM, RND, LPRINT, ON;
 %terminals AND, PLUS, MINUS, TIMES;
 %left TIMES;
@@ -141,6 +141,7 @@ ifStatement
 booleanExpression
 	= integerExpression.i1 NOTEQUALS integerExpression.i2 {: return new NotEqualsExpression(i1, i2); :}
 	| integerExpression.i1 EQUALS integerExpression.i2 {: return new EqualsExpression(i1, i2); :}
+	| integerExpression.i1 LESSTHAN integerExpression.i2 {: return new LessThanExpression(i1, i2); :}
 	| booleanExpression.b1 AND booleanExpression.b2 {: return new Conjunction(b1, b2); :}
 	;
 

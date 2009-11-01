@@ -145,6 +145,18 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         closeParenthesis();
     }
     
+    public void enterLessThanExpression(LessThanExpression lte) throws Exception {
+        openParenthesis();
+    }
+    
+    public void visitedLeftOperandOfLessThanExpression(LessThanExpression lte) throws Exception {
+        _out.write("<");
+    }
+    
+    public void leaveLessThanExpression(LessThanExpression lte) throws Exception {
+        closeParenthesis();
+    }
+    
     public void enterIntegerSumExpression(IntegerSumExpression ise) throws Exception {
         openParenthesis();
     }

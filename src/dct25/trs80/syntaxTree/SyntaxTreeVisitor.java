@@ -86,6 +86,12 @@ public class SyntaxTreeVisitor {
     public void visitedRightOperandOfEqualsExpression(EqualsExpression ee) throws Exception { }
     public void leaveEqualsExpression(EqualsExpression ee) throws Exception { }
 
+    /* LessThanExpressions have two subcomponents: the two subsidiary integer expressions */
+    public void enterLessThanExpression(LessThanExpression lte) throws Exception { }
+    public void visitedLeftOperandOfLessThanExpression(LessThanExpression lte) throws Exception { }
+    public void visitedRightOperandOfLessThanExpression(LessThanExpression lte) throws Exception { }
+    public void leaveLessThanExpression(LessThanExpression lte) throws Exception { }
+
     /* IntegerSumExpressions have two subcomponents: the two subsidiary integer expressions */
     public void enterIntegerSumExpression(IntegerSumExpression ise) throws Exception { }
     public void visitedLeftOperandOfIntegerSum(IntegerSumExpression ise) throws Exception { }
