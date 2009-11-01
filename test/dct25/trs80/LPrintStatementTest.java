@@ -34,6 +34,16 @@ public class LPrintStatementTest {
         assertEquals("Check parsed program is as expected", expectedProgram, o);
     }
     
+    @Test
+    public void shouldPrintLPrintStatementWithNoNewline() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral(":--"), false) 
+                })
+              });
+
+        assertEquals("Check parsed program is as expected", "10 PRINT \":--\";\n", p.asBasic());
+    }
 
     @Test
     public void shouldParseLPrintStatement() throws Exception {
@@ -49,5 +59,16 @@ public class LPrintStatementTest {
               });
 
         assertEquals("Check parsed program is as expected", expectedProgram, o);
+    }
+    
+    @Test
+    public void shouldPrintLPrintStatement() throws Exception {
+        Program p = new Program(new ProgramLine[] {
+                new ProgramLine(new LineNumber(10), new Statement[] {
+                    new PrintStatement(new StringLiteral(":--"), true) 
+                })
+              });
+
+        assertEquals("Check parsed program is as expected", "10 PRINT \":--\"\n", p.asBasic());
     }
 }

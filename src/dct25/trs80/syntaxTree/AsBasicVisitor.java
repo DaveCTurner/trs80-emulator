@@ -52,6 +52,9 @@ public class AsBasicVisitor extends SyntaxTreeVisitor {
         } else {
             _out.write("PRINT @ " + position + ", \"" + ps.getText() + '"');
         }
+        if (!ps.getNewLine()) {
+            _out.write(';');
+        }
     }
 
     public void visitNextStatement(NextStatement ns) throws Exception {

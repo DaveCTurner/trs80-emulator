@@ -54,6 +54,7 @@ public class PrintStatement extends beaver.Symbol implements Statement {
 
     public StringLiteral getText() { return _text; }
     public IntegerLiteral getPosition() { return _position; }
+    public boolean getNewLine() { return _newLine; }
 
     private String _name;
     public String getName() { return _name; }
