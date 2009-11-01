@@ -35,4 +35,12 @@ public class InstrumentedEnvironment implements Environment {
     public int getInput() {
         return _inputValues.remove();
     }
+
+    private Queue<Integer> _randomValues = new LinkedList<Integer>();
+    public void addRandomValue(int i) {
+        _randomValues.add(i);
+    }
+    public int getNextRandomNumber(int maximum) {
+        return _randomValues.remove();
+    }
 }

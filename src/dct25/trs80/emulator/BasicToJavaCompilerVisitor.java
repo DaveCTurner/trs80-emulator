@@ -189,6 +189,15 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         return pe;
     }
     
+    @SuppressWarnings("unchecked")
+    public void leaveRandomNumberExpression(RandomNumberExpression e) {
+        MethodInvocation randomInvocation = _ast.newMethodInvocation();
+        randomInvocation.setExpression(_ast.newSimpleName("_env"));
+        randomInvocation.setName(_ast.newSimpleName("getNextRandomNumber"));
+        randomInvocation.arguments().add(_currentExpression);
+        _currentExpression = randomInvocation;
+    }
+    
     public void visitIntegerLiteralExpression(IntegerLiteralExpression i) {
         _currentExpression = _ast.newNumberLiteral(i.toString());
     }

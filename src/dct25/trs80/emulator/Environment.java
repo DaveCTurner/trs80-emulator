@@ -12,4 +12,5 @@ public interface Environment {
     public void clearScreen();
     public void print(String s, boolean newLine);
     public int getInput();
+    public int getNextRandomNumber(int maximum);
 }
