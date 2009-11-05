@@ -10,12 +10,21 @@ public class Runner {
      * @param args
      */
     public static void main(String[] args) {
-        Executable program = new amazing_test_bas();
+        Executable program = null;
+
+        if (args.length > 0) {
+            if ("new".equals(args[0])) {
+                program = new AmazingReimplementation();
+            }
+        }
+
+        if (null == program) {
+            program = new amazing_test_bas();
+        }
         Environment e = new EnumeratingEnvironment(System.out);
-        
-        for (int i = 0; i < 100; i++) {
+
+        for (int i = 0; i < 10000; i++) {
             program.execute(e);
         }
     }
-
 }
