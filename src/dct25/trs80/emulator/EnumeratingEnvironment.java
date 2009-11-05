@@ -76,6 +76,8 @@ public class EnumeratingEnvironment implements Environment {
             // All the generated values were at maximum - time for a different
             // size.
             _advanceWidthAndHeightOnNextGetInput = true;
+            _randomNumbersGeneratedLastTime.removeAllElements();
+            _randomNumbersGeneratedThisTime.removeAllElements();
         } else {
             // Flip the stack over, throw away the terminal sequence of maximum
             // values, and increment the last non-maximum value.
@@ -92,9 +94,8 @@ public class EnumeratingEnvironment implements Environment {
                 _randomNumbersGeneratedLastTime
                         .push(_randomNumbersGeneratedThisTime.pop());
             }
-            
-            _lengthOfFinalSequenceOfMaximumValues = 0;
         }
+        _lengthOfFinalSequenceOfMaximumValues = 0;
     }
 
     Stack<Integer> _randomNumbersGeneratedLastTime;
