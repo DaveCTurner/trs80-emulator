@@ -338,7 +338,12 @@ public class BasicToJavaCompilerVisitor extends SyntaxTreeVisitor {
         Expression[] subscripts = new Expression[ae.getDimensionCount()];
         
         for (int i = ae.getDimensionCount() - 1; i >= 0; i--) {
-            subscripts[i] = _expressionStack.pop();
+            /* Correct difference between zero- and one-based indexing */
+            InfixExpression currentSubscript = _ast.newInfixExpression();
+            currentSubscript.setLeftOperand(parenthesize(_expressionStack.pop()));
+            currentSubscript.setRightOperand(_ast.newNumberLiteral("1"));
+            currentSubscript.setOperator(InfixExpression.Operator.MINUS);
+            subscripts[i] = currentSubscript;
         }
         for (int i = 0; i < ae.getDimensionCount(); i++) {
             ArrayAccess e2 = _ast.newArrayAccess();

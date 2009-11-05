@@ -541,7 +541,7 @@ public class amazing_test_bas implements Executable {
  *  line190statement0 ->  W((X),(1))=(C) ->  line190statement2
  */
   protected void line190statement1(){
-    Ws[(X)][(1)]=(C);
+    Ws[((X) - 1)][((1) - 1)]=(C);
     line190statement2();
   }
   /** 
@@ -644,7 +644,7 @@ public class amazing_test_bas implements Executable {
  *  line250statement0 line230statement2 line240statement2 line1180statement4 ->  IF (W((R),(S))=(0)) THEN 210 ->  line270statement0 line210statement0
  */
   protected void line260statement0(){
-    if (((Ws[(R)][(S)]) == (0))) {
+    if (((Ws[((R) - 1)][((S) - 1)]) == (0))) {
       line210statement0();
     }
  else {
@@ -666,7 +666,7 @@ public class amazing_test_bas implements Executable {
  *  line270statement0 ->  IF (W(((R)-(1)),(S))<>(0)) THEN 600 ->  line290statement0 line600statement0
  */
   protected void line280statement0(){
-    if (((Ws[((R) - (1))][(S)]) != (0))) {
+    if (((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
       line600statement0();
     }
  else {
@@ -688,7 +688,7 @@ public class amazing_test_bas implements Executable {
  *  line290statement0 ->  IF (W((R),((S)-(1)))<>(0)) THEN 430 ->  line310statement0 line430statement0
  */
   protected void line300statement0(){
-    if (((Ws[(R)][((S) - (1))]) != (0))) {
+    if (((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
       line430statement0();
     }
  else {
@@ -710,7 +710,7 @@ public class amazing_test_bas implements Executable {
  *  line310statement0 ->  IF (W(((R)+(1)),(S))<>(0)) THEN 350 ->  line330statement0 line350statement0
  */
   protected void line320statement0(){
-    if (((Ws[((R) + (1))][(S)]) != (0))) {
+    if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
       line350statement0();
     }
  else {
@@ -779,7 +779,7 @@ line390statement0();
  *  line350statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 410 ->  line390statement0 line410statement0
  */
 protected void line380statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line410statement0();
 }
  else {
@@ -844,7 +844,7 @@ line440statement0();
  *  line430statement0 ->  IF (W(((R)+(1)),(S))<>(0)) THEN 530 ->  line450statement0 line530statement0
  */
 protected void line440statement0(){
-if (((Ws[((R) + (1))][(S)]) != (0))) {
+if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
 line530statement0();
 }
  else {
@@ -890,7 +890,7 @@ line490statement0();
  *  line450statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 510 ->  line490statement0 line510statement0
  */
 protected void line480statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line510statement0();
 }
  else {
@@ -979,7 +979,7 @@ line570statement0();
  *  line530statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 590 ->  line570statement0 line590statement0
  */
 protected void line560statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line590statement0();
 }
  else {
@@ -1027,7 +1027,7 @@ line610statement0();
  *  line600statement0 ->  IF (W((R),((S)-(1)))<>(0)) THEN 790 ->  line620statement0 line790statement0
  */
 protected void line610statement0(){
-if (((Ws[(R)][((S) - (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
 line790statement0();
 }
  else {
@@ -1049,7 +1049,7 @@ line630statement0();
  *  line620statement0 ->  IF (W(((R)+(1)),(S))<>(0)) THEN 720 ->  line640statement0 line720statement0
  */
 protected void line630statement0(){
-if (((Ws[((R) + (1))][(S)]) != (0))) {
+if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
 line720statement0();
 }
  else {
@@ -1095,7 +1095,7 @@ line680statement0();
  *  line640statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 700 ->  line680statement0 line700statement0
  */
 protected void line670statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line700statement0();
 }
  else {
@@ -1184,7 +1184,7 @@ line760statement0();
  *  line720statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 780 ->  line760statement0 line780statement0
  */
 protected void line750statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line780statement0();
 }
  else {
@@ -1232,7 +1232,7 @@ line800statement0();
  *  line790statement0 ->  IF (W(((R)+(1)),(S))<>(0)) THEN 880 ->  line810statement0 line880statement0
  */
 protected void line800statement0(){
-if (((Ws[((R) + (1))][(S)]) != (0))) {
+if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
 line880statement0();
 }
  else {
@@ -1278,7 +1278,7 @@ line990statement0();
  *  line810statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 870 ->  line850statement0 line870statement0
  */
 protected void line840statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line870statement0();
 }
  else {
@@ -1350,7 +1350,7 @@ line920statement0();
  *  line880statement0 ->  IF (W((R),((S)+(1)))<>(0)) THEN 930 ->  line920statement0 line930statement0
  */
 protected void line910statement0(){
-if (((Ws[(R)][((S) + (1))]) != (0))) {
+if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
 line930statement0();
 }
  else {
@@ -1373,7 +1373,7 @@ line1190statement0();
  *  line340statement0 line400statement0 line420statement0 line500statement0 line520statement0 line580statement0 line590statement0 ->  W(((R)-(1)),(S))=(C) ->  line950statement0
  */
 protected void line940statement0(){
-Ws[((R) - (1))][(S)]=(C);
+Ws[(((R) - (1)) - 1)][((S) - 1)]=(C);
 line950statement0();
 }
 /** 
@@ -1387,7 +1387,7 @@ line950statement1();
  *  line950statement0 ->  V(((R)-(1)),(S))=(2) ->  line950statement2
  */
 protected void line950statement1(){
-Vs[((R) - (1))][(S)]=(2);
+Vs[(((R) - (1)) - 1)][((S) - 1)]=(2);
 line950statement2();
 }
 /** 
@@ -1425,7 +1425,7 @@ line270statement0();
  *  line340statement0 line400statement0 line420statement0 line690statement0 line710statement0 line770statement0 line780statement0 ->  W((R),((S)-(1)))=(C) ->  line990statement0
  */
 protected void line980statement0(){
-Ws[(R)][((S) - (1))]=(C);
+Ws[((R) - 1)][(((S) - (1)) - 1)]=(C);
 line990statement0();
 }
 /** 
@@ -1439,7 +1439,7 @@ line1000statement0();
  *  line990statement0 ->  V((R),((S)-(1)))=(1) ->  line1000statement1
  */
 protected void line1000statement0(){
-Vs[(R)][((S) - (1))]=(1);
+Vs[((R) - 1)][(((S) - (1)) - 1)]=(1);
 line1000statement1();
 }
 /** 
@@ -1477,7 +1477,7 @@ line270statement0();
  *  line340statement0 line500statement0 line520statement0 line690statement0 line710statement0 line860statement0 line870statement0 ->  W(((R)+(1)),(S))=(C) ->  line1030statement0
  */
 protected void line1020statement0(){
-Ws[((R) + (1))][(S)]=(C);
+Ws[(((R) + (1)) - 1)][((S) - 1)]=(C);
 line1030statement0();
 }
 /** 
@@ -1491,7 +1491,7 @@ line1030statement1();
  *  line1030statement0 ->  IF (V((R),(S))=(0)) THEN 1050 ->  line1040statement0 line1050statement0
  */
 protected void line1030statement1(){
-if (((Vs[(R)][(S)]) == (0))) {
+if (((Vs[((R) - 1)][((S) - 1)]) == (0))) {
 line1050statement0();
 }
  else {
@@ -1502,7 +1502,7 @@ line1040statement0();
  *  line1030statement1 ->  V((R),(S))=(3) ->  line1040statement1
  */
 protected void line1040statement0(){
-Vs[(R)][(S)]=(3);
+Vs[((R) - 1)][((S) - 1)]=(3);
 line1040statement1();
 }
 /** 
@@ -1515,7 +1515,7 @@ line1060statement0();
  *  line1030statement1 ->  V((R),(S))=(2) ->  line1060statement0
  */
 protected void line1050statement0(){
-Vs[(R)][(S)]=(2);
+Vs[((R) - 1)][((S) - 1)]=(2);
 line1060statement0();
 }
 /** 
@@ -1557,7 +1557,7 @@ line1100statement0();
  *  line1090statement0 ->  W((R),((S)+(1)))=(C) ->  line1100statement1
  */
 protected void line1100statement0(){
-Ws[(R)][((S) + (1))]=(C);
+Ws[((R) - 1)][(((S) + (1)) - 1)]=(C);
 line1100statement1();
 }
 /** 
@@ -1571,7 +1571,7 @@ line1100statement2();
  *  line1100statement1 ->  IF (V((R),(S))=(0)) THEN 1120 ->  line1110statement0 line1120statement0
  */
 protected void line1100statement2(){
-if (((Vs[(R)][(S)]) == (0))) {
+if (((Vs[((R) - 1)][((S) - 1)]) == (0))) {
 line1120statement0();
 }
  else {
@@ -1582,7 +1582,7 @@ line1110statement0();
  *  line1100statement2 ->  V((R),(S))=(3) ->  line1110statement1
  */
 protected void line1110statement0(){
-Vs[(R)][(S)]=(3);
+Vs[((R) - 1)][((S) - 1)]=(3);
 line1110statement1();
 }
 /** 
@@ -1595,7 +1595,7 @@ line1130statement0();
  *  line1100statement2 ->  V((R),(S))=(1) ->  line1130statement0
  */
 protected void line1120statement0(){
-Vs[(R)][(S)]=(1);
+Vs[((R) - 1)][((S) - 1)]=(1);
 line1130statement0();
 }
 /** 
@@ -1633,7 +1633,7 @@ line1160statement0();
  *  line1150statement0 ->  IF (V((R),(S))=(0)) THEN 1180 ->  line1170statement0 line1180statement0
  */
 protected void line1160statement0(){
-if (((Vs[(R)][(S)]) == (0))) {
+if (((Vs[((R) - 1)][((S) - 1)]) == (0))) {
 line1180statement0();
 }
  else {
@@ -1644,7 +1644,7 @@ line1170statement0();
  *  line1160statement0 ->  V((R),(S))=(3) ->  line1170statement1
  */
 protected void line1170statement0(){
-Vs[(R)][(S)]=(3);
+Vs[((R) - 1)][((S) - 1)]=(3);
 line1170statement1();
 }
 /** 
@@ -1664,7 +1664,7 @@ line1190statement0();
  *  line1160statement0 ->  V((R),(S))=(1) ->  line1180statement1
  */
 protected void line1180statement0(){
-Vs[(R)][(S)]=(1);
+Vs[((R) - 1)][((S) - 1)]=(1);
 line1180statement1();
 }
 /** 
@@ -1725,7 +1725,7 @@ line1230statement0();
  *  line1220statement0 line1270statement0 ->  IF (V((I),(J))<(2)) THEN 1260 ->  line1240statement0 line1260statement0
  */
 protected void line1230statement0(){
-if (((Vs[(I)][(J)]) < (2))) {
+if (((Vs[((I) - 1)][((J) - 1)]) < (2))) {
 line1260statement0();
 }
  else {
@@ -1782,7 +1782,7 @@ line1300statement0();
  *  line1290statement0 line1350statement0 ->  IF (V((I),(J))=(0)) THEN 1340 ->  line1310statement0 line1340statement0
  */
 protected void line1300statement0(){
-if (((Vs[(I)][(J)]) == (0))) {
+if (((Vs[((I) - 1)][((J) - 1)]) == (0))) {
 line1340statement0();
 }
  else {
@@ -1793,7 +1793,7 @@ line1310statement0();
  *  line1300statement0 ->  IF (V((I),(J))=(2)) THEN 1340 ->  line1320statement0 line1340statement0
  */
 protected void line1310statement0(){
-if (((Vs[(I)][(J)]) == (2))) {
+if (((Vs[((I) - 1)][((J) - 1)]) == (2))) {
 line1340statement0();
 }
  else {
