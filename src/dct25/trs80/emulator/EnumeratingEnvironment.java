@@ -16,14 +16,18 @@ public class EnumeratingEnvironment implements Environment {
     // Current width and height.
     private int _w, _h;
 
-    // Whether
+    // Whether to advance the width and height the next time the program calls 'getInput'.
     private boolean _advanceWidthAndHeightOnNextGetInput;
+
+    // Whether the next getInput() call is asking for height.
+    private boolean _nextInputIsHeight;
 
     public EnumeratingEnvironment(PrintStream out) {
         _out = out;
         _w = 1;
         _h = 1;
         _advanceWidthAndHeightOnNextGetInput = true;
+        _nextInputIsHeight = false;
     }
 
     public void clearScreen() {
@@ -34,11 +38,18 @@ public class EnumeratingEnvironment implements Environment {
         int nextInput;
         if (_advanceWidthAndHeightOnNextGetInput) {
             advanceWidthAndHeight();
-            nextInput = _w;
-        } else {
-            nextInput = _h;
+            _advanceWidthAndHeightOnNextGetInput = false;
         }
-        _advanceWidthAndHeightOnNextGetInput = !_advanceWidthAndHeightOnNextGetInput;
+
+        if (_nextInputIsHeight) {
+            nextInput = _h;
+            _advanceWidthAndHeightOnNextGetInput = true;
+            // In case the program asks for no random numbers.
+        } else {
+            nextInput = _w;
+        }
+        _nextInputIsHeight = !_nextInputIsHeight;
+
         return nextInput;
     }
 
@@ -52,8 +63,8 @@ public class EnumeratingEnvironment implements Environment {
     }
 
     public int getNextRandomNumber(int maximum) {
-        // TODO Auto-generated method stub
-        return 0;
+        _advanceWidthAndHeightOnNextGetInput = false;
+        return 1;
     }
 
     public void print(String s, boolean newLine) {
