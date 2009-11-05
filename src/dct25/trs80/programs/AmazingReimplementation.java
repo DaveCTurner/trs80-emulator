@@ -25,11 +25,33 @@ public class AmazingReimplementation extends amazing_test_bas {
         }
         _env.print("PRINTOUT IS IN PROGRESS, PLEASE BE PATIENT", true);
 
+        int x = _env.getNextRandomNumber(h);
+        for (int i = 1; i <= h; i++) {
+            if (i == x) {
+                _env.print(":  ", false);
+            } else {
+                _env.print(":--", false);
+            }
+        }
+        _env.print(":", true);
+        
+        Ws = new int[h][v];
+        Vs = new int[h][v];
+        Ws[x - 1][0] = 1;
+
         II = 1501; // replaced FOR II = (1) TO (1500) : NEXT
         A = 501; // replaced FOR A=1 TO 500: NEXT A
         H = h;
         V = v;
-        line110statement0();
+        Q = 0;
+        Z = 0;
+        X = x;
+        I = h + 1;
+        C = 2;
+        R = x;
+        S = 1;
+
+        line270statement0();
     }
 
     protected void line1200statement0() {
