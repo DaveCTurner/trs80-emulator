@@ -74,6 +74,80 @@ public class AmazingReimplementation extends amazing_test_bas {
         line270statement0();
     }
 
+    protected void line940statement0() {
+        Ws[R - 2][S - 1] = C;
+        C += 1;
+        Vs[R - 2][S - 1] = 2;
+        R -= 1;
+        if (C == (H * V + 1)) {
+            printMaze(V, H, Vs);
+            return;
+        }
+        Q = 0;
+        line270statement0();
+    }
+
+    protected void line980statement0() {
+        Ws[R - 1][S - 2] = C;
+        C += 1;
+        Vs[R - 1][S - 2] = 1;
+        S -= 1;
+        if (C == (H * V + 1)) {
+            printMaze(V, H, Vs);
+            return;
+        }
+        Q = 0;
+        line270statement0();
+    }
+
+    protected void line1020statement0() {
+        Ws[R][S - 1] = C;
+        C += 1;
+        if (Vs[R - 1][S - 1] == 0) {
+            Vs[R - 1][S - 1] = 2;
+        } else {
+            Vs[R - 1][S - 1] = 3;
+        }
+        R += 1;
+        if (C == (H * V + 1)) {
+            printMaze(V, H, Vs);
+            return;
+        }
+        line600statement0();
+    }
+
+    protected void line1090statement0() {
+        if (Q == 1) {
+            Z = 1;
+            if (Vs[R - 1][S - 1] == 0) {
+                Vs[R - 1][S - 1] = 1;
+                R = 1;
+                S = 1;
+            } else {
+                Vs[R - 1][S - 1] = 3;
+                moveToNextSquare();
+            }
+            Q = 0;
+            while (Ws[R - 1][S - 1] == 0) {
+                moveToNextSquare();
+            }
+        } else {
+            Ws[R - 1][S] = C;
+            C = C + 1;
+            if (Vs[R - 1][S - 1] == 0) {
+                Vs[R - 1][S - 1] = 1;
+            } else {
+                Vs[R - 1][S - 1] = 3;
+            }
+            S += 1;
+            if (C == (H * V + 1)) {
+                printMaze(V, H, Vs);
+                return;
+            }
+        }
+        line270statement0();
+    }
+
     protected void line1200statement0() {
         printMaze(V, H, Vs);
     }
