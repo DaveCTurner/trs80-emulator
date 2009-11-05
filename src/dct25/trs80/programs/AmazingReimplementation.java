@@ -26,7 +26,7 @@ public class AmazingReimplementation extends amazing_test_bas {
         _env.print("PRINTOUT IS IN PROGRESS, PLEASE BE PATIENT", true);
 
         entryPosition = _env.getNextRandomNumber(h);
-        
+
         Ws = new int[h][v];
         Vs = new int[h][v];
         Ws[entryPosition - 1][0] = 1;
@@ -46,10 +46,38 @@ public class AmazingReimplementation extends amazing_test_bas {
         line270statement0();
     }
 
+    protected void line210statement0() {
+        do {
+            moveToNextSquare();
+        } while (Ws[R - 1][S - 1] == 0);
+        line270statement0();
+    }
+
+    private void moveToNextSquare() {
+        if (R != H) {
+            R += 1;
+        } else {
+            if (S != V) {
+                R = 1;
+                S += 1;
+            } else {
+                R = 1;
+                S = 1;
+            }
+        }
+    }
+
+    protected void line260statement0() {
+        while (Ws[R - 1][S - 1] == 0) {
+            moveToNextSquare();
+        }
+        line270statement0();
+    }
+
     protected void line1200statement0() {
         printMaze(V, H, Vs);
     }
-    
+
     private int entryPosition;
 
     private void printMaze(int v, int h, int[][] wallFlags) {
@@ -61,7 +89,7 @@ public class AmazingReimplementation extends amazing_test_bas {
             }
         }
         _env.print(":", true);
-        
+
         for (int j = 0; j < v; j++) {
             _env.print("I", false);
             for (int i = 0; i < h; i++) {
