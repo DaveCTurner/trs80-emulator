@@ -39,9 +39,6 @@ public class EnumeratingEnvironmentTest {
             assertEquals("Check height of " + expectedWidth + "x"
                     + expectedHeight + " (" + i + ")", expectedHeight, e
                     .getInput());
-            if (2 == i) {
-                break; // TODO REMOVE THIS.
-            }
             assertEquals("Check random number sequence", i,
                     randomNumberSequenceIndex(e));
         }
