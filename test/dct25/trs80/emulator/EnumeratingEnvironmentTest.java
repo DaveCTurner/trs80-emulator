@@ -32,7 +32,7 @@ public class EnumeratingEnvironmentTest {
         int expectedWidth = 1, expectedHeight = 2;
         Environment e = new EnumeratingEnvironment(System.out);
 
-        for (int i = 1; i <= 14; i++) {
+        for (int i = 1; i <= 16; i++) {
             assertEquals("Check width of " + expectedWidth + "x"
                     + expectedHeight + " (" + i + ")", expectedWidth, e
                     .getInput());
@@ -106,11 +106,15 @@ public class EnumeratingEnvironmentTest {
                     return 12;
                 case 3:
                     return 13;
+                case 4:
+                    return 14;
+                case 5:
+                    return 15;
                 default:
                     return 0;
                 }
             case 3:
-                return 14;
+                return 16;
             default:
                 return 0;
             }
