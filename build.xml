@@ -53,12 +53,26 @@
 		<path refid="classpath.base" />
 	</path>
 
-	<target name="test" depends="compile">
+	<target name="compiletest" depends="compile">
 		<javac destdir="bin">
 			<classpath refid="classpath.test" />
 			<src path="test" />
 		</javac>
+	</target>
 
+	<target name="testone" depends="compiletest">
+		<junit>
+			<classpath refid="classpath.test" />
+			<formatter type="plain" usefile="true" />
+			<batchtest>
+				<fileset dir="test">
+					<include name="**/EnumeratingEnvironment*" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="test" depends="compiletest">
 		<junit>
 			<classpath refid="classpath.test" />
 			<formatter type="plain" usefile="true" />
