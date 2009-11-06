@@ -91,7 +91,7 @@ public class AmazingReimplementation implements Executable {
         }
     }
 
-    protected void line940statement0() {
+    private void line940() {
         R -= 1;
         Ws[R - 1][S - 1] = C;
         C += 1;
@@ -100,11 +100,10 @@ public class AmazingReimplementation implements Executable {
             printMaze(V, H, Vs);
             return;
         }
-        Q = 0;
         line270statement0();
     }
 
-    protected void line980statement0() {
+    private void line980() {
         S -= 1;
         Ws[R - 1][S - 1] = C;
         C += 1;
@@ -113,24 +112,7 @@ public class AmazingReimplementation implements Executable {
             printMaze(V, H, Vs);
             return;
         }
-        Q = 0;
         line270statement0();
-    }
-
-    protected void line1020statement0() {
-        if (Vs[R - 1][S - 1] == 0) {
-            Vs[R - 1][S - 1] = 2;
-        } else {
-            Vs[R - 1][S - 1] = 3;
-        }
-        R += 1;
-        Ws[R - 1][S - 1] = C;
-        C += 1;
-        if (C == (H * V + 1)) {
-            printMaze(V, H, Vs);
-            return;
-        }
-        line600statement0();
     }
 
     private void line1090withoutQ() {
@@ -149,8 +131,7 @@ public class AmazingReimplementation implements Executable {
         line270statement0();
     }
 
-    private void line1090withQ() {
-        Z = 1;
+    private void line1090a() {
         if (Vs[R - 1][S - 1] == 0) {
             Vs[R - 1][S - 1] = 1;
             R = 1;
@@ -159,7 +140,7 @@ public class AmazingReimplementation implements Executable {
             Vs[R - 1][S - 1] = 3;
             moveToNextSquare();
         }
-        Q = 0;
+
         while (Ws[R - 1][S - 1] == 0) {
             moveToNextSquare();
         }
@@ -210,16 +191,20 @@ public class AmazingReimplementation implements Executable {
                     if (atEasternEdge()) {
                         if (!atSouthernEdge()) {
                             if (haveVisitedSquareToSouth()) {
-                                line940statement0();
+                                Q = 0;
+                                line940();
                             } else {
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line940statement0();
+                                    Q = 0;
+                                    line940();
                                     break;
                                 case 2:
                                     if (Q == 1) {
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                     } else {
                                         line1090withoutQ();
                                     }
@@ -227,17 +212,18 @@ public class AmazingReimplementation implements Executable {
                                 }
                             }
                         } else {
+                            Q = 0;
                             if (((Z) == (1))) {
-                                line940statement0();
+                                line940();
                             } else {
-                                Q = (1);
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line940statement0();
+                                    line940();
                                     break;
                                 case 2:
-                                    line1090withQ();
+                                    Z = 1;
+                                    line1090a();
                                     break;
                                 }
                             }
@@ -246,16 +232,20 @@ public class AmazingReimplementation implements Executable {
                         if (haveVisitedSquareToEast()) {
                             if (!atSouthernEdge()) {
                                 if (haveVisitedSquareToSouth()) {
-                                    line940statement0();
+                                    Q = 0;
+                                    line940();
                                 } else {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
                                         if (Q == 1) {
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                         } else {
                                             line1090withoutQ();
                                         }
@@ -263,17 +253,18 @@ public class AmazingReimplementation implements Executable {
                                     }
                                 }
                             } else {
+                                Q = 0;
                                 if (((Z) == (1))) {
-                                    line940statement0();
+                                    line940();
                                 } else {
-                                    Q = (1);
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        line940();
                                         break;
                                     case 2:
-                                        line1090withQ();
+                                        Z = 1;
+                                        line1090a();
                                         break;
                                     }
                                 }
@@ -284,24 +275,52 @@ public class AmazingReimplementation implements Executable {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line1020statement0();
+                                        if (Vs[R - 1][S - 1] == 0) {
+                                            Vs[R - 1][S - 1] = 2;
+                                        } else {
+                                            Vs[R - 1][S - 1] = 3;
+                                        }
+                                        R += 1;
+                                        Ws[R - 1][S - 1] = C;
+                                        C += 1;
+                                        if (C == (H * V + 1)) {
+                                            printMaze(V, H, Vs);
+                                        } else {
+                                            line600statement0();
+                                        }
                                         break;
                                     }
                                 } else {
                                     X = (_env.getNextRandomNumber(3));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line1020statement0();
+                                        if (Vs[R - 1][S - 1] == 0) {
+                                            Vs[R - 1][S - 1] = 2;
+                                        } else {
+                                            Vs[R - 1][S - 1] = 3;
+                                        }
+                                        R += 1;
+                                        Ws[R - 1][S - 1] = C;
+                                        C += 1;
+                                        if (C == (H * V + 1)) {
+                                            printMaze(V, H, Vs);
+                                        } else {
+                                            line600statement0();
+                                        }
                                         break;
                                     case 3:
                                         if (Q == 1) {
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                         } else {
                                             line1090withoutQ();
                                         }
@@ -313,10 +332,23 @@ public class AmazingReimplementation implements Executable {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line1020statement0();
+                                        if (Vs[R - 1][S - 1] == 0) {
+                                            Vs[R - 1][S - 1] = 2;
+                                        } else {
+                                            Vs[R - 1][S - 1] = 3;
+                                        }
+                                        R += 1;
+                                        Ws[R - 1][S - 1] = C;
+                                        C += 1;
+                                        if (C == (H * V + 1)) {
+                                            printMaze(V, H, Vs);
+                                        } else {
+                                            line600statement0();
+                                        }
                                         break;
                                     }
                                 } else {
@@ -324,13 +356,28 @@ public class AmazingReimplementation implements Executable {
                                     X = (_env.getNextRandomNumber(3));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line1020statement0();
+                                        if (Vs[R - 1][S - 1] == 0) {
+                                            Vs[R - 1][S - 1] = 2;
+                                        } else {
+                                            Vs[R - 1][S - 1] = 3;
+                                        }
+                                        R += 1;
+                                        Ws[R - 1][S - 1] = C;
+                                        C += 1;
+                                        if (C == (H * V + 1)) {
+                                            printMaze(V, H, Vs);
+                                        } else {
+                                            line600statement0();
+                                        }
                                         break;
                                     case 3:
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                         break;
                                     }
                                 }
@@ -342,16 +389,20 @@ public class AmazingReimplementation implements Executable {
                         if (atEasternEdge()) {
                             if (!atSouthernEdge()) {
                                 if (haveVisitedSquareToSouth()) {
-                                    line940statement0();
+                                    Q = 0;
+                                    line940();
                                 } else {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
                                         if (Q == 1) {
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                         } else {
                                             line1090withoutQ();
                                         }
@@ -360,16 +411,20 @@ public class AmazingReimplementation implements Executable {
                                 }
                             } else {
                                 if (((Z) == (1))) {
-                                    line940statement0();
+                                    Q = 0;
+                                    line940();
                                 } else {
                                     Q = (1);
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                         break;
                                     }
                                 }
@@ -378,16 +433,20 @@ public class AmazingReimplementation implements Executable {
                             if (haveVisitedSquareToEast()) {
                                 if (!atSouthernEdge()) {
                                     if (haveVisitedSquareToSouth()) {
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                     } else {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
                                             if (Q == 1) {
-                                                line1090withQ();
+                                                Z = 1;
+                                                Q = 0;
+                                                line1090a();
                                             } else {
                                                 line1090withoutQ();
                                             }
@@ -396,16 +455,20 @@ public class AmazingReimplementation implements Executable {
                                     }
                                 } else {
                                     if (((Z) == (1))) {
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                     } else {
                                         Q = (1);
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                             break;
                                         }
                                     }
@@ -416,24 +479,52 @@ public class AmazingReimplementation implements Executable {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line1020statement0();
+                                            if (Vs[R - 1][S - 1] == 0) {
+                                                Vs[R - 1][S - 1] = 2;
+                                            } else {
+                                                Vs[R - 1][S - 1] = 3;
+                                            }
+                                            R += 1;
+                                            Ws[R - 1][S - 1] = C;
+                                            C += 1;
+                                            if (C == (H * V + 1)) {
+                                                printMaze(V, H, Vs);
+                                            } else {
+                                                line600statement0();
+                                            }
                                             break;
                                         }
                                     } else {
                                         X = (_env.getNextRandomNumber(3));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line1020statement0();
+                                            if (Vs[R - 1][S - 1] == 0) {
+                                                Vs[R - 1][S - 1] = 2;
+                                            } else {
+                                                Vs[R - 1][S - 1] = 3;
+                                            }
+                                            R += 1;
+                                            Ws[R - 1][S - 1] = C;
+                                            C += 1;
+                                            if (C == (H * V + 1)) {
+                                                printMaze(V, H, Vs);
+                                            } else {
+                                                line600statement0();
+                                            }
                                             break;
                                         case 3:
                                             if (Q == 1) {
-                                                line1090withQ();
+                                                Z = 1;
+                                                Q = 0;
+                                                line1090a();
                                             } else {
                                                 line1090withoutQ();
                                             }
@@ -445,10 +536,23 @@ public class AmazingReimplementation implements Executable {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line1020statement0();
+                                            if (Vs[R - 1][S - 1] == 0) {
+                                                Vs[R - 1][S - 1] = 2;
+                                            } else {
+                                                Vs[R - 1][S - 1] = 3;
+                                            }
+                                            R += 1;
+                                            Ws[R - 1][S - 1] = C;
+                                            C += 1;
+                                            if (C == (H * V + 1)) {
+                                                printMaze(V, H, Vs);
+                                            } else {
+                                                line600statement0();
+                                            }
                                             break;
                                         }
                                     } else {
@@ -456,13 +560,28 @@ public class AmazingReimplementation implements Executable {
                                         X = (_env.getNextRandomNumber(3));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line1020statement0();
+                                            if (Vs[R - 1][S - 1] == 0) {
+                                                Vs[R - 1][S - 1] = 2;
+                                            } else {
+                                                Vs[R - 1][S - 1] = 3;
+                                            }
+                                            R += 1;
+                                            Ws[R - 1][S - 1] = C;
+                                            C += 1;
+                                            if (C == (H * V + 1)) {
+                                                printMaze(V, H, Vs);
+                                            } else {
+                                                line600statement0();
+                                            }
                                             break;
                                         case 3:
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                             break;
                                         }
                                     }
@@ -476,24 +595,30 @@ public class AmazingReimplementation implements Executable {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line980statement0();
+                                        Q = 0;
+                                        line980();
                                         break;
                                     }
                                 } else {
                                     X = (_env.getNextRandomNumber(3));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line980statement0();
+                                        Q = 0;
+                                        line980();
                                         break;
                                     case 3:
                                         if (Q == 1) {
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                         } else {
                                             line1090withoutQ();
                                         }
@@ -505,10 +630,12 @@ public class AmazingReimplementation implements Executable {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line980statement0();
+                                        Q = 0;
+                                        line980();
                                         break;
                                     }
                                 } else {
@@ -516,13 +643,17 @@ public class AmazingReimplementation implements Executable {
                                     X = (_env.getNextRandomNumber(3));
                                     switch (X) {
                                     case 1:
-                                        line940statement0();
+                                        Q = 0;
+                                        line940();
                                         break;
                                     case 2:
-                                        line980statement0();
+                                        Q = 0;
+                                        line980();
                                         break;
                                     case 3:
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                         break;
                                     }
                                 }
@@ -534,24 +665,30 @@ public class AmazingReimplementation implements Executable {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line980statement0();
+                                            Q = 0;
+                                            line980();
                                             break;
                                         }
                                     } else {
                                         X = (_env.getNextRandomNumber(3));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line980statement0();
+                                            Q = 0;
+                                            line980();
                                             break;
                                         case 3:
                                             if (Q == 1) {
-                                                line1090withQ();
+                                                Z = 1;
+                                                Q = 0;
+                                                line1090a();
                                             } else {
                                                 line1090withoutQ();
                                             }
@@ -563,10 +700,12 @@ public class AmazingReimplementation implements Executable {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line980statement0();
+                                            Q = 0;
+                                            line980();
                                             break;
                                         }
                                     } else {
@@ -574,13 +713,17 @@ public class AmazingReimplementation implements Executable {
                                         X = (_env.getNextRandomNumber(3));
                                         switch (X) {
                                         case 1:
-                                            line940statement0();
+                                            Q = 0;
+                                            line940();
                                             break;
                                         case 2:
-                                            line980statement0();
+                                            Q = 0;
+                                            line980();
                                             break;
                                         case 3:
-                                            line1090withQ();
+                                            Z = 1;
+                                            Q = 0;
+                                            line1090a();
                                             break;
                                         }
                                     }
@@ -589,13 +732,27 @@ public class AmazingReimplementation implements Executable {
                                 X = (_env.getNextRandomNumber(3));
                                 switch (X) {
                                 case 1:
-                                    line940statement0();
+                                    Q = 0;
+                                    line940();
                                     break;
                                 case 2:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 3:
-                                    line1020statement0();
+                                    if (Vs[R - 1][S - 1] == 0) {
+                                        Vs[R - 1][S - 1] = 2;
+                                    } else {
+                                        Vs[R - 1][S - 1] = 3;
+                                    }
+                                    R += 1;
+                                    Ws[R - 1][S - 1] = C;
+                                    C += 1;
+                                    if (C == (H * V + 1)) {
+                                        printMaze(V, H, Vs);
+                                    } else {
+                                        line600statement0();
+                                    }
                                     break;
                                 }
                             }
@@ -649,7 +806,9 @@ public class AmazingReimplementation implements Executable {
                         line270statement0();
                     } else {
                         if (Q == 1) {
-                            line1090withQ();
+                            Z = 1;
+                            Q = 0;
+                            line1090a();
                         } else {
                             line1090withoutQ();
                         }
@@ -661,7 +820,9 @@ public class AmazingReimplementation implements Executable {
                         } while (Ws[R - 1][S - 1] == 0);
                         line270statement0();
                     } else {
-                        line1090withQ();
+                        Z = 1;
+                        Q = 0;
+                        line1090a();
                     }
                 }
             } else {
@@ -674,7 +835,9 @@ public class AmazingReimplementation implements Executable {
                             line270statement0();
                         } else {
                             if (Q == 1) {
-                                line1090withQ();
+                                Z = 1;
+                                Q = 0;
+                                line1090a();
                             } else {
                                 line1090withoutQ();
                             }
@@ -686,22 +849,50 @@ public class AmazingReimplementation implements Executable {
                             } while (Ws[R - 1][S - 1] == 0);
                             line270statement0();
                         } else {
-                            line1090withQ();
+                            Z = 1;
+                            Q = 0;
+                            line1090a();
                         }
                     }
                 } else {
                     if (!atSouthernEdge()) {
                         if (haveVisitedSquareToSouth()) {
-                            line1020statement0();
+                            if (Vs[R - 1][S - 1] == 0) {
+                                Vs[R - 1][S - 1] = 2;
+                            } else {
+                                Vs[R - 1][S - 1] = 3;
+                            }
+                            R += 1;
+                            Ws[R - 1][S - 1] = C;
+                            C += 1;
+                            if (C == (H * V + 1)) {
+                                printMaze(V, H, Vs);
+                            } else {
+                                line600statement0();
+                            }
                         } else {
                             X = (_env.getNextRandomNumber(2));
                             switch (X) {
                             case 1:
-                                line1020statement0();
+                                if (Vs[R - 1][S - 1] == 0) {
+                                    Vs[R - 1][S - 1] = 2;
+                                } else {
+                                    Vs[R - 1][S - 1] = 3;
+                                }
+                                R += 1;
+                                Ws[R - 1][S - 1] = C;
+                                C += 1;
+                                if (C == (H * V + 1)) {
+                                    printMaze(V, H, Vs);
+                                } else {
+                                    line600statement0();
+                                }
                                 break;
                             case 2:
                                 if (Q == 1) {
-                                    line1090withQ();
+                                    Z = 1;
+                                    Q = 0;
+                                    line1090a();
                                 } else {
                                     line1090withoutQ();
                                 }
@@ -710,7 +901,19 @@ public class AmazingReimplementation implements Executable {
                         }
                     } else {
                         if (((Z) == (1))) {
-                            line1020statement0();
+                            if (Vs[R - 1][S - 1] == 0) {
+                                Vs[R - 1][S - 1] = 2;
+                            } else {
+                                Vs[R - 1][S - 1] = 3;
+                            }
+                            R += 1;
+                            Ws[R - 1][S - 1] = C;
+                            C += 1;
+                            if (C == (H * V + 1)) {
+                                printMaze(V, H, Vs);
+                            } else {
+                                line600statement0();
+                            }
                         } else {
                             Q = (1);
                             C = ((C) + (1));
@@ -737,7 +940,9 @@ public class AmazingReimplementation implements Executable {
                             line270statement0();
                         } else {
                             if (Q == 1) {
-                                line1090withQ();
+                                Z = 1;
+                                Q = 0;
+                                line1090a();
                             } else {
                                 line1090withoutQ();
                             }
@@ -749,7 +954,9 @@ public class AmazingReimplementation implements Executable {
                             } while (Ws[R - 1][S - 1] == 0);
                             line270statement0();
                         } else {
-                            line1090withQ();
+                            Z = 1;
+                            Q = 0;
+                            line1090a();
                         }
                     }
                 } else {
@@ -762,7 +969,9 @@ public class AmazingReimplementation implements Executable {
                                 line270statement0();
                             } else {
                                 if (Q == 1) {
-                                    line1090withQ();
+                                    Z = 1;
+                                    Q = 0;
+                                    line1090a();
                                 } else {
                                     line1090withoutQ();
                                 }
@@ -774,22 +983,50 @@ public class AmazingReimplementation implements Executable {
                                 } while (Ws[R - 1][S - 1] == 0);
                                 line270statement0();
                             } else {
-                                line1090withQ();
+                                Z = 1;
+                                Q = 0;
+                                line1090a();
                             }
                         }
                     } else {
                         if (!atSouthernEdge()) {
                             if (haveVisitedSquareToSouth()) {
-                                line1020statement0();
+                                if (Vs[R - 1][S - 1] == 0) {
+                                    Vs[R - 1][S - 1] = 2;
+                                } else {
+                                    Vs[R - 1][S - 1] = 3;
+                                }
+                                R += 1;
+                                Ws[R - 1][S - 1] = C;
+                                C += 1;
+                                if (C == (H * V + 1)) {
+                                    printMaze(V, H, Vs);
+                                } else {
+                                    line600statement0();
+                                }
                             } else {
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line1020statement0();
+                                    if (Vs[R - 1][S - 1] == 0) {
+                                        Vs[R - 1][S - 1] = 2;
+                                    } else {
+                                        Vs[R - 1][S - 1] = 3;
+                                    }
+                                    R += 1;
+                                    Ws[R - 1][S - 1] = C;
+                                    C += 1;
+                                    if (C == (H * V + 1)) {
+                                        printMaze(V, H, Vs);
+                                    } else {
+                                        line600statement0();
+                                    }
                                     break;
                                 case 2:
                                     if (Q == 1) {
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                     } else {
                                         line1090withoutQ();
                                     }
@@ -798,7 +1035,19 @@ public class AmazingReimplementation implements Executable {
                             }
                         } else {
                             if (((Z) == (1))) {
-                                line1020statement0();
+                                if (Vs[R - 1][S - 1] == 0) {
+                                    Vs[R - 1][S - 1] = 2;
+                                } else {
+                                    Vs[R - 1][S - 1] = 3;
+                                }
+                                R += 1;
+                                Ws[R - 1][S - 1] = C;
+                                C += 1;
+                                if (C == (H * V + 1)) {
+                                    printMaze(V, H, Vs);
+                                } else {
+                                    line600statement0();
+                                }
                             } else {
                                 Q = (1);
                                 C = ((C) + (1));
@@ -818,16 +1067,20 @@ public class AmazingReimplementation implements Executable {
                 if (atEasternEdge()) {
                     if (!atSouthernEdge()) {
                         if (haveVisitedSquareToSouth()) {
-                            line980statement0();
+                            Q = 0;
+                            line980();
                         } else {
                             X = (_env.getNextRandomNumber(2));
                             switch (X) {
                             case 1:
-                                line980statement0();
+                                Q = 0;
+                                line980();
                                 break;
                             case 2:
                                 if (Q == 1) {
-                                    line1090withQ();
+                                    Z = 1;
+                                    Q = 0;
+                                    line1090a();
                                 } else {
                                     line1090withoutQ();
                                 }
@@ -836,15 +1089,19 @@ public class AmazingReimplementation implements Executable {
                         }
                     } else {
                         if (((Z) == (1))) {
-                            line980statement0();
+                            Q = 0;
+                            line980();
                         } else {
                             X = (_env.getNextRandomNumber(2));
                             switch (X) {
                             case 1:
-                                line980statement0();
+                                Q = 0;
+                                line980();
                                 break;
                             case 2:
-                                line1090withQ();
+                                Z = 1;
+                                Q = 0;
+                                line1090a();
                                 break;
                             }
                         }
@@ -853,16 +1110,20 @@ public class AmazingReimplementation implements Executable {
                     if (haveVisitedSquareToEast()) {
                         if (!atSouthernEdge()) {
                             if (haveVisitedSquareToSouth()) {
-                                line980statement0();
+                                Q = 0;
+                                line980();
                             } else {
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 2:
                                     if (Q == 1) {
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                     } else {
                                         line1090withoutQ();
                                     }
@@ -871,16 +1132,20 @@ public class AmazingReimplementation implements Executable {
                             }
                         } else {
                             if (((Z) == (1))) {
-                                line980statement0();
+                                Q = 0;
+                                line980();
                             } else {
                                 Q = (1);
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 2:
-                                    line1090withQ();
+                                    Z = 1;
+                                    Q = 0;
+                                    line1090a();
                                     break;
                                 }
                             }
@@ -891,24 +1156,52 @@ public class AmazingReimplementation implements Executable {
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 2:
-                                    line1020statement0();
+                                    if (Vs[R - 1][S - 1] == 0) {
+                                        Vs[R - 1][S - 1] = 2;
+                                    } else {
+                                        Vs[R - 1][S - 1] = 3;
+                                    }
+                                    R += 1;
+                                    Ws[R - 1][S - 1] = C;
+                                    C += 1;
+                                    if (C == (H * V + 1)) {
+                                        printMaze(V, H, Vs);
+                                    } else {
+                                        line600statement0();
+                                    }
                                     break;
                                 }
                             } else {
                                 X = (_env.getNextRandomNumber(3));
                                 switch (X) {
                                 case 1:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 2:
-                                    line1020statement0();
+                                    if (Vs[R - 1][S - 1] == 0) {
+                                        Vs[R - 1][S - 1] = 2;
+                                    } else {
+                                        Vs[R - 1][S - 1] = 3;
+                                    }
+                                    R += 1;
+                                    Ws[R - 1][S - 1] = C;
+                                    C += 1;
+                                    if (C == (H * V + 1)) {
+                                        printMaze(V, H, Vs);
+                                    } else {
+                                        line600statement0();
+                                    }
                                     break;
                                 case 3:
                                     if (Q == 1) {
-                                        line1090withQ();
+                                        Z = 1;
+                                        Q = 0;
+                                        line1090a();
                                     } else {
                                         line1090withoutQ();
                                     }
@@ -920,10 +1213,23 @@ public class AmazingReimplementation implements Executable {
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 2:
-                                    line1020statement0();
+                                    if (Vs[R - 1][S - 1] == 0) {
+                                        Vs[R - 1][S - 1] = 2;
+                                    } else {
+                                        Vs[R - 1][S - 1] = 3;
+                                    }
+                                    R += 1;
+                                    Ws[R - 1][S - 1] = C;
+                                    C += 1;
+                                    if (C == (H * V + 1)) {
+                                        printMaze(V, H, Vs);
+                                    } else {
+                                        line600statement0();
+                                    }
                                     break;
                                 }
                             } else {
@@ -931,13 +1237,28 @@ public class AmazingReimplementation implements Executable {
                                 X = (_env.getNextRandomNumber(3));
                                 switch (X) {
                                 case 1:
-                                    line980statement0();
+                                    Q = 0;
+                                    line980();
                                     break;
                                 case 2:
-                                    line1020statement0();
+                                    if (Vs[R - 1][S - 1] == 0) {
+                                        Vs[R - 1][S - 1] = 2;
+                                    } else {
+                                        Vs[R - 1][S - 1] = 3;
+                                    }
+                                    R += 1;
+                                    Ws[R - 1][S - 1] = C;
+                                    C += 1;
+                                    if (C == (H * V + 1)) {
+                                        printMaze(V, H, Vs);
+                                    } else {
+                                        line600statement0();
+                                    }
                                     break;
                                 case 3:
-                                    line1090withQ();
+                                    Z = 1;
+                                    Q = 0;
+                                    line1090a();
                                     break;
                                 }
                             }
