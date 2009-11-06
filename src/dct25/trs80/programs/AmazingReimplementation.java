@@ -237,11 +237,7 @@ public class AmazingReimplementation implements Executable {
                                     line940statement0();
                                     break;
                                 case 2:
-                                    if (Q == 1) {
-                                        line1090withQ();
-                                    } else {
-                                        line1090withoutQ();
-                                    }
+                                    line1090withQ();
                                     break;
                                 }
                             }
@@ -277,11 +273,7 @@ public class AmazingReimplementation implements Executable {
                                         line940statement0();
                                         break;
                                     case 2:
-                                        if (Q == 1) {
-                                            line1090withQ();
-                                        } else {
-                                            line1090withoutQ();
-                                        }
+                                        line1090withQ();
                                         break;
                                     }
                                 }
@@ -338,11 +330,7 @@ public class AmazingReimplementation implements Executable {
                                         line1020statement0();
                                         break;
                                     case 3:
-                                        if (Q == 1) {
-                                            line1090withQ();
-                                        } else {
-                                            line1090withoutQ();
-                                        }
+                                        line1090withQ();
                                         break;
                                     }
                                 }
@@ -381,11 +369,7 @@ public class AmazingReimplementation implements Executable {
                                         line940statement0();
                                         break;
                                     case 2:
-                                        if (Q == 1) {
-                                            line1090withQ();
-                                        } else {
-                                            line1090withoutQ();
-                                        }
+                                        line1090withQ();
                                         break;
                                     }
                                 }
@@ -421,11 +405,7 @@ public class AmazingReimplementation implements Executable {
                                             line940statement0();
                                             break;
                                         case 2:
-                                            if (Q == 1) {
-                                                line1090withQ();
-                                            } else {
-                                                line1090withoutQ();
-                                            }
+                                            line1090withQ();
                                             break;
                                         }
                                     }
@@ -482,11 +462,7 @@ public class AmazingReimplementation implements Executable {
                                             line1020statement0();
                                             break;
                                         case 3:
-                                            if (Q == 1) {
-                                                line1090withQ();
-                                            } else {
-                                                line1090withoutQ();
-                                            }
+                                            line1090withQ();
                                             break;
                                         }
                                     }
@@ -546,11 +522,7 @@ public class AmazingReimplementation implements Executable {
                                         line980statement0();
                                         break;
                                     case 3:
-                                        if (Q == 1) {
-                                            line1090withQ();
-                                        } else {
-                                            line1090withoutQ();
-                                        }
+                                        line1090withQ();
                                         break;
                                     }
                                 }
@@ -608,11 +580,7 @@ public class AmazingReimplementation implements Executable {
                                             line980statement0();
                                             break;
                                         case 3:
-                                            if (Q == 1) {
-                                                line1090withQ();
-                                            } else {
-                                                line1090withoutQ();
-                                            }
+                                            line1090withQ();
                                             break;
                                         }
                                     }
@@ -693,12 +661,7 @@ public class AmazingReimplementation implements Executable {
                         } while (Ws[R - 1][S - 1] == 0);
                         line270statement0();
                     } else {
-                        Q = (1);
-                        if (Q == 1) {
-                            line1090withQ();
-                        } else {
-                            line1090withoutQ();
-                        }
+                        line1090withQ();
                     }
                 }
             } else {
@@ -723,12 +686,7 @@ public class AmazingReimplementation implements Executable {
                             } while (Ws[R - 1][S - 1] == 0);
                             line270statement0();
                         } else {
-                            Q = (1);
-                            if (Q == 1) {
-                                line1090withQ();
-                            } else {
-                                line1090withoutQ();
-                            }
+                            line1090withQ();
                         }
                     }
                 } else {
@@ -791,12 +749,7 @@ public class AmazingReimplementation implements Executable {
                             } while (Ws[R - 1][S - 1] == 0);
                             line270statement0();
                         } else {
-                            Q = (1);
-                            if (Q == 1) {
-                                line1090withQ();
-                            } else {
-                                line1090withoutQ();
-                            }
+                            line1090withQ();
                         }
                     }
                 } else {
@@ -821,12 +774,7 @@ public class AmazingReimplementation implements Executable {
                                 } while (Ws[R - 1][S - 1] == 0);
                                 line270statement0();
                             } else {
-                                Q = (1);
-                                if (Q == 1) {
-                                    line1090withQ();
-                                } else {
-                                    line1090withoutQ();
-                                }
+                                line1090withQ();
                             }
                         }
                     } else {
@@ -890,18 +838,13 @@ public class AmazingReimplementation implements Executable {
                         if (((Z) == (1))) {
                             line980statement0();
                         } else {
-                            Q = (1);
                             X = (_env.getNextRandomNumber(2));
                             switch (X) {
                             case 1:
                                 line980statement0();
                                 break;
                             case 2:
-                                if (Q == 1) {
-                                    line1090withQ();
-                                } else {
-                                    line1090withoutQ();
-                                }
+                                line1090withQ();
                                 break;
                             }
                         }
@@ -937,11 +880,7 @@ public class AmazingReimplementation implements Executable {
                                     line980statement0();
                                     break;
                                 case 2:
-                                    if (Q == 1) {
-                                        line1090withQ();
-                                    } else {
-                                        line1090withoutQ();
-                                    }
+                                    line1090withQ();
                                     break;
                                 }
                             }
@@ -998,11 +937,7 @@ public class AmazingReimplementation implements Executable {
                                     line1020statement0();
                                     break;
                                 case 3:
-                                    if (Q == 1) {
-                                        line1090withQ();
-                                    } else {
-                                        line1090withoutQ();
-                                    }
+                                    line1090withQ();
                                     break;
                                 }
                             }
