@@ -185,4 +185,658 @@ public class AmazingReimplementation extends amazing_test_bas {
             _env.print(":", true);
         }
     }
+
+    protected void line270statement0() {
+        if ((((R) - (1)) == (0))) {
+            line600statement0();
+        } else {
+            if (((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
+                line600statement0();
+            } else {
+                if ((((S) - (1)) == (0))) {
+                    if (((R) == (H))) {
+                        if (((S) != (V))) {
+                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                line940statement0();
+                            } else {
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line940statement0();
+                                    break;
+                                case 2:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        } else {
+                            if (((Z) == (1))) {
+                                line940statement0();
+                            } else {
+                                Q = (1);
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line940statement0();
+                                    break;
+                                case 2:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                            if (((S) != (V))) {
+                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                    line940statement0();
+                                } else {
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            } else {
+                                if (((Z) == (1))) {
+                                    line940statement0();
+                                } else {
+                                    Q = (1);
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (((S) != (V))) {
+                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1020statement0();
+                                        break;
+                                    }
+                                } else {
+                                    X = (_env.getNextRandomNumber(3));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1020statement0();
+                                        break;
+                                    case 3:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            } else {
+                                if (((Z) == (1))) {
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1020statement0();
+                                        break;
+                                    }
+                                } else {
+                                    Q = (1);
+                                    X = (_env.getNextRandomNumber(3));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1020statement0();
+                                        break;
+                                    case 3:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
+                        if (((R) == (H))) {
+                            if (((S) != (V))) {
+                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                    line940statement0();
+                                } else {
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            } else {
+                                if (((Z) == (1))) {
+                                    line940statement0();
+                                } else {
+                                    Q = (1);
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                                if (((S) != (V))) {
+                                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                        line940statement0();
+                                    } else {
+                                        X = (_env.getNextRandomNumber(2));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line1090statement0();
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    if (((Z) == (1))) {
+                                        line940statement0();
+                                    } else {
+                                        Q = (1);
+                                        X = (_env.getNextRandomNumber(2));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line1090statement0();
+                                            break;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (((S) != (V))) {
+                                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                        X = (_env.getNextRandomNumber(2));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line1020statement0();
+                                            break;
+                                        }
+                                    } else {
+                                        X = (_env.getNextRandomNumber(3));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line1020statement0();
+                                            break;
+                                        case 3:
+                                            line1090statement0();
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    if (((Z) == (1))) {
+                                        X = (_env.getNextRandomNumber(2));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line1020statement0();
+                                            break;
+                                        }
+                                    } else {
+                                        Q = (1);
+                                        X = (_env.getNextRandomNumber(3));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line1020statement0();
+                                            break;
+                                        case 3:
+                                            line1090statement0();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (((R) == (H))) {
+                            if (((S) != (V))) {
+                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line980statement0();
+                                        break;
+                                    }
+                                } else {
+                                    X = (_env.getNextRandomNumber(3));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line980statement0();
+                                        break;
+                                    case 3:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            } else {
+                                if (((Z) == (1))) {
+                                    X = (_env.getNextRandomNumber(2));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line980statement0();
+                                        break;
+                                    }
+                                } else {
+                                    Q = (1);
+                                    X = (_env.getNextRandomNumber(3));
+                                    switch (X) {
+                                    case 1:
+                                        line940statement0();
+                                        break;
+                                    case 2:
+                                        line980statement0();
+                                        break;
+                                    case 3:
+                                        line1090statement0();
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                                if (((S) != (V))) {
+                                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                        X = (_env.getNextRandomNumber(2));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line980statement0();
+                                            break;
+                                        }
+                                    } else {
+                                        X = (_env.getNextRandomNumber(3));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line980statement0();
+                                            break;
+                                        case 3:
+                                            line1090statement0();
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    if (((Z) == (1))) {
+                                        X = (_env.getNextRandomNumber(2));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line980statement0();
+                                            break;
+                                        }
+                                    } else {
+                                        Q = (1);
+                                        X = (_env.getNextRandomNumber(3));
+                                        switch (X) {
+                                        case 1:
+                                            line940statement0();
+                                            break;
+                                        case 2:
+                                            line980statement0();
+                                            break;
+                                        case 3:
+                                            line1090statement0();
+                                            break;
+                                        }
+                                    }
+                                }
+                            } else {
+                                X = (_env.getNextRandomNumber(3));
+                                switch (X) {
+                                case 1:
+                                    line940statement0();
+                                    break;
+                                case 2:
+                                    line980statement0();
+                                    break;
+                                case 3:
+                                    line1020statement0();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    protected void line600statement0() {
+        if ((((S) - (1)) == (0))) {
+            if (((R) == (H))) {
+                if (((S) != (V))) {
+                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                        do {
+                            moveToNextSquare();
+                        } while (Ws[R - 1][S - 1] == 0);
+                        line270statement0();
+                    } else {
+                        line1090statement0();
+                    }
+                } else {
+                    if (((Z) == (1))) {
+                        do {
+                            moveToNextSquare();
+                        } while (Ws[R - 1][S - 1] == 0);
+                        line270statement0();
+                    } else {
+                        Q = (1);
+                        line1090statement0();
+                    }
+                }
+            } else {
+                if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                    if (((S) != (V))) {
+                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            do {
+                                moveToNextSquare();
+                            } while (Ws[R - 1][S - 1] == 0);
+                            line270statement0();
+                        } else {
+                            line1090statement0();
+                        }
+                    } else {
+                        if (((Z) == (1))) {
+                            do {
+                                moveToNextSquare();
+                            } while (Ws[R - 1][S - 1] == 0);
+                            line270statement0();
+                        } else {
+                            Q = (1);
+                            line1090statement0();
+                        }
+                    }
+                } else {
+                    if (((S) != (V))) {
+                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            line1020statement0();
+                        } else {
+                            X = (_env.getNextRandomNumber(2));
+                            switch (X) {
+                            case 1:
+                                line1020statement0();
+                                break;
+                            case 2:
+                                line1090statement0();
+                                break;
+                            }
+                        }
+                    } else {
+                        if (((Z) == (1))) {
+                            line1020statement0();
+                        } else {
+                            Q = (1);
+                            C = ((C) + (1));
+                            Vs[((R) - 1)][(((S) - (1)) - 1)] = (1);
+                            S = ((S) - (1));
+                            if (((C) == (((H) * (V)) + (1)))) {
+                                printMaze(V, H, Vs);
+                            } else {
+                                Q = (0);
+                                line270statement0();
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if (((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
+                if (((R) == (H))) {
+                    if (((S) != (V))) {
+                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            do {
+                                moveToNextSquare();
+                            } while (Ws[R - 1][S - 1] == 0);
+                            line270statement0();
+                        } else {
+                            line1090statement0();
+                        }
+                    } else {
+                        if (((Z) == (1))) {
+                            do {
+                                moveToNextSquare();
+                            } while (Ws[R - 1][S - 1] == 0);
+                            line270statement0();
+                        } else {
+                            Q = (1);
+                            line1090statement0();
+                        }
+                    }
+                } else {
+                    if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                        if (((S) != (V))) {
+                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                do {
+                                    moveToNextSquare();
+                                } while (Ws[R - 1][S - 1] == 0);
+                                line270statement0();
+                            } else {
+                                line1090statement0();
+                            }
+                        } else {
+                            if (((Z) == (1))) {
+                                do {
+                                    moveToNextSquare();
+                                } while (Ws[R - 1][S - 1] == 0);
+                                line270statement0();
+                            } else {
+                                Q = (1);
+                                line1090statement0();
+                            }
+                        }
+                    } else {
+                        if (((S) != (V))) {
+                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                line1020statement0();
+                            } else {
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line1020statement0();
+                                    break;
+                                case 2:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        } else {
+                            if (((Z) == (1))) {
+                                line1020statement0();
+                            } else {
+                                Q = (1);
+                                C = ((C) + (1));
+                                Vs[((R) - 1)][(((S) - (1)) - 1)] = (1);
+                                S = ((S) - (1));
+                                if (((C) == (((H) * (V)) + (1)))) {
+                                    printMaze(V, H, Vs);
+                                } else {
+                                    Q = (0);
+                                    line270statement0();
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (((R) == (H))) {
+                    if (((S) != (V))) {
+                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            line980statement0();
+                        } else {
+                            X = (_env.getNextRandomNumber(2));
+                            switch (X) {
+                            case 1:
+                                line980statement0();
+                                break;
+                            case 2:
+                                line1090statement0();
+                                break;
+                            }
+                        }
+                    } else {
+                        if (((Z) == (1))) {
+                            line980statement0();
+                        } else {
+                            Q = (1);
+                            X = (_env.getNextRandomNumber(2));
+                            switch (X) {
+                            case 1:
+                                line980statement0();
+                                break;
+                            case 2:
+                                line1090statement0();
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                        if (((S) != (V))) {
+                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                line980statement0();
+                            } else {
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line980statement0();
+                                    break;
+                                case 2:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        } else {
+                            if (((Z) == (1))) {
+                                line980statement0();
+                            } else {
+                                Q = (1);
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line980statement0();
+                                    break;
+                                case 2:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        if (((S) != (V))) {
+                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line980statement0();
+                                    break;
+                                case 2:
+                                    line1020statement0();
+                                    break;
+                                }
+                            } else {
+                                X = (_env.getNextRandomNumber(3));
+                                switch (X) {
+                                case 1:
+                                    line980statement0();
+                                    break;
+                                case 2:
+                                    line1020statement0();
+                                    break;
+                                case 3:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        } else {
+                            if (((Z) == (1))) {
+                                X = (_env.getNextRandomNumber(2));
+                                switch (X) {
+                                case 1:
+                                    line980statement0();
+                                    break;
+                                case 2:
+                                    line1020statement0();
+                                    break;
+                                }
+                            } else {
+                                Q = (1);
+                                X = (_env.getNextRandomNumber(3));
+                                switch (X) {
+                                case 1:
+                                    line980statement0();
+                                    break;
+                                case 2:
+                                    line1020statement0();
+                                    break;
+                                case 3:
+                                    line1090statement0();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
