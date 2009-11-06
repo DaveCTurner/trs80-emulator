@@ -1,8 +1,25 @@
 package dct25.trs80.programs;
 
 import dct25.trs80.emulator.Environment;
+import dct25.trs80.emulator.Executable;
 
-public class AmazingReimplementation extends amazing_test_bas {
+public class AmazingReimplementation implements Executable {
+    int II;
+    int V;
+    int Q;
+    int A;
+    int S;
+    int R;
+    int C;
+    int H;
+    int I;
+    int X;
+    int J;
+    int Z;
+    int[][] Ws;
+    int[][] Vs;
+    Environment _env;
+    
     public void execute(Environment env) {
         _env = env;
         _env.clearScreen();
@@ -46,13 +63,6 @@ public class AmazingReimplementation extends amazing_test_bas {
         line270statement0();
     }
 
-    protected void line210statement0() {
-        do {
-            moveToNextSquare();
-        } while (Ws[R - 1][S - 1] == 0);
-        line270statement0();
-    }
-
     private void moveToNextSquare() {
         if (R != H) {
             R += 1;
@@ -65,13 +75,6 @@ public class AmazingReimplementation extends amazing_test_bas {
                 S = 1;
             }
         }
-    }
-
-    protected void line260statement0() {
-        while (Ws[R - 1][S - 1] == 0) {
-            moveToNextSquare();
-        }
-        line270statement0();
     }
 
     protected void line940statement0() {
@@ -147,10 +150,6 @@ public class AmazingReimplementation extends amazing_test_bas {
             }
         }
         line270statement0();
-    }
-
-    protected void line1200statement0() {
-        printMaze(V, H, Vs);
     }
 
     private int entryPosition;
