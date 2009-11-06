@@ -186,16 +186,16 @@ public class AmazingReimplementation implements Executable {
     }
 
     protected void line270statement0() {
-        if ((((R) - (1)) == (0))) {
+        if (atWesternEdge()) {
             line600statement0();
         } else {
-            if (((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
+            if (haveVisitedSquareToWest()) {
                 line600statement0();
             } else {
-                if ((((S) - (1)) == (0))) {
-                    if (((R) == (H))) {
-                        if (((S) != (V))) {
-                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                if (atNorthernEdge()) {
+                    if (atEasternEdge()) {
+                        if (!atSouthernEdge()) {
+                            if (haveVisitedSquareToSouth()) {
                                 line940statement0();
                             } else {
                                 X = (_env.getNextRandomNumber(2));
@@ -225,9 +225,9 @@ public class AmazingReimplementation implements Executable {
                             }
                         }
                     } else {
-                        if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                            if (((S) != (V))) {
-                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                        if (haveVisitedSquareToEast()) {
+                            if (!atSouthernEdge()) {
+                                if (haveVisitedSquareToSouth()) {
                                     line940statement0();
                                 } else {
                                     X = (_env.getNextRandomNumber(2));
@@ -257,8 +257,8 @@ public class AmazingReimplementation implements Executable {
                                 }
                             }
                         } else {
-                            if (((S) != (V))) {
-                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            if (!atSouthernEdge()) {
+                                if (haveVisitedSquareToSouth()) {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
@@ -312,10 +312,10 @@ public class AmazingReimplementation implements Executable {
                         }
                     }
                 } else {
-                    if (((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
-                        if (((R) == (H))) {
-                            if (((S) != (V))) {
-                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                    if (haveVisitedSquareToNorth()) {
+                        if (atEasternEdge()) {
+                            if (!atSouthernEdge()) {
+                                if (haveVisitedSquareToSouth()) {
                                     line940statement0();
                                 } else {
                                     X = (_env.getNextRandomNumber(2));
@@ -345,9 +345,9 @@ public class AmazingReimplementation implements Executable {
                                 }
                             }
                         } else {
-                            if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                                if (((S) != (V))) {
-                                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            if (haveVisitedSquareToEast()) {
+                                if (!atSouthernEdge()) {
+                                    if (haveVisitedSquareToSouth()) {
                                         line940statement0();
                                     } else {
                                         X = (_env.getNextRandomNumber(2));
@@ -377,8 +377,8 @@ public class AmazingReimplementation implements Executable {
                                     }
                                 }
                             } else {
-                                if (((S) != (V))) {
-                                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                                if (!atSouthernEdge()) {
+                                    if (haveVisitedSquareToSouth()) {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
@@ -432,9 +432,9 @@ public class AmazingReimplementation implements Executable {
                             }
                         }
                     } else {
-                        if (((R) == (H))) {
-                            if (((S) != (V))) {
-                                if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                        if (atEasternEdge()) {
+                            if (!atSouthernEdge()) {
+                                if (haveVisitedSquareToSouth()) {
                                     X = (_env.getNextRandomNumber(2));
                                     switch (X) {
                                     case 1:
@@ -486,9 +486,9 @@ public class AmazingReimplementation implements Executable {
                                 }
                             }
                         } else {
-                            if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                                if (((S) != (V))) {
-                                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                            if (haveVisitedSquareToEast()) {
+                                if (!atSouthernEdge()) {
+                                    if (haveVisitedSquareToSouth()) {
                                         X = (_env.getNextRandomNumber(2));
                                         switch (X) {
                                         case 1:
@@ -560,11 +560,43 @@ public class AmazingReimplementation implements Executable {
         }
     }
 
+    private boolean haveVisitedSquareToNorth() {
+        return ((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0));
+    }
+
+    private boolean haveVisitedSquareToEast() {
+        return ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0));
+    }
+
+    private boolean haveVisitedSquareToSouth() {
+        return ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0));
+    }
+
+    private boolean atSouthernEdge() {
+        return ((S) == (V));
+    }
+    
+    private boolean atEasternEdge() {
+        return ((R) == (H));
+    }
+
+    private boolean atNorthernEdge() {
+        return (((S) - (1)) == (0));
+    }
+
+    private boolean atWesternEdge() {
+        return (((R) - (1)) == (0));
+    }
+
+    private boolean haveVisitedSquareToWest() {
+        return ((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0));
+    }
+
     protected void line600statement0() {
-        if ((((S) - (1)) == (0))) {
-            if (((R) == (H))) {
-                if (((S) != (V))) {
-                    if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+        if (atNorthernEdge()) {
+            if (atEasternEdge()) {
+                if (!atSouthernEdge()) {
+                    if (haveVisitedSquareToSouth()) {
                         do {
                             moveToNextSquare();
                         } while (Ws[R - 1][S - 1] == 0);
@@ -584,9 +616,9 @@ public class AmazingReimplementation implements Executable {
                     }
                 }
             } else {
-                if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                    if (((S) != (V))) {
-                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                if (haveVisitedSquareToEast()) {
+                    if (!atSouthernEdge()) {
+                        if (haveVisitedSquareToSouth()) {
                             do {
                                 moveToNextSquare();
                             } while (Ws[R - 1][S - 1] == 0);
@@ -606,8 +638,8 @@ public class AmazingReimplementation implements Executable {
                         }
                     }
                 } else {
-                    if (((S) != (V))) {
-                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                    if (!atSouthernEdge()) {
+                        if (haveVisitedSquareToSouth()) {
                             line1020statement0();
                         } else {
                             X = (_env.getNextRandomNumber(2));
@@ -639,10 +671,10 @@ public class AmazingReimplementation implements Executable {
                 }
             }
         } else {
-            if (((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
-                if (((R) == (H))) {
-                    if (((S) != (V))) {
-                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+            if (haveVisitedSquareToNorth()) {
+                if (atEasternEdge()) {
+                    if (!atSouthernEdge()) {
+                        if (haveVisitedSquareToSouth()) {
                             do {
                                 moveToNextSquare();
                             } while (Ws[R - 1][S - 1] == 0);
@@ -662,9 +694,9 @@ public class AmazingReimplementation implements Executable {
                         }
                     }
                 } else {
-                    if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                        if (((S) != (V))) {
-                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                    if (haveVisitedSquareToEast()) {
+                        if (!atSouthernEdge()) {
+                            if (haveVisitedSquareToSouth()) {
                                 do {
                                     moveToNextSquare();
                                 } while (Ws[R - 1][S - 1] == 0);
@@ -684,8 +716,8 @@ public class AmazingReimplementation implements Executable {
                             }
                         }
                     } else {
-                        if (((S) != (V))) {
-                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                        if (!atSouthernEdge()) {
+                            if (haveVisitedSquareToSouth()) {
                                 line1020statement0();
                             } else {
                                 X = (_env.getNextRandomNumber(2));
@@ -717,9 +749,9 @@ public class AmazingReimplementation implements Executable {
                     }
                 }
             } else {
-                if (((R) == (H))) {
-                    if (((S) != (V))) {
-                        if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                if (atEasternEdge()) {
+                    if (!atSouthernEdge()) {
+                        if (haveVisitedSquareToSouth()) {
                             line980statement0();
                         } else {
                             X = (_env.getNextRandomNumber(2));
@@ -749,9 +781,9 @@ public class AmazingReimplementation implements Executable {
                         }
                     }
                 } else {
-                    if (((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                        if (((S) != (V))) {
-                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                    if (haveVisitedSquareToEast()) {
+                        if (!atSouthernEdge()) {
+                            if (haveVisitedSquareToSouth()) {
                                 line980statement0();
                             } else {
                                 X = (_env.getNextRandomNumber(2));
@@ -781,8 +813,8 @@ public class AmazingReimplementation implements Executable {
                             }
                         }
                     } else {
-                        if (((S) != (V))) {
-                            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                        if (!atSouthernEdge()) {
+                            if (haveVisitedSquareToSouth()) {
                                 X = (_env.getNextRandomNumber(2));
                                 switch (X) {
                                 case 1:
