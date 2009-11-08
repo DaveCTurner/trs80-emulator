@@ -182,10 +182,10 @@ public class AmazingReimplementation implements Executable {
             }
             if (!didSomethingWeird && finished()) {
                 printMaze();
+                break;
             } else {
-                line270or600();
+                continue;
             }
-            break;
         }
     }
 
