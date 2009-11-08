@@ -8,13 +8,9 @@ import dct25.trs80.emulator.Environment;
 import dct25.trs80.emulator.Executable;
 
 public class AmazingReimplementation implements Executable {
-    int II;
-
     int V;
 
     int Q;
-
-    int A;
 
     int S;
 
@@ -23,12 +19,6 @@ public class AmazingReimplementation implements Executable {
     int C;
 
     int H;
-
-    int I;
-
-    int X;
-
-    int J;
 
     int Z;
 
@@ -66,14 +56,10 @@ public class AmazingReimplementation implements Executable {
         Vs = new int[h][v];
         Ws[entryPosition - 1][0] = 1;
 
-        II = 1501; // replaced FOR II = (1) TO (1500) : NEXT
-        A = 501; // replaced FOR A=1 TO 500: NEXT A
         H = h;
         V = v;
         Q = 0;
         Z = 0;
-        X = entryPosition;
-        I = h + 1;
         C = 2;
         R = entryPosition;
         goNorthToEdge();
@@ -108,9 +94,7 @@ public class AmazingReimplementation implements Executable {
             targetsArray[i] = targets.get(i);
         }
         Arrays.sort(targetsArray);
-        X = (_env.getNextRandomNumber(targetsArray.length));
-        int jumpTarget = targetsArray[X - 1];
-        switch (jumpTarget) {
+        switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
         case 940:
             goWestAndRestart();
             break;
