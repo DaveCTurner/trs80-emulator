@@ -157,25 +157,17 @@ public class AmazingReimplementation implements Executable {
             }
             randomJump(jumpTargets);
         } else {
+            if (unvisitedCellToSouth()) {
+                jumpTargets.add(POSSIBLY_SOUTH);
+            }
             if (unvisitedCellToEast()) {
-                if (atSouthernEdge()) {
-                    if (_haveMadeExit) {
-                        jumpTargets.add(POSSIBLY_EAST);
-                        randomJump(jumpTargets);
-                    } else {
-                        goNorthAndRestartWithoutMark();
-                    }
-                } else {
-                    jumpTargets.add(POSSIBLY_EAST);
-                    if (unvisitedCellToSouth()) {
-                        jumpTargets.add(POSSIBLY_SOUTH);
-                    }
-                    randomJump(jumpTargets);
+                if (atSouthernEdge() && !_haveMadeExit) {
+                    goNorthAndRestartWithoutMark();
+                    return;
                 }
+                jumpTargets.add(POSSIBLY_EAST);
+                randomJump(jumpTargets);
             } else {
-                if (unvisitedCellToSouth()) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                }
                 if (atSouthernEdge() && !_haveMadeExit) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                     _inExitMode = true;
