@@ -106,30 +106,6 @@ public class AmazingReimplementation extends amazing_test_bas {
         }
     }
 
-    protected void line590statement0() {
-        randomJump(new int[] { 940 });
-    }
-
-    protected void line570statement0() {
-        randomJump(new int[] { 940, 1090 });
-    }
-
-    protected void line510statement0() {
-        randomJump(new int[] { 940, 1020 });
-    }
-
-    protected void line490statement0() {
-        randomJump(new int[] { 940, 1020, 1090 });
-    }
-
-    protected void line410statement0() {
-        randomJump(new int[] { 940, 980 });
-    }
-
-    protected void line390statement0() {
-        randomJump(new int[] { 940, 980, 1090 });
-    }
-
     protected void line270statement0() {
         if ((((R) - (1)) == (0)) || ((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
             line600statement0();
