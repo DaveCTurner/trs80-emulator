@@ -186,31 +186,17 @@ public class AmazingReimplementation extends amazing_test_bas {
                 line810statement0();
             }
         } else {
-            if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                setQFlagIfAtSouthernEdgeAndZUnset();
+            setQFlagIfAtSouthernEdgeAndZUnset();
+            jumpTargets.add(980);
 
-                if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                    jumpTargets.add(980);
-                    randomJump(jumpTargets);
-                } else {
-                    jumpTargets.add(1090);
-                    jumpTargets.add(980);
-                    randomJump(jumpTargets);
-                }
-            } else {
-                setQFlagIfAtSouthernEdgeAndZUnset();
-
-                if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                    jumpTargets.add(980);
-                    jumpTargets.add(1020);
-                    randomJump(jumpTargets);
-                } else {
-                    jumpTargets.add(980);
-                    jumpTargets.add(1020);
-                    jumpTargets.add(1090);
-                    randomJump(jumpTargets);
-                }
+            if (!(((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0)))) {
+                jumpTargets.add(1020);
             }
+
+            if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
+                jumpTargets.add(1090);
+            }
+            randomJump(jumpTargets);
         }
     }
 
