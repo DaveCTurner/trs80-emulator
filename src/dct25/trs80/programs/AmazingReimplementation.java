@@ -162,6 +162,57 @@ public class AmazingReimplementation extends amazing_test_bas {
         }
     }
 
+    protected void line450statement0() {
+        if (((S) != (V))) {
+            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                line510statement0();
+            } else {
+                line490statement0();
+            }
+        } else {
+            if (((Z) == (1))) {
+                line510statement0();
+            } else {
+                Q = (1);
+                line490statement0();
+            }
+        }
+    }
+
+    protected void line530statement0() {
+        if (((S) != (V))) {
+            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                line590statement0();
+            } else {
+                line570statement0();
+            }
+        } else {
+            if (((Z) == (1))) {
+                line590statement0();
+            } else {
+                Q = (1);
+                line570statement0();
+            }
+        }
+    }
+
+    protected void line350statement0() {
+        if (((S) != (V))) {
+            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+                line410statement0();
+            } else {
+                line390statement0();
+            }
+        } else {
+            if (((Z) == (1))) {
+                line410statement0();
+            } else {
+                Q = (1);
+                line390statement0();
+            }
+        }
+    }
+
     protected void line940statement0() {
         R -= 1;
         Ws[R - 1][S - 1] = C;
