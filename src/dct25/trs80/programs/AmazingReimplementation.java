@@ -95,6 +95,22 @@ public class AmazingReimplementation extends amazing_test_bas {
         }
     }
 
+    protected void line600statement0() {
+        if ((((S) - (1)) == (0)) || ((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
+            if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                line880statement0();
+            } else {
+                line810statement0();
+            }
+        } else {
+            if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                line720statement0();
+            } else {
+                line640statement0();
+            }
+        }
+    }
+
     protected void line940statement0() {
         R -= 1;
         Ws[R - 1][S - 1] = C;
