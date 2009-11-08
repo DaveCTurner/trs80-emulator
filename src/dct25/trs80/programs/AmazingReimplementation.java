@@ -20,8 +20,6 @@ public class AmazingReimplementation implements Executable {
 
     int H;
 
-    int Z;
-
     int[][] Ws;
 
     int[][] Vs;
@@ -59,7 +57,7 @@ public class AmazingReimplementation implements Executable {
         H = h;
         V = v;
         Q = 0;
-        Z = 0;
+        _haveMadeExit = false;
         C = 2;
         R = entryPosition;
         goNorthToEdge();
@@ -162,7 +160,7 @@ public class AmazingReimplementation implements Executable {
         } else {
             if (unvisitedCellToEast()) {
                 if (atSouthernEdge()) {
-                    if (zSet()) {
+                    if (_haveMadeExit) {
                         jumpTargets.add(POSSIBLY_EAST);
                         randomJump(jumpTargets);
                     } else {
@@ -191,12 +189,8 @@ public class AmazingReimplementation implements Executable {
         }
     }
 
-    private boolean zSet() {
-        return ((Z) == (1));
-    }
-
     private void setQFlagIfAtSouthernEdgeAndZUnset() {
-        if (atSouthernEdge() && (Z != 1)) {
+        if (atSouthernEdge() && (!_haveMadeExit)) {
             Q = 1;
         }
     }
@@ -253,7 +247,7 @@ public class AmazingReimplementation implements Executable {
     }
 
     private void doSomethingWeirdAndRestart() {
-        Z = 1;
+        _haveMadeExit = true;
         if (wallsToEastAndSouth()) {
             setWallToEastButNotToSouth();
             goToNorthWestCorner();
@@ -443,7 +437,7 @@ public class AmazingReimplementation implements Executable {
     }
 
     private boolean couldExitHere() {
-        return (atSouthernEdge() && !zSet());
+        return (atSouthernEdge() && !_haveMadeExit);
     }
 
     private boolean currentCellIsUnvisited() {
@@ -454,4 +448,6 @@ public class AmazingReimplementation implements Executable {
         return Ws[R - 1][S - 1];
     }
 
+    private boolean _haveMadeExit;
+    
 }
