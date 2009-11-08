@@ -108,6 +108,14 @@ public class AmazingReimplementation implements Executable {
         line270statement0();
     }
 
+    private int POSSIBLY_WEST = 940;
+
+    private int POSSIBLY_NORTH = 980;
+
+    private int POSSIBLY_EAST = 1020;
+
+    private int POSSIBLY_SOUTH = 1090;
+
     private void randomJump(List<Integer> targets) {
         int[] targetsArray = new int[targets.size()];
         for (int i = 0; i < targets.size(); i++) {
@@ -118,16 +126,20 @@ public class AmazingReimplementation implements Executable {
         int jumpTarget = targetsArray[X - 1];
         switch (jumpTarget) {
         case 940:
-            line940statement0();
+            goWestAndRestart();
             break;
         case 980:
-            line980statement0();
+            goNorthAndRestart();
             break;
         case 1020:
-            line1020statement0();
+            goEastAndRestart();
             break;
         case 1090:
-            line1090statement0();
+            if (Q == 1) {
+                doSomethingWeirdAndRestart();
+            } else {
+                goSouthAndRestart();
+            }
             break;
         }
     }
@@ -136,24 +148,24 @@ public class AmazingReimplementation implements Executable {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
         if (unvisitedCellToWest()) {
-            jumpTargets.add(940);
+            jumpTargets.add(POSSIBLY_WEST);
             if (unvisitedCellToNorth()) {
-                jumpTargets.add(980);
+                jumpTargets.add(POSSIBLY_NORTH);
                 if (unvisitedCellToEast()) {
-                    jumpTargets.add(1020);
+                    jumpTargets.add(POSSIBLY_EAST);
                 } else {
                     setQFlagIfAtSouthernEdgeAndZUnset();
                     if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
-                        jumpTargets.add(1090);
+                        jumpTargets.add(POSSIBLY_SOUTH);
                     }
                 }
             } else {
                 setQFlagIfAtSouthernEdgeAndZUnset();
                 if (unvisitedCellToEast()) {
-                    jumpTargets.add(1020);
+                    jumpTargets.add(POSSIBLY_EAST);
                 }
                 if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
-                    jumpTargets.add(1090);
+                    jumpTargets.add(POSSIBLY_SOUTH);
                 }
             }
             randomJump(jumpTargets);
@@ -167,29 +179,29 @@ public class AmazingReimplementation implements Executable {
 
         if (unvisitedCellToNorth()) {
             setQFlagIfAtSouthernEdgeAndZUnset();
-            jumpTargets.add(980);
+            jumpTargets.add(POSSIBLY_NORTH);
 
             if (unvisitedCellToEast()) {
-                jumpTargets.add(1020);
+                jumpTargets.add(POSSIBLY_EAST);
             }
 
             if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
-                jumpTargets.add(1090);
+                jumpTargets.add(POSSIBLY_SOUTH);
             }
             randomJump(jumpTargets);
         } else {
             if (unvisitedCellToEast()) {
                 if (atSouthernEdge()) {
                     if (zSet()) {
-                        jumpTargets.add(1020);
+                        jumpTargets.add(POSSIBLY_EAST);
                         randomJump(jumpTargets);
                     } else {
-                        line830statement0();
+                        goNorthAndRestartWithoutMark();
                     }
                 } else {
-                    jumpTargets.add(1020);
+                    jumpTargets.add(POSSIBLY_EAST);
                     if (!(((cellToSouth()) != (0)))) {
-                        jumpTargets.add(1090);
+                        jumpTargets.add(POSSIBLY_SOUTH);
                     }
                     randomJump(jumpTargets);
                 }
@@ -199,7 +211,7 @@ public class AmazingReimplementation implements Executable {
                 if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
                     line210statement0();
                 } else {
-                    jumpTargets.add(1090);
+                    jumpTargets.add(POSSIBLY_SOUTH);
                     randomJump(jumpTargets);
                 }
             }
@@ -216,7 +228,7 @@ public class AmazingReimplementation implements Executable {
         }
     }
 
-    protected void line830statement0() {
+    protected void goNorthAndRestartWithoutMark() {
         moveNorth();
         advanceCounter();
         setCurrentCellWallsToOne();
@@ -228,7 +240,7 @@ public class AmazingReimplementation implements Executable {
         line270statement0();
     }
 
-    protected void line940statement0() {
+    protected void goWestAndRestart() {
         moveWest();
         markCurrentCellAndAdvanceCounter();
         setCurrentCellWallsToTwo();
@@ -240,7 +252,7 @@ public class AmazingReimplementation implements Executable {
         line270statement0();
     }
 
-    protected void line980statement0() {
+    protected void goNorthAndRestart() {
         moveNorth();
         markCurrentCellAndAdvanceCounter();
         setCurrentCellWallsToOne();
@@ -252,7 +264,7 @@ public class AmazingReimplementation implements Executable {
         line270statement0();
     }
 
-    protected void line1020statement0() {
+    protected void goEastAndRestart() {
         if (currentCellWallsAreZero()) {
             setCurrentCellWallsToTwo();
         } else {
@@ -267,39 +279,35 @@ public class AmazingReimplementation implements Executable {
         line600statement0();
     }
 
-    protected void line1090statement0() {
-        if (Q == 1) {
-            Z = 1;
-            if (currentCellWallsAreZero()) {
-                setCurrentCellWallsToOne();
-                goToNorthWestCorner();
-            } else {
-                setCurrentCellWallsToThree();
-                moveToNextSquare();
-            }
-            Q = 0;
-            while (currentCellIsUnvisited()) {
-                moveToNextSquare();
-            }
+    private void doSomethingWeirdAndRestart() {
+        Z = 1;
+        if (currentCellWallsAreZero()) {
+            setCurrentCellWallsToOne();
+            goToNorthWestCorner();
         } else {
-
-            if (currentCellWallsAreZero()) {
-                setCurrentCellWallsToOne();
-            } else {
-                setCurrentCellWallsToThree();
-            }
-            moveSouth();
-            markCurrentCellAndAdvanceCounter();
-            if (finished()) {
-                printMaze();
-                return;
-            }
+            setCurrentCellWallsToThree();
+            moveToNextSquare();
+        }
+        Q = 0;
+        while (currentCellIsUnvisited()) {
+            moveToNextSquare();
         }
         line270statement0();
     }
 
-    protected void line1200statement0() {
-        printMaze();
+    private void goSouthAndRestart() {
+        if (currentCellWallsAreZero()) {
+            setCurrentCellWallsToOne();
+        } else {
+            setCurrentCellWallsToThree();
+        }
+        moveSouth();
+        markCurrentCellAndAdvanceCounter();
+        if (finished()) {
+            printMaze();
+        } else {
+            line270statement0();
+        }
     }
 
     private int entryPosition;
