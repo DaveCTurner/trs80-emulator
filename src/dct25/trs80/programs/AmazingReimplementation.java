@@ -81,13 +81,6 @@ public class AmazingReimplementation implements Executable {
         line270statement0();
     }
 
-    protected void line210statement0() {
-        do {
-            moveToNextSquare();
-        } while (currentCellIsUnvisited());
-        line270statement0();
-    }
-
     private void moveToNextSquare() {
         if (atEasternEdge()) {
             if (atSouthernEdge()) {
@@ -99,13 +92,6 @@ public class AmazingReimplementation implements Executable {
         } else {
             moveEast();
         }
-    }
-
-    protected void line260statement0() {
-        while (currentCellIsUnvisited()) {
-            moveToNextSquare();
-        }
-        line270statement0();
     }
 
     private int POSSIBLY_WEST = 940;
@@ -209,7 +195,10 @@ public class AmazingReimplementation implements Executable {
                 setQFlagIfAtSouthernEdgeAndZUnset();
 
                 if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                    line210statement0();
+                    do {
+                        moveToNextSquare();
+                    } while (currentCellIsUnvisited());
+                    line270statement0();
                 } else {
                     jumpTargets.add(POSSIBLY_SOUTH);
                     randomJump(jumpTargets);
