@@ -116,16 +116,12 @@ public class AmazingReimplementation extends amazing_test_bas {
             Q = 1;
         }
 
-        if (((S) != (V))) {
-            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
-                line700statement0();
-                return;
-            }
-        } else {
-            if (((Z) == (1))) {
-                line700statement0();
-                return;
-            }
+        if (((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
+            line700statement0();
+            return;
+        } else if (((Z) == (1))) {
+            line700statement0();
+            return;
         }
         line680statement0();
     }
