@@ -25,7 +25,7 @@ public class AmazingReimplementation implements Executable {
     Environment _env;
 
     private boolean _haveMadeExit;
-    
+
     private boolean _inExitMode;
 
     public void execute(Environment env) {
@@ -419,7 +419,7 @@ public class AmazingReimplementation implements Executable {
     }
 
     private boolean unvisitedCellToSouth() {
-        return (!(atSouthernEdge()  || haveVisitedCellToSouth()));
+        return (!(atSouthernEdge() || haveVisitedCellToSouth()));
     }
 
     private boolean atSouthernEdge() {
@@ -445,5 +445,5 @@ public class AmazingReimplementation implements Executable {
     private int currentCell() {
         return Ws[R - 1][S - 1];
     }
-    
+
 }
