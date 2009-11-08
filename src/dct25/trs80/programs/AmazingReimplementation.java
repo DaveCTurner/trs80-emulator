@@ -143,8 +143,6 @@ public class AmazingReimplementation implements Executable {
                 jumpTargets.add(POSSIBLY_SOUTH);
                 _inExitMode = true;
             }
-            randomJump(jumpTargets);
-            return;
         } else {
             boolean performRandomJump = false;
 
@@ -186,11 +184,9 @@ public class AmazingReimplementation implements Executable {
                 _skipToLine600 = false;
                 line270or600();
                 return;
-            } else {
-                randomJump(jumpTargets);
-                return;
             }
         }
+        randomJump(jumpTargets);
     }
 
     private void goNorthWithoutMark() {
