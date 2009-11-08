@@ -161,7 +161,19 @@ public class AmazingReimplementation implements Executable {
     }
 
     private boolean mightWantToGoSouth() {
-        return !((visitedCellToSouth()) || atSouthernEdgeAndZSet());
+        if (atSouthernEdge()) {
+            if (zSet()) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if (haveVisitedCellToSouth()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     protected void line600statement0() {
@@ -446,16 +458,8 @@ public class AmazingReimplementation implements Executable {
         return Ws[(((R) + (1)) - 1)][((S) - 1)];
     }
 
-    private boolean atSouthernEdgeAndZSet() {
-        return (atSouthernEdge() && zSet());
-    }
-
     private boolean atSouthernEdge() {
         return (S == V);
-    }
-
-    private boolean visitedCellToSouth() {
-        return (!atSouthernEdge()) && (haveVisitedCellToSouth());
     }
 
     private boolean haveVisitedCellToSouth() {
