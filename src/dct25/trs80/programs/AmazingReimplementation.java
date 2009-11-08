@@ -137,13 +137,6 @@ public class AmazingReimplementation implements Executable {
                         jumpTargets.add(POSSIBLY_SOUTH);
                         _inExitMode = true;
                         performRandomJump = true;
-                        if (!performRandomJump) {
-                            do {
-                                moveToNextSquare();
-                            } while (currentCellIsUnvisited());
-                            _skipToLine600 = false;
-                            continue;
-                        }
                     }
                 } else {
                     if (!performRandomJump) {
