@@ -95,44 +95,27 @@ public class AmazingReimplementation implements Executable {
             targetsArray[i] = targets.get(i);
         }
         Arrays.sort(targetsArray);
+        boolean didSomethingWeird = false;
         switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
         case 940:
             goWest();
-            if (finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
-            break;
         case 980:
             goNorth();
-            if (finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
-            break;
         case 1020:
             goEast();
-            if (finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
-            break;
         case 1090:
             if (_inExitMode) {
                 doSomethingWeird();
-                line270or600();
+                didSomethingWeird = true;
             } else {
                 goSouth();
-                if (finished()) {
-                    printMaze();
-                } else {
-                    line270or600();
-                }
             }
             break;
+        }
+        if (!didSomethingWeird && finished()) {
+            printMaze();
+        } else {
+            line270or600();
         }
     }
 
