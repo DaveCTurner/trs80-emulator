@@ -137,16 +137,14 @@ public class AmazingReimplementation implements Executable {
                     }
                 }
             } else {
-                if (!(!_skipToLine600 && unvisitedCellToWest())) {
-                    if (!performRandomJump) {
-                        do {
-                            moveToNextSquare();
-                        } while (currentCellIsUnvisited());
-                        _skipToLine600 = false;
-                        continue;
-                    }
+                if (!(!_skipToLine600 && unvisitedCellToWest())
+                        && !performRandomJump) {
+                    do {
+                        moveToNextSquare();
+                    } while (currentCellIsUnvisited());
+                    _skipToLine600 = false;
+                    continue;
                 }
-
             }
 
             boolean didSomethingWeird = false;
