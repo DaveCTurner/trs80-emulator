@@ -121,27 +121,16 @@ public class AmazingReimplementation implements Executable {
             jumpTargets.add(POSSIBLY_WEST);
             if (unvisitedCellToNorth()) {
                 jumpTargets.add(POSSIBLY_NORTH);
-                if (unvisitedCellToEast()) {
-                    jumpTargets.add(POSSIBLY_EAST);
-                }
-                if (unvisitedCellToSouth()) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                }
-                if (atSouthernEdge() && !_haveMadeExit) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                    _inExitMode = true;
-                }
-            } else {
-                if (unvisitedCellToEast()) {
-                    jumpTargets.add(POSSIBLY_EAST);
-                }
-                if (unvisitedCellToSouth()) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                }
-                if (atSouthernEdge() && !_haveMadeExit) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                    _inExitMode = true;
-                }
+            }
+            if (unvisitedCellToEast()) {
+                jumpTargets.add(POSSIBLY_EAST);
+            }
+            if (unvisitedCellToSouth()) {
+                jumpTargets.add(POSSIBLY_SOUTH);
+            }
+            if (atSouthernEdge() && !_haveMadeExit) {
+                jumpTargets.add(POSSIBLY_SOUTH);
+                _inExitMode = true;
             }
             randomJump(jumpTargets);
         } else {
@@ -152,16 +141,21 @@ public class AmazingReimplementation implements Executable {
     protected void line600statement0() {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
+        if (!unvisitedCellToNorth() && unvisitedCellToEast()
+                && atSouthernEdge() && !_haveMadeExit) {
+            goNorthAndRestartWithoutMark();
+            return;
+        }
+
+        if (unvisitedCellToSouth()) {
+            jumpTargets.add(POSSIBLY_SOUTH);
+        }
+        if (unvisitedCellToEast()) {
+            jumpTargets.add(POSSIBLY_EAST);
+        }
         if (unvisitedCellToNorth()) {
             jumpTargets.add(POSSIBLY_NORTH);
 
-            if (unvisitedCellToEast()) {
-                jumpTargets.add(POSSIBLY_EAST);
-            }
-
-            if (unvisitedCellToSouth()) {
-                jumpTargets.add(POSSIBLY_SOUTH);
-            }
             if (atSouthernEdge() && !_haveMadeExit) {
                 jumpTargets.add(POSSIBLY_SOUTH);
                 _inExitMode = true;
@@ -169,37 +163,21 @@ public class AmazingReimplementation implements Executable {
             randomJump(jumpTargets);
         } else {
             if (unvisitedCellToEast()) {
-                if (atSouthernEdge()) {
-                    if (_haveMadeExit) {
-                        jumpTargets.add(POSSIBLY_EAST);
-                        randomJump(jumpTargets);
-                    } else {
-                        goNorthAndRestartWithoutMark();
-                    }
-                } else {
-                    jumpTargets.add(POSSIBLY_EAST);
-                    if (unvisitedCellToSouth()) {
-                        jumpTargets.add(POSSIBLY_SOUTH);
-                    }
-                    randomJump(jumpTargets);
-                }
-            } else {
-                if (unvisitedCellToSouth()) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                }
-                if (atSouthernEdge() && !_haveMadeExit) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                    _inExitMode = true;
-                }
+                randomJump(jumpTargets);
+                return;
+            }
+            if (atSouthernEdge() && !_haveMadeExit) {
+                jumpTargets.add(POSSIBLY_SOUTH);
+                _inExitMode = true;
+            }
 
-                if ((unvisitedCellToSouth() || couldExitHere())) {
-                    randomJump(jumpTargets);
-                } else {
-                    do {
-                        moveToNextSquare();
-                    } while (currentCellIsUnvisited());
-                    line270statement0();
-                }
+            if ((unvisitedCellToSouth() || couldExitHere())) {
+                randomJump(jumpTargets);
+            } else {
+                do {
+                    moveToNextSquare();
+                } while (currentCellIsUnvisited());
+                line270statement0();
             }
         }
     }
