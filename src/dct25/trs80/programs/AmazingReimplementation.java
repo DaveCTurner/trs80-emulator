@@ -92,96 +92,100 @@ public class AmazingReimplementation implements Executable {
     boolean _skipToLine600;
 
     private void line270or600() {
-        List<Integer> jumpTargets = new ArrayList<Integer>();
-        if (!_skipToLine600 && unvisitedCellToWest()) {
-            jumpTargets.add(POSSIBLY_WEST);
-            if (unvisitedCellToNorth()) {
-                jumpTargets.add(POSSIBLY_NORTH);
-            }
-            if (unvisitedCellToEast()) {
-                jumpTargets.add(POSSIBLY_EAST);
-            }
-            if (unvisitedCellToSouth() && jumpTargets.size() < 3) {
-                jumpTargets.add(POSSIBLY_SOUTH);
-            }
-            if (atSouthernEdge() && !_haveMadeExit && jumpTargets.size() < 3) {
-                jumpTargets.add(POSSIBLY_SOUTH);
-                _inExitMode = true;
-            }
-        } else {
-            boolean performRandomJump = false;
+        while (true) {
+            List<Integer> jumpTargets = new ArrayList<Integer>();
+            if (!_skipToLine600 && unvisitedCellToWest()) {
+                jumpTargets.add(POSSIBLY_WEST);
+                if (unvisitedCellToNorth()) {
+                    jumpTargets.add(POSSIBLY_NORTH);
+                }
+                if (unvisitedCellToEast()) {
+                    jumpTargets.add(POSSIBLY_EAST);
+                }
+                if (unvisitedCellToSouth() && jumpTargets.size() < 3) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                }
+                if (atSouthernEdge() && !_haveMadeExit
+                        && jumpTargets.size() < 3) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                    _inExitMode = true;
+                }
+            } else {
+                boolean performRandomJump = false;
 
-            if (unvisitedCellToSouth()) {
-                jumpTargets.add(POSSIBLY_SOUTH);
-                performRandomJump = true;
-            }
-
-            if (unvisitedCellToEast()) {
-                jumpTargets.add(POSSIBLY_EAST);
-                performRandomJump = true;
-            }
-
-            if (unvisitedCellToNorth()) {
-                jumpTargets.add(POSSIBLY_NORTH);
-                performRandomJump = true;
-            }
-
-            if ((atSouthernEdge() && !_haveMadeExit)) {
-                if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
-                    goNorthWithoutMark();
-                    if (finished()) {
-                        printMaze();
-                    } else {
-                        line270or600();
-                    }
-                    return;
+                if (unvisitedCellToSouth()) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                    performRandomJump = true;
                 }
 
-                jumpTargets.add(POSSIBLY_SOUTH);
-                _inExitMode = true;
-                performRandomJump = true;
-            }
+                if (unvisitedCellToEast()) {
+                    jumpTargets.add(POSSIBLY_EAST);
+                    performRandomJump = true;
+                }
 
-            if (!performRandomJump) {
-                do {
-                    moveToNextSquare();
-                } while (currentCellIsUnvisited());
-                _skipToLine600 = false;
-                line270or600();
-                return;
+                if (unvisitedCellToNorth()) {
+                    jumpTargets.add(POSSIBLY_NORTH);
+                    performRandomJump = true;
+                }
+
+                if ((atSouthernEdge() && !_haveMadeExit)) {
+                    if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
+                        goNorthWithoutMark();
+                        if (finished()) {
+                            printMaze();
+                        } else {
+                            line270or600();
+                        }
+                        return;
+                    }
+
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                    _inExitMode = true;
+                    performRandomJump = true;
+                }
+
+                if (!performRandomJump) {
+                    do {
+                        moveToNextSquare();
+                    } while (currentCellIsUnvisited());
+                    _skipToLine600 = false;
+                    line270or600();
+                    return;
+                }
             }
-        }
-        boolean didSomethingWeird = false;
-        int[] targetsArray = new int[jumpTargets.size()];
-        for (int i = 0; i < jumpTargets.size(); i++) {
-            targetsArray[i] = jumpTargets.get(i);
-        }
-        Arrays.sort(targetsArray);
-        switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
-        case 940:
-            goWest();
-            break;
-        case 980:
-            goNorth();
-            break;
-        case 1020:
-            goEast();
-            break;
-        case 1090:
-            if (_inExitMode) {
-                doSomethingWeird();
-                didSomethingWeird = true;
+            boolean didSomethingWeird = false;
+            int[] targetsArray = new int[jumpTargets.size()];
+            for (int i = 0; i < jumpTargets.size(); i++) {
+                targetsArray[i] = jumpTargets.get(i);
+            }
+            Arrays.sort(targetsArray);
+            switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
+            case 940:
+                goWest();
+                break;
+            case 980:
+                goNorth();
+                break;
+            case 1020:
+                goEast();
+                break;
+            case 1090:
+                if (_inExitMode) {
+                    doSomethingWeird();
+                    didSomethingWeird = true;
+                } else {
+                    goSouth();
+                }
+                break;
+            default:
+                throw new Error("Unknown target in randomJump()");
+            }
+            if (!didSomethingWeird && finished()) {
+                printMaze();
             } else {
-                goSouth();
+                line270or600();
             }
             break;
-        default:
-            throw new Error("Unknown target in randomJump()");
-        }
-        if (!didSomethingWeird && finished()) {
-            printMaze();
-        } else {
-            line270or600();
         }
     }
 
