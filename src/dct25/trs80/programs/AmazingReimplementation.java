@@ -116,15 +116,12 @@ public class AmazingReimplementation implements Executable {
                 performRandomJump = true;
             }
 
-            if (!_skipToLine600 && unvisitedCellToWest()) {
-                if (atSouthernEdge() && !_haveMadeExit
-                        && jumpTargets.size() < 3) {
+            if ((atSouthernEdge() && !_haveMadeExit && jumpTargets.size() < 3)) {
+
+                if (!_skipToLine600 && unvisitedCellToWest()) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                     _inExitMode = true;
-                }
-            } else {
-
-                if ((atSouthernEdge() && !_haveMadeExit && jumpTargets.size() < 3)) {
+                } else {
                     if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
                         goNorthWithoutMark();
                         if (finished()) {
@@ -138,7 +135,9 @@ public class AmazingReimplementation implements Executable {
                         _inExitMode = true;
                         performRandomJump = true;
                     }
-                } else {
+                }
+            } else {
+                if (!(!_skipToLine600 && unvisitedCellToWest())) {
                     if (!performRandomJump) {
                         do {
                             moveToNextSquare();
@@ -147,7 +146,9 @@ public class AmazingReimplementation implements Executable {
                         continue;
                     }
                 }
+
             }
+
             boolean didSomethingWeird = false;
             int[] targetsArray = new int[jumpTargets.size()];
             for (int i = 0; i < jumpTargets.size(); i++) {
