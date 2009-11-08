@@ -146,10 +146,10 @@ public class AmazingReimplementation implements Executable {
                     }
                 }
             } else {
-                setQFlagIfAtSouthernEdgeAndZUnset();
                 if (unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 }
+                setQFlagIfAtSouthernEdgeAndZUnset();
                 if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                 }
@@ -164,13 +164,13 @@ public class AmazingReimplementation implements Executable {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
         if (unvisitedCellToNorth()) {
-            setQFlagIfAtSouthernEdgeAndZUnset();
             jumpTargets.add(POSSIBLY_NORTH);
 
             if (unvisitedCellToEast()) {
                 jumpTargets.add(POSSIBLY_EAST);
             }
 
+            setQFlagIfAtSouthernEdgeAndZUnset();
             if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
                 jumpTargets.add(POSSIBLY_SOUTH);
             }
