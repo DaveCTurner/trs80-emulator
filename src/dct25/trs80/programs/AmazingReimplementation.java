@@ -84,12 +84,8 @@ public class AmazingReimplementation extends amazing_test_bas {
             targetsArray[i] = targets.get(i);
         }
         Arrays.sort(targetsArray);
-        randomJump(targetsArray);
-    }
-
-    private void randomJump(int[] lineNumbers) {
-        X = (_env.getNextRandomNumber(lineNumbers.length));
-        int jumpTarget = lineNumbers[X - 1];
+        X = (_env.getNextRandomNumber(targetsArray.length));
+        int jumpTarget = targetsArray[X - 1];
         switch (jumpTarget) {
         case 940:
             line940statement0();
@@ -107,6 +103,8 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line270statement0() {
+        List<Integer> jumpTargets = new ArrayList<Integer>();
+
         if ((((R) - (1)) == (0)) || ((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
             line600statement0();
         } else {
@@ -116,17 +114,25 @@ public class AmazingReimplementation extends amazing_test_bas {
                     setQFlagIfAtSouthernEdgeAndZUnset();
 
                     if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        randomJump(new int[] { 940 });
+                        jumpTargets.add(940);
+                        randomJump(jumpTargets);
                     } else {
-                        randomJump(new int[] { 940, 1090 });
+                        jumpTargets.add(940);
+                        jumpTargets.add(1090);
+                        randomJump(jumpTargets);
                     }
                 } else {
                     setQFlagIfAtSouthernEdgeAndZUnset();
 
                     if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        randomJump(new int[] { 940, 1020 });
+                        jumpTargets.add(940);
+                        jumpTargets.add(1020);
+                        randomJump(jumpTargets);
                     } else {
-                        randomJump(new int[] { 940, 1020, 1090 });
+                        jumpTargets.add(940);
+                        jumpTargets.add(1020);
+                        jumpTargets.add(1090);
+                        randomJump(jumpTargets);
                     }
                 }
             } else {
@@ -134,12 +140,20 @@ public class AmazingReimplementation extends amazing_test_bas {
                     setQFlagIfAtSouthernEdgeAndZUnset();
 
                     if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        randomJump(new int[] { 940, 980 });
+                        jumpTargets.add(940);
+                        jumpTargets.add(980);
+                        randomJump(jumpTargets);
                     } else {
-                        randomJump(new int[] { 940, 980, 1090 });
+                        jumpTargets.add(940);
+                        jumpTargets.add(980);
+                        jumpTargets.add(1090);
+                        randomJump(jumpTargets);
                     }
                 } else {
-                    randomJump(new int[] { 940, 980, 1020 });
+                    jumpTargets.add(940);
+                    jumpTargets.add(980);
+                    jumpTargets.add(1020);
+                    randomJump(jumpTargets);
                 }
             }
         }
