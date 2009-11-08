@@ -90,6 +90,7 @@ public class AmazingReimplementation implements Executable {
     private int POSSIBLY_SOUTH = 1090;
 
     private void randomJump(List<Integer> targets) {
+        boolean didSomethingWeird = false;
         int[] targetsArray = new int[targets.size()];
         for (int i = 0; i < targets.size(); i++) {
             targetsArray[i] = targets.get(i);
@@ -98,7 +99,7 @@ public class AmazingReimplementation implements Executable {
         switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
         case 940:
             goWest();
-            if (finished()) {
+            if (!didSomethingWeird && finished()) {
                 printMaze();
             } else {
                 line270or600();
@@ -106,7 +107,7 @@ public class AmazingReimplementation implements Executable {
             break;
         case 980:
             goNorth();
-            if (finished()) {
+            if (!didSomethingWeird && finished()) {
                 printMaze();
             } else {
                 line270or600();
@@ -114,14 +115,13 @@ public class AmazingReimplementation implements Executable {
             break;
         case 1020:
             goEast();
-            if (finished()) {
+            if (!didSomethingWeird && finished()) {
                 printMaze();
             } else {
                 line270or600();
             }
             break;
         case 1090:
-            boolean didSomethingWeird = false;
             if (_inExitMode) {
                 doSomethingWeird();
                 didSomethingWeird = true;
