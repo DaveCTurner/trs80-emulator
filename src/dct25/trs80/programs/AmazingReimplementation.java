@@ -5,8 +5,39 @@ import java.util.Arrays;
 import java.util.List;
 
 import dct25.trs80.emulator.Environment;
+import dct25.trs80.emulator.Executable;
 
-public class AmazingReimplementation extends amazing_test_bas {
+public class AmazingReimplementation implements Executable {
+    int II;
+
+    int V;
+
+    int Q;
+
+    int A;
+
+    int S;
+
+    int R;
+
+    int C;
+
+    int H;
+
+    int I;
+
+    int X;
+
+    int J;
+
+    int Z;
+
+    int[][] Ws;
+
+    int[][] Vs;
+
+    Environment _env;
+
     public void execute(Environment env) {
         _env = env;
         _env.clearScreen();
