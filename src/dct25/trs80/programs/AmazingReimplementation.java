@@ -94,14 +94,20 @@ public class AmazingReimplementation implements Executable {
     private void line270or600() {
         while (true) {
             List<Integer> jumpTargets = new ArrayList<Integer>();
+            boolean performRandomJump = false;
+
+            if (unvisitedCellToEast()) {
+                jumpTargets.add(POSSIBLY_EAST);
+                performRandomJump = true;
+            }
+
+            if (unvisitedCellToNorth()) {
+                jumpTargets.add(POSSIBLY_NORTH);
+                performRandomJump = true;
+            }
+
             if (!_skipToLine600 && unvisitedCellToWest()) {
                 jumpTargets.add(POSSIBLY_WEST);
-                if (unvisitedCellToNorth()) {
-                    jumpTargets.add(POSSIBLY_NORTH);
-                }
-                if (unvisitedCellToEast()) {
-                    jumpTargets.add(POSSIBLY_EAST);
-                }
                 if (unvisitedCellToSouth() && jumpTargets.size() < 3) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                 }
@@ -111,22 +117,11 @@ public class AmazingReimplementation implements Executable {
                     _inExitMode = true;
                 }
             } else {
-                boolean performRandomJump = false;
-
                 if (unvisitedCellToSouth()) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                     performRandomJump = true;
                 }
 
-                if (unvisitedCellToEast()) {
-                    jumpTargets.add(POSSIBLY_EAST);
-                    performRandomJump = true;
-                }
-
-                if (unvisitedCellToNorth()) {
-                    jumpTargets.add(POSSIBLY_NORTH);
-                    performRandomJump = true;
-                }
 
                 if ((atSouthernEdge() && !_haveMadeExit)) {
                     if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
