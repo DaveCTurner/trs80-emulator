@@ -99,27 +99,12 @@ public class AmazingReimplementation implements Executable {
         switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
         case 940:
             goWest();
-            if (!didSomethingWeird && finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
             break;
         case 980:
             goNorth();
-            if (!didSomethingWeird && finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
             break;
         case 1020:
             goEast();
-            if (!didSomethingWeird && finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
             break;
         case 1090:
             if (_inExitMode) {
@@ -128,12 +113,14 @@ public class AmazingReimplementation implements Executable {
             } else {
                 goSouth();
             }
-            if (!didSomethingWeird && finished()) {
-                printMaze();
-            } else {
-                line270or600();
-            }
             break;
+        default:
+            throw new Error("Unknown target in randomJump()");
+        }
+        if (!didSomethingWeird && finished()) {
+            printMaze();
+        } else {
+            line270or600();
         }
     }
 
