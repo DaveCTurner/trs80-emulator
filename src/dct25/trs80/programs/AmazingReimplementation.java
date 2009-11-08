@@ -141,42 +141,43 @@ public class AmazingReimplementation implements Executable {
     protected void line600statement0() {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
+        boolean performRandomJump = false;
+
         if (unvisitedCellToSouth()) {
             jumpTargets.add(POSSIBLY_SOUTH);
+            performRandomJump = true;
         }
 
         if (unvisitedCellToEast()) {
             jumpTargets.add(POSSIBLY_EAST);
-        }
-
-        if ((!unvisitedCellToNorth()) && unvisitedCellToEast() && atSouthernEdge() && !_haveMadeExit) {
-            goNorthAndRestartWithoutMark();
-            return;
-        }
-
-        if (((!unvisitedCellToEast()) || unvisitedCellToNorth()) && atSouthernEdge() && !_haveMadeExit) {
-            jumpTargets.add(POSSIBLY_SOUTH);
-            _inExitMode = true;
+            performRandomJump = true;
         }
 
         if (unvisitedCellToNorth()) {
             jumpTargets.add(POSSIBLY_NORTH);
-            randomJump(jumpTargets);
-        } else {
-            if (unvisitedCellToEast()) {
-                randomJump(jumpTargets);
-            } else {
-
-                if ((unvisitedCellToSouth() || couldExitHere())) {
-                    randomJump(jumpTargets);
-                } else {
-                    do {
-                        moveToNextSquare();
-                    } while (currentCellIsUnvisited());
-                    line270statement0();
-                }
-            }
+            performRandomJump = true;
         }
+
+        if ((atSouthernEdge() && !_haveMadeExit)) {
+            if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
+                goNorthAndRestartWithoutMark();
+                return;
+            }
+
+            jumpTargets.add(POSSIBLY_SOUTH);
+            _inExitMode = true;
+            performRandomJump = true;
+        }
+
+        if (performRandomJump) {
+            randomJump(jumpTargets);
+            return;
+        }
+
+        do {
+            moveToNextSquare();
+        } while (currentCellIsUnvisited());
+        line270statement0();
     }
 
     protected void goNorthAndRestartWithoutMark() {
