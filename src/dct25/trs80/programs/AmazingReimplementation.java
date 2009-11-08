@@ -147,7 +147,20 @@ public class AmazingReimplementation extends amazing_test_bas {
                     randomJump(jumpTargets);
                 }
             } else {
-                line810statement0();
+                if (((S) != (V))) {
+                    jumpTargets.add(1020);
+                    if (!(((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))) {
+                        jumpTargets.add(1090);
+                    }
+                    randomJump(jumpTargets);
+                } else {
+                    if (((Z) == (1))) {
+                        jumpTargets.add(1020);
+                        randomJump(jumpTargets);
+                    } else {
+                         line830statement0();
+                    }
+                }
             }
         } else {
             setQFlagIfAtSouthernEdgeAndZUnset();
