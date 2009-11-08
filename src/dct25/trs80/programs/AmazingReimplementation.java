@@ -112,21 +112,22 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line640statement0() {
-        if ((S == V) && (Z != 1)) { Q = 1; }
-        
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
+        }
+
         if (((S) != (V))) {
             if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
                 line700statement0();
-            } else {
-                line680statement0();
+                return;
             }
         } else {
             if (((Z) == (1))) {
                 line700statement0();
-            } else {
-                line680statement0();
+                return;
             }
         }
+        line680statement0();
     }
 
     protected void line720statement0() {
