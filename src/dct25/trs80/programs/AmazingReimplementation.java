@@ -133,10 +133,10 @@ public class AmazingReimplementation implements Executable {
                         goNorthWithoutMark();
                         if (finished()) {
                             printMaze();
+                            break;
                         } else {
-                            line270or600();
+                            continue;
                         }
-                        return;
                     }
 
                     jumpTargets.add(POSSIBLY_SOUTH);
