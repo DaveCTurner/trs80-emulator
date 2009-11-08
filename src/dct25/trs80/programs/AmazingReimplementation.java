@@ -1,5 +1,8 @@
 package dct25.trs80.programs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dct25.trs80.emulator.Environment;
 
 public class AmazingReimplementation extends amazing_test_bas {
@@ -72,6 +75,14 @@ public class AmazingReimplementation extends amazing_test_bas {
             moveToNextSquare();
         }
         line270statement0();
+    }
+
+    private void randomJump(List<Integer> targets) {
+        int[] targetsArray = new int[targets.size()];
+        for (int i = 0; i < targets.size(); i++) {
+            targetsArray[i] = targets.get(i);
+        }
+        randomJump(targetsArray);
     }
 
     private void randomJump(int[] lineNumbers) {
@@ -157,6 +168,8 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line600statement0() {
+        List<Integer> jumpTargets = new ArrayList<Integer>();
+
         if ((((S) - (1)) == (0)) || ((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
             if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
                 setQFlagIfAtSouthernEdgeAndZUnset();
@@ -164,7 +177,8 @@ public class AmazingReimplementation extends amazing_test_bas {
                 if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
                     line210statement0();
                 } else {
-                    line1090statement0();
+                    jumpTargets.add(1090);
+                    randomJump(jumpTargets);
                 }
             } else {
                 line810statement0();
@@ -174,17 +188,25 @@ public class AmazingReimplementation extends amazing_test_bas {
                 setQFlagIfAtSouthernEdgeAndZUnset();
 
                 if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                    randomJump(new int[] { 980 });
+                    jumpTargets.add(980);
+                    randomJump(jumpTargets);
                 } else {
-                    randomJump(new int[] { 980, 1090 });
+                    jumpTargets.add(980);
+                    jumpTargets.add(1090);
+                    randomJump(jumpTargets);
                 }
             } else {
                 setQFlagIfAtSouthernEdgeAndZUnset();
 
                 if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                    randomJump(new int[] { 980, 1020 });
+                    jumpTargets.add(980);
+                    jumpTargets.add(1020);
+                    randomJump(jumpTargets);
                 } else {
-                    randomJump(new int[] { 980, 1020, 1090 });
+                    jumpTargets.add(980);
+                    jumpTargets.add(1020);
+                    jumpTargets.add(1090);
+                    randomJump(jumpTargets);
                 }
             }
         }
