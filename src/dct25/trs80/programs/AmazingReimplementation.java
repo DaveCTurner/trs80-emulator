@@ -112,12 +112,9 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line640statement0() {
-        if ((S == V) && (Z != 1)) {
-            Q = 1;
-        }
+        setQFlagIfAtSouthernEdgeAndZUnset();
 
-        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
-                || ((S == V) && ((Z) == (1)))) {
+        if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
             line700statement0();
         } else {
             line680statement0();
@@ -125,12 +122,9 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line720statement0() {
-        if ((S == V) && (Z != 1)) {
-            Q = 1;
-        }
+        setQFlagIfAtSouthernEdgeAndZUnset();
 
-        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
-                || ((S == V) && ((Z) == (1)))) {
+        if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
             line780statement0();
         } else {
             line760statement0();
@@ -138,12 +132,9 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line880statement0() {
-        if ((S == V) && (Z != 1)) {
-            Q = 1;
-        }
+        setQFlagIfAtSouthernEdgeAndZUnset();
 
-        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
-                || ((S == V) && ((Z) == (1)))) {
+        if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
             line930statement0();
         } else {
             line920statement0();
@@ -151,25 +142,27 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line450statement0() {
-        if ((S == V) && (Z != 1)) {
-            Q = 1;
-        }
+        setQFlagIfAtSouthernEdgeAndZUnset();
 
-        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
-                || ((S == V) && ((Z) == (1)))) {
+        if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
             line510statement0();
         } else {
             line490statement0();
         }
     }
 
-    protected void line530statement0() {
-        if ((S == V) && (Z != 1)) {
-            Q = 1;
-        }
+    private boolean atSouthernEdgeAndZSet() {
+        return ((S == V) && ((Z) == (1)));
+    }
 
-        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
-                || ((S == V) && ((Z) == (1)))) {
+    private boolean haveVisitedCellToSouth() {
+        return ((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0));
+    }
+
+    protected void line530statement0() {
+        setQFlagIfAtSouthernEdgeAndZUnset();
+
+        if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
             line590statement0();
         } else {
             line570statement0();
@@ -177,15 +170,18 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line350statement0() {
-        if ((S == V) && (Z != 1)) {
-            Q = 1;
-        }
+        setQFlagIfAtSouthernEdgeAndZUnset();
 
-        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
-                || ((S == V) && ((Z) == (1)))) {
+        if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
             line410statement0();
         } else {
             line390statement0();
+        }
+    }
+
+    private void setQFlagIfAtSouthernEdgeAndZUnset() {
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
         }
     }
 
