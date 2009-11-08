@@ -149,8 +149,7 @@ public class AmazingReimplementation implements Executable {
                         moveToNextSquare();
                     } while (currentCellIsUnvisited());
                     _skipToLine600 = false;
-                    line270or600();
-                    return;
+                    continue;
                 }
             }
             boolean didSomethingWeird = false;
