@@ -97,19 +97,40 @@ public class AmazingReimplementation implements Executable {
         Arrays.sort(targetsArray);
         switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
         case 940:
-            goWestAndRestart();
+            goWest();
+            if (finished()) {
+                printMaze();
+            } else {
+                line270or600();
+            }
             break;
         case 980:
-            goNorthAndRestart();
+            goNorth();
+            if (finished()) {
+                printMaze();
+            } else {
+                line270or600();
+            }
             break;
         case 1020:
-            goEastAndRestart();
+            goEast();
+            if (finished()) {
+                printMaze();
+            } else {
+                line270or600();
+            }
             break;
         case 1090:
             if (_inExitMode) {
-                doSomethingWeirdAndRestart();
+                doSomethingWeird();
+                line270or600();
             } else {
-                goSouthAndRestart();
+                goSouth();
+                if (finished()) {
+                    printMaze();
+                } else {
+                    line270or600();
+                }
             }
             break;
         }
@@ -155,7 +176,12 @@ public class AmazingReimplementation implements Executable {
 
             if ((atSouthernEdge() && !_haveMadeExit)) {
                 if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
-                    goNorthAndRestartWithoutMark();
+                    goNorthWithoutMark();
+                    if (finished()) {
+                        printMaze();
+                    } else {
+                        line270or600();
+                    }
                     return;
                 }
 
@@ -177,30 +203,12 @@ public class AmazingReimplementation implements Executable {
         }
     }
 
-    protected void goNorthAndRestartWithoutMark() {
-        goNorthWithoutMark();
-        if (finished()) {
-            printMaze();
-        } else {
-            line270or600();
-        }
-    }
-
     private void goNorthWithoutMark() {
         moveNorth();
         advanceCounter();
         setWallToEastButNotToSouth();
         _inExitMode = false;
         _skipToLine600 = false;
-    }
-
-    protected void goWestAndRestart() {
-        goWest();
-        if (finished()) {
-            printMaze();
-        } else {
-            line270or600();
-        }
     }
 
     private void goWest() {
@@ -211,30 +219,12 @@ public class AmazingReimplementation implements Executable {
         _skipToLine600 = false;
     }
 
-    protected void goNorthAndRestart() {
-        goNorth();
-        if (finished()) {
-            printMaze();
-        } else {
-            line270or600();
-        }
-    }
-
     private void goNorth() {
         moveNorth();
         markCurrentCellAndAdvanceCounter();
         setWallToEastButNotToSouth();
         _inExitMode = false;
         _skipToLine600 = false;
-    }
-
-    protected void goEastAndRestart() {
-        goEast();
-        if (finished()) {
-            printMaze();
-        } else {
-            line270or600();
-        }
     }
 
     private void goEast() {
@@ -246,11 +236,6 @@ public class AmazingReimplementation implements Executable {
         moveEast();
         markCurrentCellAndAdvanceCounter();
         _skipToLine600 = true;
-    }
-
-    private void doSomethingWeirdAndRestart() {
-        doSomethingWeird();
-        line270or600();
     }
 
     private void doSomethingWeird() {
@@ -267,15 +252,6 @@ public class AmazingReimplementation implements Executable {
             moveToNextSquare();
         }
         _skipToLine600 = false;
-    }
-
-    private void goSouthAndRestart() {
-        goSouth();
-        if (finished()) {
-            printMaze();
-        } else {
-            line270or600();
-        }
     }
 
     private void goSouth() {
