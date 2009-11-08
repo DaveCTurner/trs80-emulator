@@ -125,18 +125,13 @@ public class AmazingReimplementation implements Executable {
             if (_inExitMode) {
                 doSomethingWeird();
                 didSomethingWeird = true;
-                if (!didSomethingWeird && finished()) {
-                    printMaze();
-                } else {
-                    line270or600();
-                }
             } else {
                 goSouth();
-                if (!didSomethingWeird && finished()) {
-                    printMaze();
-                } else {
-                    line270or600();
-                }
+            }
+            if (!didSomethingWeird && finished()) {
+                printMaze();
+            } else {
+                line270or600();
             }
             break;
         }
