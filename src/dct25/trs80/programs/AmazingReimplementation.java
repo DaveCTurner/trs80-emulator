@@ -124,7 +124,7 @@ public class AmazingReimplementation implements Executable {
                 }
             } else {
 
-                if ((atSouthernEdge() && !_haveMadeExit)) {
+                if ((atSouthernEdge() && !_haveMadeExit && jumpTargets.size() < 3)) {
                     if ((!unvisitedCellToNorth()) && unvisitedCellToEast()) {
                         goNorthWithoutMark();
                         if (finished()) {
