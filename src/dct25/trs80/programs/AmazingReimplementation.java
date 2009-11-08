@@ -122,19 +122,13 @@ public class AmazingReimplementation implements Executable {
                 if (unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 } else {
-                    setQFlagIfAtSouthernEdgeAndZUnset();
-                    if ((unvisitedCellToSouth() || couldExitHere())) {
-                        jumpTargets.add(POSSIBLY_SOUTH);
-                    }
+                    considerGoingSouth(jumpTargets);
                 }
             } else {
                 if (unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 }
-                setQFlagIfAtSouthernEdgeAndZUnset();
-                if ((unvisitedCellToSouth() || couldExitHere())) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
-                }
+                considerGoingSouth(jumpTargets);
             }
             randomJump(jumpTargets);
         } else {
@@ -152,10 +146,7 @@ public class AmazingReimplementation implements Executable {
                 jumpTargets.add(POSSIBLY_EAST);
             }
 
-            setQFlagIfAtSouthernEdgeAndZUnset();
-            if ((unvisitedCellToSouth() || couldExitHere())) {
-                jumpTargets.add(POSSIBLY_SOUTH);
-            }
+            considerGoingSouth(jumpTargets);
             randomJump(jumpTargets);
         } else {
             if (unvisitedCellToEast()) {
@@ -174,10 +165,9 @@ public class AmazingReimplementation implements Executable {
                     randomJump(jumpTargets);
                 }
             } else {
-                setQFlagIfAtSouthernEdgeAndZUnset();
+                considerGoingSouth(jumpTargets);
 
                 if ((unvisitedCellToSouth() || couldExitHere())) {
-                    jumpTargets.add(POSSIBLY_SOUTH);
                     randomJump(jumpTargets);
                 } else {
                     do {
@@ -186,6 +176,13 @@ public class AmazingReimplementation implements Executable {
                     line270statement0();
                 }
             }
+        }
+    }
+
+    private void considerGoingSouth(List<Integer> jumpTargets) {
+        setQFlagIfAtSouthernEdgeAndZUnset();
+        if ((unvisitedCellToSouth() || couldExitHere())) {
+            jumpTargets.add(POSSIBLY_SOUTH);
         }
     }
 
