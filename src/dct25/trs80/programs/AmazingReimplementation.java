@@ -181,39 +181,39 @@ public class AmazingReimplementation implements Executable {
         moveNorth();
         advanceCounter();
         setWallToEastButNotToSouth();
-        if (finished()) {
-            printMaze();
-            return;
-        }
         _inExitMode = false;
         _skipToLine600 = false;
-        line270or600();
+        if (finished()) {
+            printMaze();
+        } else {
+            line270or600();
+        }
     }
 
     protected void goWestAndRestart() {
         moveWest();
         markCurrentCellAndAdvanceCounter();
         setWallToSouthButNotToEast();
-        if (finished()) {
-            printMaze();
-            return;
-        }
         _inExitMode = false;
         _skipToLine600 = false;
-        line270or600();
+        if (finished()) {
+            printMaze();
+        } else {
+            line270or600();
+        }
     }
 
     protected void goNorthAndRestart() {
         moveNorth();
         markCurrentCellAndAdvanceCounter();
         setWallToEastButNotToSouth();
-        if (finished()) {
-            printMaze();
-            return;
-        }
         _inExitMode = false;
         _skipToLine600 = false;
-        line270or600();
+        if (finished()) {
+            printMaze();
+        } else {
+            line270or600();
+        }
     }
 
     protected void goEastAndRestart() {
@@ -224,12 +224,12 @@ public class AmazingReimplementation implements Executable {
         }
         moveEast();
         markCurrentCellAndAdvanceCounter();
+        _skipToLine600 = true;
         if (finished()) {
             printMaze();
-            return;
+        } else {
+            line270or600();
         }
-        _skipToLine600 = true;
-        line270or600();
     }
 
     private void doSomethingWeirdAndRestart() {
@@ -257,10 +257,10 @@ public class AmazingReimplementation implements Executable {
         }
         moveSouth();
         markCurrentCellAndAdvanceCounter();
+        _skipToLine600 = false;
         if (finished()) {
             printMaze();
         } else {
-            _skipToLine600 = false;
             line270or600();
         }
     }
