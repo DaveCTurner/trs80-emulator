@@ -180,14 +180,11 @@ public class AmazingReimplementation implements Executable {
     }
 
     private void considerGoingSouth(List<Integer> jumpTargets) {
-        setQFlagIfAtSouthernEdgeAndZUnset();
-        if ((unvisitedCellToSouth() || couldExitHere())) {
+        if (unvisitedCellToSouth()) {
             jumpTargets.add(POSSIBLY_SOUTH);
         }
-    }
-
-    private void setQFlagIfAtSouthernEdgeAndZUnset() {
-        if (atSouthernEdge() && (!_haveMadeExit)) {
+        if (atSouthernEdge() && !_haveMadeExit) {
+            jumpTargets.add(POSSIBLY_SOUTH);
             Q = 1;
         }
     }
