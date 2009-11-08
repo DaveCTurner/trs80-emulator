@@ -8,23 +8,11 @@ import dct25.trs80.emulator.Environment;
 import dct25.trs80.emulator.Executable;
 
 public class AmazingReimplementation implements Executable {
-    int V;
-
     int Q;
-
-    int S;
-
-    int R;
 
     int C;
 
-    int H;
-
     int Z;
-
-    int[][] Ws;
-
-    int[][] Vs;
 
     Environment _env;
 
@@ -52,31 +40,25 @@ public class AmazingReimplementation implements Executable {
 
         entryPosition = _env.getNextRandomNumber(h);
 
-        Ws = new int[h][v];
-        Vs = new int[h][v];
-        Ws[entryPosition - 1][0] = 1;
-
-        H = h;
-        V = v;
+        _layout = new AmazingLayout(h, v, entryPosition);
+        
         Q = 0;
         Z = 0;
         C = 2;
-        R = entryPosition;
-        goNorthToEdge();
 
         line270statement0();
     }
 
     private void moveToNextSquare() {
-        if (atEasternEdge()) {
-            if (atSouthernEdge()) {
-                goToNorthWestCorner();
+        if (_layout.atEasternEdge()) {
+            if (_layout.atSouthernEdge()) {
+                _layout.goToNorthWestCorner();
             } else {
-                goWestToEdge();
-                moveSouth();
+                _layout.goWestToEdge();
+                _layout.moveSouth();
             }
         } else {
-            moveEast();
+            _layout.moveEast();
         }
     }
 
@@ -117,24 +99,24 @@ public class AmazingReimplementation implements Executable {
     protected void line270statement0() {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
-        if (unvisitedCellToWest()) {
+        if (_layout.unvisitedCellToWest()) {
             jumpTargets.add(POSSIBLY_WEST);
-            if (unvisitedCellToNorth()) {
+            if (_layout.unvisitedCellToNorth()) {
                 jumpTargets.add(POSSIBLY_NORTH);
-                if (unvisitedCellToEast()) {
+                if (_layout.unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 } else {
                     setQFlagIfAtSouthernEdgeAndZUnset();
-                    if ((unvisitedCellToSouth() || couldExitHere())) {
+                    if ((_layout.unvisitedCellToSouth() || couldExitHere())) {
                         jumpTargets.add(POSSIBLY_SOUTH);
                     }
                 }
             } else {
-                if (unvisitedCellToEast()) {
+                if (_layout.unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 }
                 setQFlagIfAtSouthernEdgeAndZUnset();
-                if ((unvisitedCellToSouth() || couldExitHere())) {
+                if ((_layout.unvisitedCellToSouth() || couldExitHere())) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                 }
             }
@@ -147,21 +129,21 @@ public class AmazingReimplementation implements Executable {
     protected void line600statement0() {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
-        if (unvisitedCellToNorth()) {
+        if (_layout.unvisitedCellToNorth()) {
             jumpTargets.add(POSSIBLY_NORTH);
 
-            if (unvisitedCellToEast()) {
+            if (_layout.unvisitedCellToEast()) {
                 jumpTargets.add(POSSIBLY_EAST);
             }
 
             setQFlagIfAtSouthernEdgeAndZUnset();
-            if ((unvisitedCellToSouth() || couldExitHere())) {
+            if ((_layout.unvisitedCellToSouth() || couldExitHere())) {
                 jumpTargets.add(POSSIBLY_SOUTH);
             }
             randomJump(jumpTargets);
         } else {
-            if (unvisitedCellToEast()) {
-                if (atSouthernEdge()) {
+            if (_layout.unvisitedCellToEast()) {
+                if (_layout.atSouthernEdge()) {
                     if (zSet()) {
                         jumpTargets.add(POSSIBLY_EAST);
                         randomJump(jumpTargets);
@@ -170,7 +152,7 @@ public class AmazingReimplementation implements Executable {
                     }
                 } else {
                     jumpTargets.add(POSSIBLY_EAST);
-                    if (!((haveVisitedCellToSouth()))) {
+                    if (!((_layout.haveVisitedCellToSouth()))) {
                         jumpTargets.add(POSSIBLY_SOUTH);
                     }
                     randomJump(jumpTargets);
@@ -178,13 +160,13 @@ public class AmazingReimplementation implements Executable {
             } else {
                 setQFlagIfAtSouthernEdgeAndZUnset();
 
-                if ((unvisitedCellToSouth() || couldExitHere())) {
+                if ((_layout.unvisitedCellToSouth() || couldExitHere())) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                     randomJump(jumpTargets);
                 } else {
                     do {
                         moveToNextSquare();
-                    } while (currentCellIsUnvisited());
+                    } while (_layout.currentCellIsUnvisited());
                     line270statement0();
                 }
             }
@@ -196,17 +178,17 @@ public class AmazingReimplementation implements Executable {
     }
 
     private void setQFlagIfAtSouthernEdgeAndZUnset() {
-        if (atSouthernEdge() && (Z != 1)) {
+        if (_layout.atSouthernEdge() && (Z != 1)) {
             Q = 1;
         }
     }
 
     protected void goNorthAndRestartWithoutMark() {
-        moveNorth();
+        _layout.moveNorth();
         advanceCounter();
-        setWallToEastButNotToSouth();
+        _layout.setWallToEastButNotToSouth();
         if (finished()) {
-            printMaze();
+            _layout.printMaze(this);
             return;
         }
         Q = 0;
@@ -214,11 +196,11 @@ public class AmazingReimplementation implements Executable {
     }
 
     protected void goWestAndRestart() {
-        moveWest();
+        _layout.moveWest();
         markCurrentCellAndAdvanceCounter();
-        setWallToSouthButNotToEast();
+        _layout.setWallToSouthButNotToEast();
         if (finished()) {
-            printMaze();
+            _layout.printMaze(this);
             return;
         }
         Q = 0;
@@ -226,11 +208,11 @@ public class AmazingReimplementation implements Executable {
     }
 
     protected void goNorthAndRestart() {
-        moveNorth();
+        _layout.moveNorth();
         markCurrentCellAndAdvanceCounter();
-        setWallToEastButNotToSouth();
+        _layout.setWallToEastButNotToSouth();
         if (finished()) {
-            printMaze();
+            _layout.printMaze(this);
             return;
         }
         Q = 0;
@@ -238,15 +220,15 @@ public class AmazingReimplementation implements Executable {
     }
 
     protected void goEastAndRestart() {
-        if (wallsToEastAndSouth()) {
-            setWallToSouthButNotToEast();
+        if (_layout.wallsToEastAndSouth()) {
+            _layout.setWallToSouthButNotToEast();
         } else {
-            setNoWallsToEastOrSouth();
+            _layout.setNoWallsToEastOrSouth();
         }
-        moveEast();
+        _layout.moveEast();
         markCurrentCellAndAdvanceCounter();
         if (finished()) {
-            printMaze();
+            _layout.printMaze(this);
             return;
         }
         line600statement0();
@@ -254,99 +236,41 @@ public class AmazingReimplementation implements Executable {
 
     private void doSomethingWeirdAndRestart() {
         Z = 1;
-        if (wallsToEastAndSouth()) {
-            setWallToEastButNotToSouth();
-            goToNorthWestCorner();
+        if (_layout.wallsToEastAndSouth()) {
+            _layout.setWallToEastButNotToSouth();
+            _layout.goToNorthWestCorner();
         } else {
-            setNoWallsToEastOrSouth();
+            _layout.setNoWallsToEastOrSouth();
             moveToNextSquare();
         }
         Q = 0;
-        while (currentCellIsUnvisited()) {
+        while (_layout.currentCellIsUnvisited()) {
             moveToNextSquare();
         }
         line270statement0();
     }
 
     private void goSouthAndRestart() {
-        if (wallsToEastAndSouth()) {
-            setWallToEastButNotToSouth();
+        if (_layout.wallsToEastAndSouth()) {
+            _layout.setWallToEastButNotToSouth();
         } else {
-            setNoWallsToEastOrSouth();
+            _layout.setNoWallsToEastOrSouth();
         }
-        moveSouth();
+        _layout.moveSouth();
         markCurrentCellAndAdvanceCounter();
         if (finished()) {
-            printMaze();
+            _layout.printMaze(this);
         } else {
             line270statement0();
         }
     }
 
-    private int entryPosition;
+    int entryPosition;
 
-    private void printMaze(int v, int h, int[][] wallFlags) {
-        for (int i = 1; i <= h; i++) {
-            if (i == entryPosition) {
-                _env.print(":  ", false);
-            } else {
-                _env.print(":--", false);
-            }
-        }
-        _env.print(":", true);
-
-        for (int j = 0; j < v; j++) {
-            _env.print("I", false);
-            for (int i = 0; i < h; i++) {
-                if ((wallFlags[i][j] & 0x02) == 0) {
-                    _env.print("  I", false);
-                } else {
-                    _env.print("   ", false);
-                }
-            }
-            _env.print(" ", true);
-            for (int i = 0; i < h; i++) {
-                if ((wallFlags[i][j] & 0x01) == 0) {
-                    _env.print(":--", false);
-                } else {
-                    _env.print(":  ", false);
-                }
-            }
-            _env.print(":", true);
-        }
-    }
-
-    private void goToNorthWestCorner() {
-        goWestToEdge();
-        goNorthToEdge();
-    }
-
-    private void goWestToEdge() {
-        R = 1;
-    }
-
-    private void goNorthToEdge() {
-        S = 1;
-    }
-
-    private void moveWest() {
-        R -= 1;
-    }
-
-    private void moveEast() {
-        R += 1;
-    }
-
-    private void moveNorth() {
-        S -= 1;
-    }
-
-    private void moveSouth() {
-        S += 1;
-    }
-
+    AmazingLayout _layout;
+    
     private void markCurrentCellAndAdvanceCounter() {
-        Ws[R - 1][S - 1] = C;
+        _layout.markCurrentPosition(C);
         advanceCounter();
     }
 
@@ -355,103 +279,11 @@ public class AmazingReimplementation implements Executable {
     }
 
     private boolean finished() {
-        return C == (H * V + 1);
+        return C == (_layout.numberOfCells() + 1);
     }
 
-    private boolean wallsToEastAndSouth() {
-        return Vs[R - 1][S - 1] == 0;
-    }
-
-    private void setWallToEastButNotToSouth() {
-        Vs[R - 1][S - 1] = 1;
-    }
-
-    private void setWallToSouthButNotToEast() {
-        Vs[R - 1][S - 1] = 2;
-    }
-
-    private void setNoWallsToEastOrSouth() {
-        Vs[R - 1][S - 1] = 3;
-    }
-
-    private void printMaze() {
-        printMaze(V, H, Vs);
-    }
-
-    private boolean unvisitedCellToWest() {
-        return (!(atWesternEdge() || haveVisitedCellToWest()));
-    }
-
-    private boolean atWesternEdge() {
-        return (((R) - (1)) == (0));
-    }
-
-    private boolean haveVisitedCellToWest() {
-        return (cellToWest() != (0));
-    }
-
-    private int cellToWest() {
-        return (Ws[(((R) - (1)) - 1)][((S) - 1)]);
-    }
-
-    private boolean unvisitedCellToNorth() {
-        return (!(atNorthernEdge() || haveVisitedCellToNorth()));
-    }
-
-    private boolean atNorthernEdge() {
-        return (((S) - (1)) == (0));
-    }
-
-    private boolean haveVisitedCellToNorth() {
-        return (cellToNorth() != (0));
-    }
-
-    private int cellToNorth() {
-        return (Ws[((R) - 1)][(((S) - (1)) - 1)]);
-    }
-
-    private boolean unvisitedCellToEast() {
-        return (!(atEasternEdge() || haveVisitedCellToEast()));
-    }
-
-    private boolean atEasternEdge() {
-        return ((R) == (H));
-    }
-
-    private boolean haveVisitedCellToEast() {
-        return ((cellToEast()) != (0));
-    }
-
-    private int cellToEast() {
-        return Ws[(((R) + (1)) - 1)][((S) - 1)];
-    }
-
-    private boolean unvisitedCellToSouth() {
-        return (!(atSouthernEdge()  || haveVisitedCellToSouth()));
-    }
-
-    private boolean atSouthernEdge() {
-        return (S == V);
-    }
-
-    private boolean haveVisitedCellToSouth() {
-        return (cellToSouth()) != (0);
-    }
-
-    private int cellToSouth() {
-        return Ws[((R) - 1)][(((S) + (1)) - 1)];
-    }
-
-    private boolean couldExitHere() {
-        return (atSouthernEdge() && !zSet());
-    }
-
-    private boolean currentCellIsUnvisited() {
-        return currentCell() == 0;
-    }
-
-    private int currentCell() {
-        return Ws[R - 1][S - 1];
+    boolean couldExitHere() {
+        return (_layout.atSouthernEdge() && !zSet());
     }
 
 }
