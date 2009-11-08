@@ -220,7 +220,7 @@ public class AmazingReimplementation implements Executable {
     protected void goNorthAndRestartWithoutMark() {
         moveNorth();
         advanceCounter();
-        setCurrentCellWallsToOne();
+        setWallToEastButNotToSouth();
         if (finished()) {
             printMaze();
             return;
@@ -232,7 +232,7 @@ public class AmazingReimplementation implements Executable {
     protected void goWestAndRestart() {
         moveWest();
         markCurrentCellAndAdvanceCounter();
-        setCurrentCellWallsToTwo();
+        setWallToSouthButNotToEast();
         if (finished()) {
             printMaze();
             return;
@@ -244,7 +244,7 @@ public class AmazingReimplementation implements Executable {
     protected void goNorthAndRestart() {
         moveNorth();
         markCurrentCellAndAdvanceCounter();
-        setCurrentCellWallsToOne();
+        setWallToEastButNotToSouth();
         if (finished()) {
             printMaze();
             return;
@@ -254,10 +254,10 @@ public class AmazingReimplementation implements Executable {
     }
 
     protected void goEastAndRestart() {
-        if (currentCellWallsAreZero()) {
-            setCurrentCellWallsToTwo();
+        if (wallsToEastAndSouth()) {
+            setWallToSouthButNotToEast();
         } else {
-            setCurrentCellWallsToThree();
+            setNoWallsToEastOrSouth();
         }
         moveEast();
         markCurrentCellAndAdvanceCounter();
@@ -270,11 +270,11 @@ public class AmazingReimplementation implements Executable {
 
     private void doSomethingWeirdAndRestart() {
         Z = 1;
-        if (currentCellWallsAreZero()) {
-            setCurrentCellWallsToOne();
+        if (wallsToEastAndSouth()) {
+            setWallToEastButNotToSouth();
             goToNorthWestCorner();
         } else {
-            setCurrentCellWallsToThree();
+            setNoWallsToEastOrSouth();
             moveToNextSquare();
         }
         Q = 0;
@@ -285,10 +285,10 @@ public class AmazingReimplementation implements Executable {
     }
 
     private void goSouthAndRestart() {
-        if (currentCellWallsAreZero()) {
-            setCurrentCellWallsToOne();
+        if (wallsToEastAndSouth()) {
+            setWallToEastButNotToSouth();
         } else {
-            setCurrentCellWallsToThree();
+            setNoWallsToEastOrSouth();
         }
         moveSouth();
         markCurrentCellAndAdvanceCounter();
@@ -374,19 +374,19 @@ public class AmazingReimplementation implements Executable {
         return C == (H * V + 1);
     }
 
-    private boolean currentCellWallsAreZero() {
+    private boolean wallsToEastAndSouth() {
         return Vs[R - 1][S - 1] == 0;
     }
 
-    private void setCurrentCellWallsToOne() {
+    private void setWallToEastButNotToSouth() {
         Vs[R - 1][S - 1] = 1;
     }
 
-    private void setCurrentCellWallsToTwo() {
+    private void setWallToSouthButNotToEast() {
         Vs[R - 1][S - 1] = 2;
     }
 
-    private void setCurrentCellWallsToThree() {
+    private void setNoWallsToEastOrSouth() {
         Vs[R - 1][S - 1] = 3;
     }
 
