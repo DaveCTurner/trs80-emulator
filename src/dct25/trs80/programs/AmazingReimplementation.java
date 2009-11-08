@@ -45,7 +45,7 @@ public class AmazingReimplementation extends amazing_test_bas {
         I = h + 1;
         C = 2;
         R = entryPosition;
-        S = 1;
+        goNorthToEdge();
 
         line270statement0();
     }
@@ -53,26 +53,25 @@ public class AmazingReimplementation extends amazing_test_bas {
     protected void line210statement0() {
         do {
             moveToNextSquare();
-        } while (Ws[R - 1][S - 1] == 0);
+        } while (currentCellIsUnvisited());
         line270statement0();
     }
 
     private void moveToNextSquare() {
-        if (R != H) {
-            R += 1;
-        } else {
-            if (S != V) {
-                R = 1;
-                S += 1;
+        if (atEasternEdge()) {
+            if (atSouthernEdge()) {
+                goToNorthWestCorner();
             } else {
-                R = 1;
-                S = 1;
+                goWestToEdge();
+                moveSouth();
             }
+        } else {
+            moveEast();
         }
     }
 
     protected void line260statement0() {
-        while (Ws[R - 1][S - 1] == 0) {
+        while (currentCellIsUnvisited()) {
             moveToNextSquare();
         }
         line270statement0();
@@ -105,14 +104,13 @@ public class AmazingReimplementation extends amazing_test_bas {
     protected void line270statement0() {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
-        if ((((R) - (1)) == (0)) || ((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
+        if ((!unvisitedCellToWest())) {
             line600statement0();
         } else {
             jumpTargets.add(940);
-            if ((((S) - (1)) == (0))
-                    || ((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
+            if ((!unvisitedCellToNorth())) {
                 setQFlagIfAtSouthernEdgeAndZUnset();
-                if (!(((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0)))) {
+                if (!((!unvisitedCellToEast()))) {
                     jumpTargets.add(1020);
                 }
                 if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
@@ -120,7 +118,7 @@ public class AmazingReimplementation extends amazing_test_bas {
                 }
             } else {
                 jumpTargets.add(980);
-                if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+                if ((!unvisitedCellToEast())) {
                     setQFlagIfAtSouthernEdgeAndZUnset();
                     if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
                         jumpTargets.add(1090);
@@ -136,8 +134,8 @@ public class AmazingReimplementation extends amazing_test_bas {
     protected void line600statement0() {
         List<Integer> jumpTargets = new ArrayList<Integer>();
 
-        if ((((S) - (1)) == (0)) || ((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
-            if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
+        if ((!unvisitedCellToNorth())) {
+            if ((!unvisitedCellToEast())) {
                 setQFlagIfAtSouthernEdgeAndZUnset();
 
                 if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
@@ -147,14 +145,14 @@ public class AmazingReimplementation extends amazing_test_bas {
                     randomJump(jumpTargets);
                 }
             } else {
-                if (((S) != (V))) {
+                if (!atSouthernEdge()) {
                     jumpTargets.add(1020);
-                    if (!(((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))) {
+                    if (!(((cellToSouth()) != (0)))) {
                         jumpTargets.add(1090);
                     }
                     randomJump(jumpTargets);
                 } else {
-                    if (((Z) == (1))) {
+                    if (zSet()) {
                         jumpTargets.add(1020);
                         randomJump(jumpTargets);
                     } else {
@@ -166,7 +164,7 @@ public class AmazingReimplementation extends amazing_test_bas {
             setQFlagIfAtSouthernEdgeAndZUnset();
             jumpTargets.add(980);
 
-            if (!(((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0)))) {
+            if (!((!unvisitedCellToEast()))) {
                 jumpTargets.add(1020);
             }
 
@@ -177,26 +175,22 @@ public class AmazingReimplementation extends amazing_test_bas {
         }
     }
 
-    private boolean atSouthernEdgeAndZSet() {
-        return ((S == V) && ((Z) == (1)));
-    }
-
-    private boolean haveVisitedCellToSouth() {
-        return ((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0));
+    private boolean zSet() {
+        return ((Z) == (1));
     }
 
     private void setQFlagIfAtSouthernEdgeAndZUnset() {
-        if ((S == V) && (Z != 1)) {
+        if (atSouthernEdge() && (Z != 1)) {
             Q = 1;
         }
     }
 
     protected void line830statement0() {
-        S -= 1;
-        C += 1;
-        Vs[R - 1][S - 1] = 1;
-        if (C == (H * V + 1)) {
-            printMaze(V, H, Vs);
+        moveNorth();
+        advanceCounter();
+        setCurrentCellWallsToOne();
+        if (finished()) {
+            printMaze();
             return;
         }
         Q = 0;
@@ -204,12 +198,11 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line940statement0() {
-        R -= 1;
-        Ws[R - 1][S - 1] = C;
-        C += 1;
-        Vs[R - 1][S - 1] = 2;
-        if (C == (H * V + 1)) {
-            printMaze(V, H, Vs);
+        moveWest();
+        markCurrentCellAndAdvanceCounter();
+        setCurrentCellWallsToTwo();
+        if (finished()) {
+            printMaze();
             return;
         }
         Q = 0;
@@ -217,12 +210,11 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line980statement0() {
-        S -= 1;
-        Ws[R - 1][S - 1] = C;
-        C += 1;
-        Vs[R - 1][S - 1] = 1;
-        if (C == (H * V + 1)) {
-            printMaze(V, H, Vs);
+        moveNorth();
+        markCurrentCellAndAdvanceCounter();
+        setCurrentCellWallsToOne();
+        if (finished()) {
+            printMaze();
             return;
         }
         Q = 0;
@@ -230,16 +222,15 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line1020statement0() {
-        if (Vs[R - 1][S - 1] == 0) {
-            Vs[R - 1][S - 1] = 2;
+        if (currentCellWallsAreZero()) {
+            setCurrentCellWallsToTwo();
         } else {
-            Vs[R - 1][S - 1] = 3;
+            setCurrentCellWallsToThree();
         }
-        R += 1;
-        Ws[R - 1][S - 1] = C;
-        C += 1;
-        if (C == (H * V + 1)) {
-            printMaze(V, H, Vs);
+        moveEast();
+        markCurrentCellAndAdvanceCounter();
+        if (finished()) {
+            printMaze();
             return;
         }
         line600statement0();
@@ -248,30 +239,28 @@ public class AmazingReimplementation extends amazing_test_bas {
     protected void line1090statement0() {
         if (Q == 1) {
             Z = 1;
-            if (Vs[R - 1][S - 1] == 0) {
-                Vs[R - 1][S - 1] = 1;
-                R = 1;
-                S = 1;
+            if (currentCellWallsAreZero()) {
+                setCurrentCellWallsToOne();
+                goToNorthWestCorner();
             } else {
-                Vs[R - 1][S - 1] = 3;
+                setCurrentCellWallsToThree();
                 moveToNextSquare();
             }
             Q = 0;
-            while (Ws[R - 1][S - 1] == 0) {
+            while (currentCellIsUnvisited()) {
                 moveToNextSquare();
             }
         } else {
 
-            if (Vs[R - 1][S - 1] == 0) {
-                Vs[R - 1][S - 1] = 1;
+            if (currentCellWallsAreZero()) {
+                setCurrentCellWallsToOne();
             } else {
-                Vs[R - 1][S - 1] = 3;
+                setCurrentCellWallsToThree();
             }
-            S += 1;
-            Ws[R - 1][S - 1] = C;
-            C = C + 1;
-            if (C == (H * V + 1)) {
-                printMaze(V, H, Vs);
+            moveSouth();
+            markCurrentCellAndAdvanceCounter();
+            if (finished()) {
+                printMaze();
                 return;
             }
         }
@@ -279,7 +268,7 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line1200statement0() {
-        printMaze(V, H, Vs);
+        printMaze();
     }
 
     private int entryPosition;
@@ -314,4 +303,139 @@ public class AmazingReimplementation extends amazing_test_bas {
             _env.print(":", true);
         }
     }
+
+    private void goToNorthWestCorner() {
+        goWestToEdge();
+        goNorthToEdge();
+    }
+
+    private void goWestToEdge() {
+        R = 1;
+    }
+
+    private void goNorthToEdge() {
+        S = 1;
+    }
+
+    private void moveWest() {
+        R -= 1;
+    }
+
+    private void moveEast() {
+        R += 1;
+    }
+
+    private void moveNorth() {
+        S -= 1;
+    }
+
+    private void moveSouth() {
+        S += 1;
+    }
+
+    private void markCurrentCellAndAdvanceCounter() {
+        Ws[R - 1][S - 1] = C;
+        advanceCounter();
+    }
+
+    private void advanceCounter() {
+        C += 1;
+    }
+
+    private boolean finished() {
+        return C == (H * V + 1);
+    }
+
+    private boolean currentCellWallsAreZero() {
+        return Vs[R - 1][S - 1] == 0;
+    }
+
+    private void setCurrentCellWallsToOne() {
+        Vs[R - 1][S - 1] = 1;
+    }
+
+    private void setCurrentCellWallsToTwo() {
+        Vs[R - 1][S - 1] = 2;
+    }
+
+    private void setCurrentCellWallsToThree() {
+        Vs[R - 1][S - 1] = 3;
+    }
+
+    private void printMaze() {
+        printMaze(V, H, Vs);
+    }
+
+    private boolean unvisitedCellToWest() {
+        return (!(atWesternEdge() || haveVisitedCellToWest()));
+    }
+
+    private boolean atWesternEdge() {
+        return (((R) - (1)) == (0));
+    }
+
+    private boolean haveVisitedCellToWest() {
+        return (cellToWest() != (0));
+    }
+
+    private int cellToWest() {
+        return (Ws[(((R) - (1)) - 1)][((S) - 1)]);
+    }
+
+    private boolean unvisitedCellToNorth() {
+        return (!(atNorthernEdge() || haveVisitedCellToNorth()));
+    }
+
+    private boolean atNorthernEdge() {
+        return (((S) - (1)) == (0));
+    }
+
+    private boolean haveVisitedCellToNorth() {
+        return (cellToNorth() != (0));
+    }
+
+    private int cellToNorth() {
+        return (Ws[((R) - 1)][(((S) - (1)) - 1)]);
+    }
+
+    private boolean unvisitedCellToEast() {
+        return (!(atEasternEdge() || haveVisitedCellToEast()));
+    }
+
+    private boolean atEasternEdge() {
+        return ((R) == (H));
+    }
+
+    private boolean haveVisitedCellToEast() {
+        return ((cellToEast()) != (0));
+    }
+
+    private int cellToEast() {
+        return Ws[(((R) + (1)) - 1)][((S) - 1)];
+    }
+
+    private boolean atSouthernEdgeAndZSet() {
+        return (atSouthernEdge() && zSet());
+    }
+
+    private boolean atSouthernEdge() {
+        return (S == V);
+    }
+
+    private boolean haveVisitedCellToSouth() {
+        return (!atSouthernEdge()) && ((cellToSouth()) != (0));
+    }
+
+    private int cellToSouth() {
+        return Ws[((R) - 1)][(((S) + (1)) - 1)];
+    }
+
+    private boolean currentCellIsUnvisited() {
+        return currentCell() == 0;
+    }
+
+    private int currentCell() {
+        return Ws[R - 1][S - 1];
+    }
+
 }
