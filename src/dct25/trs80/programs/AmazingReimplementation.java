@@ -125,87 +125,67 @@ public class AmazingReimplementation extends amazing_test_bas {
     }
 
     protected void line720statement0() {
-        if (((S) != (V))) {
-            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
-                line780statement0();
-            } else {
-                line760statement0();
-            }
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
+        }
+
+        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
+                || ((S == V) && ((Z) == (1)))) {
+            line780statement0();
         } else {
-            if (((Z) == (1))) {
-                line780statement0();
-            } else {
-                Q = (1);
-                line760statement0();
-            }
+            line760statement0();
         }
     }
 
     protected void line880statement0() {
-        if (((S) != (V))) {
-            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
-                line930statement0();
-            } else {
-                line920statement0();
-            }
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
+        }
+
+        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
+                || ((S == V) && ((Z) == (1)))) {
+            line930statement0();
         } else {
-            if (((Z) == (1))) {
-                line930statement0();
-            } else {
-                Q = (1);
-                line920statement0();
-            }
+            line920statement0();
         }
     }
 
     protected void line450statement0() {
-        if (((S) != (V))) {
-            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
-                line510statement0();
-            } else {
-                line490statement0();
-            }
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
+        }
+
+        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
+                || ((S == V) && ((Z) == (1)))) {
+            line510statement0();
         } else {
-            if (((Z) == (1))) {
-                line510statement0();
-            } else {
-                Q = (1);
-                line490statement0();
-            }
+            line490statement0();
         }
     }
 
     protected void line530statement0() {
-        if (((S) != (V))) {
-            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
-                line590statement0();
-            } else {
-                line570statement0();
-            }
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
+        }
+
+        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
+                || ((S == V) && ((Z) == (1)))) {
+            line590statement0();
         } else {
-            if (((Z) == (1))) {
-                line590statement0();
-            } else {
-                Q = (1);
-                line570statement0();
-            }
+            line570statement0();
         }
     }
 
     protected void line350statement0() {
-        if (((S) != (V))) {
-            if (((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0))) {
-                line410statement0();
-            } else {
-                line390statement0();
-            }
+        if ((S == V) && (Z != 1)) {
+            Q = 1;
+        }
+
+        if ((((S) != (V)) && ((Ws[((R) - 1)][(((S) + (1)) - 1)]) != (0)))
+                || ((S == V) && ((Z) == (1)))) {
+            line410statement0();
         } else {
-            if (((Z) == (1))) {
-                line410statement0();
-            } else {
-                Q = (1);
-                line390statement0();
-            }
+            line390statement0();
         }
     }
 
