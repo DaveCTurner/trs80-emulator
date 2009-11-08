@@ -108,54 +108,28 @@ public class AmazingReimplementation extends amazing_test_bas {
         if ((((R) - (1)) == (0)) || ((Ws[(((R) - (1)) - 1)][((S) - 1)]) != (0))) {
             line600statement0();
         } else {
+            jumpTargets.add(940);
             if ((((S) - (1)) == (0))
                     || ((Ws[((R) - 1)][(((S) - (1)) - 1)]) != (0))) {
-                if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
-                    setQFlagIfAtSouthernEdgeAndZUnset();
-
-                    if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        jumpTargets.add(940);
-                        randomJump(jumpTargets);
-                    } else {
-                        jumpTargets.add(940);
-                        jumpTargets.add(1090);
-                        randomJump(jumpTargets);
-                    }
-                } else {
-                    setQFlagIfAtSouthernEdgeAndZUnset();
-
-                    if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        jumpTargets.add(940);
-                        jumpTargets.add(1020);
-                        randomJump(jumpTargets);
-                    } else {
-                        jumpTargets.add(940);
-                        jumpTargets.add(1020);
-                        jumpTargets.add(1090);
-                        randomJump(jumpTargets);
-                    }
+                setQFlagIfAtSouthernEdgeAndZUnset();
+                if (!(((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0)))) {
+                    jumpTargets.add(1020);
+                }
+                if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
+                    jumpTargets.add(1090);
                 }
             } else {
+                jumpTargets.add(980);
                 if (((R) == (H)) || ((Ws[(((R) + (1)) - 1)][((S) - 1)]) != (0))) {
                     setQFlagIfAtSouthernEdgeAndZUnset();
-
-                    if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        jumpTargets.add(940);
-                        jumpTargets.add(980);
-                        randomJump(jumpTargets);
-                    } else {
-                        jumpTargets.add(940);
-                        jumpTargets.add(980);
+                    if (!((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet())) {
                         jumpTargets.add(1090);
-                        randomJump(jumpTargets);
                     }
                 } else {
-                    jumpTargets.add(940);
-                    jumpTargets.add(980);
                     jumpTargets.add(1020);
-                    randomJump(jumpTargets);
                 }
             }
+            randomJump(jumpTargets);
         }
     }
 
