@@ -10,8 +10,6 @@ import dct25.trs80.emulator.Executable;
 public class AmazingReimplementation implements Executable {
     int V;
 
-    int Q;
-
     int S;
 
     int R;
@@ -25,6 +23,10 @@ public class AmazingReimplementation implements Executable {
     int[][] Vs;
 
     Environment _env;
+
+    private boolean _haveMadeExit;
+    
+    private boolean _inExitMode;
 
     public void execute(Environment env) {
         _env = env;
@@ -56,7 +58,7 @@ public class AmazingReimplementation implements Executable {
 
         H = h;
         V = v;
-        Q = 0;
+        _inExitMode = false;
         _haveMadeExit = false;
         C = 2;
         R = entryPosition;
@@ -103,7 +105,7 @@ public class AmazingReimplementation implements Executable {
             goEastAndRestart();
             break;
         case 1090:
-            if (Q == 1) {
+            if (_inExitMode) {
                 doSomethingWeirdAndRestart();
             } else {
                 goSouthAndRestart();
@@ -127,7 +129,7 @@ public class AmazingReimplementation implements Executable {
                     }
                     if (atSouthernEdge() && !_haveMadeExit) {
                         jumpTargets.add(POSSIBLY_SOUTH);
-                        Q = 1;
+                        _inExitMode = true;
                     }
                 }
             } else {
@@ -139,7 +141,7 @@ public class AmazingReimplementation implements Executable {
                 }
                 if (atSouthernEdge() && !_haveMadeExit) {
                     jumpTargets.add(POSSIBLY_SOUTH);
-                    Q = 1;
+                    _inExitMode = true;
                 }
             }
             randomJump(jumpTargets);
@@ -163,7 +165,7 @@ public class AmazingReimplementation implements Executable {
             }
             if (atSouthernEdge() && !_haveMadeExit) {
                 jumpTargets.add(POSSIBLY_SOUTH);
-                Q = 1;
+                _inExitMode = true;
             }
             randomJump(jumpTargets);
         } else {
@@ -177,7 +179,7 @@ public class AmazingReimplementation implements Executable {
                     }
                 } else {
                     jumpTargets.add(POSSIBLY_EAST);
-                    if (!((haveVisitedCellToSouth()))) {
+                    if (unvisitedCellToSouth()) {
                         jumpTargets.add(POSSIBLY_SOUTH);
                     }
                     randomJump(jumpTargets);
@@ -188,7 +190,7 @@ public class AmazingReimplementation implements Executable {
                 }
                 if (atSouthernEdge() && !_haveMadeExit) {
                     jumpTargets.add(POSSIBLY_SOUTH);
-                    Q = 1;
+                    _inExitMode = true;
                 }
 
                 if ((unvisitedCellToSouth() || couldExitHere())) {
@@ -211,7 +213,7 @@ public class AmazingReimplementation implements Executable {
             printMaze();
             return;
         }
-        Q = 0;
+        _inExitMode = false;
         line270statement0();
     }
 
@@ -223,7 +225,7 @@ public class AmazingReimplementation implements Executable {
             printMaze();
             return;
         }
-        Q = 0;
+        _inExitMode = false;
         line270statement0();
     }
 
@@ -235,7 +237,7 @@ public class AmazingReimplementation implements Executable {
             printMaze();
             return;
         }
-        Q = 0;
+        _inExitMode = false;
         line270statement0();
     }
 
@@ -263,7 +265,7 @@ public class AmazingReimplementation implements Executable {
             setNoWallsToEastOrSouth();
             moveToNextSquare();
         }
-        Q = 0;
+        _inExitMode = false;
         while (currentCellIsUnvisited()) {
             moveToNextSquare();
         }
@@ -455,7 +457,5 @@ public class AmazingReimplementation implements Executable {
     private int currentCell() {
         return Ws[R - 1][S - 1];
     }
-
-    private boolean _haveMadeExit;
     
 }
