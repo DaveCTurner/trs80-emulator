@@ -405,10 +405,6 @@ public class AmazingReimplementation implements Executable {
         return Ws[((R) - 1)][(((S) + (1)) - 1)];
     }
 
-    private boolean couldExitHere() {
-        return (atSouthernEdge() && !_haveMadeExit);
-    }
-
     private boolean currentCellIsUnvisited() {
         return currentCell() == 0;
     }
