@@ -25,7 +25,7 @@ public class AmazingReimplementation implements Executable {
     Environment _env;
 
     private boolean _haveMadeExit;
-    
+
     private boolean _inExitMode;
 
     public void execute(Environment env) {
@@ -123,14 +123,13 @@ public class AmazingReimplementation implements Executable {
                 jumpTargets.add(POSSIBLY_NORTH);
                 if (unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
-                } else {
-                    if (unvisitedCellToSouth()) {
-                        jumpTargets.add(POSSIBLY_SOUTH);
-                    }
-                    if (atSouthernEdge() && !_haveMadeExit) {
-                        jumpTargets.add(POSSIBLY_SOUTH);
-                        _inExitMode = true;
-                    }
+                }
+                if (unvisitedCellToSouth()) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                }
+                if (atSouthernEdge() && !_haveMadeExit) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                    _inExitMode = true;
                 }
             } else {
                 if (unvisitedCellToEast()) {
@@ -431,7 +430,7 @@ public class AmazingReimplementation implements Executable {
     }
 
     private boolean unvisitedCellToSouth() {
-        return (!(atSouthernEdge()  || haveVisitedCellToSouth()));
+        return (!(atSouthernEdge() || haveVisitedCellToSouth()));
     }
 
     private boolean atSouthernEdge() {
@@ -457,5 +456,5 @@ public class AmazingReimplementation implements Executable {
     private int currentCell() {
         return Ws[R - 1][S - 1];
     }
-    
+
 }
