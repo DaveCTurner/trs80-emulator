@@ -144,6 +144,7 @@ public class AmazingReimplementation implements Executable {
                 _inExitMode = true;
             }
             randomJump(jumpTargets);
+            return;
         } else {
             boolean performRandomJump = false;
 
@@ -181,13 +182,14 @@ public class AmazingReimplementation implements Executable {
             if (performRandomJump) {
                 randomJump(jumpTargets);
                 return;
+            } else {
+                do {
+                    moveToNextSquare();
+                } while (currentCellIsUnvisited());
+                _skipToLine600 = false;
+                line270or600();
+                return;
             }
-
-            do {
-                moveToNextSquare();
-            } while (currentCellIsUnvisited());
-            _skipToLine600 = false;
-            line270or600();
         }
     }
 
