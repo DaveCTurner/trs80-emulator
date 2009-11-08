@@ -127,17 +127,17 @@ public class AmazingReimplementation extends amazing_test_bas {
                     setQFlagIfAtSouthernEdgeAndZUnset();
 
                     if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        line590statement0();
+                        randomJump(new int[] { 940 });
                     } else {
-                        line570statement0();
+                        randomJump(new int[] { 940, 1090 });
                     }
                 } else {
                     setQFlagIfAtSouthernEdgeAndZUnset();
 
                     if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        line510statement0();
+                        randomJump(new int[] { 940, 1020 });
                     } else {
-                        line490statement0();
+                        randomJump(new int[] { 940, 1020, 1090 });
                     }
                 }
             } else {
@@ -145,12 +145,12 @@ public class AmazingReimplementation extends amazing_test_bas {
                     setQFlagIfAtSouthernEdgeAndZUnset();
 
                     if ((haveVisitedCellToSouth()) || atSouthernEdgeAndZSet()) {
-                        line410statement0();
+                        randomJump(new int[] { 940, 980 });
                     } else {
-                        line390statement0();
+                        randomJump(new int[] { 940, 980, 1090 });
                     }
                 } else {
-                    line330statement0();
+                    randomJump(new int[] { 940, 980, 1020 });
                 }
             }
         }
