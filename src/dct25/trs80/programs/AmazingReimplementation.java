@@ -158,7 +158,7 @@ public class AmazingReimplementation extends amazing_test_bas {
                         jumpTargets.add(1020);
                         randomJump(jumpTargets);
                     } else {
-                         line830statement0();
+                        line830statement0();
                     }
                 }
             }
@@ -189,6 +189,18 @@ public class AmazingReimplementation extends amazing_test_bas {
         if ((S == V) && (Z != 1)) {
             Q = 1;
         }
+    }
+
+    protected void line830statement0() {
+        S -= 1;
+        C += 1;
+        Vs[R - 1][S - 1] = 1;
+        if (C == (H * V + 1)) {
+            printMaze(V, H, Vs);
+            return;
+        }
+        Q = 0;
+        line270statement0();
     }
 
     protected void line940statement0() {
