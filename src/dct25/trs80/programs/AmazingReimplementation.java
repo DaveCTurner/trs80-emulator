@@ -141,7 +141,7 @@ public class AmazingReimplementation implements Executable {
                     jumpTargets.add(POSSIBLY_EAST);
                 } else {
                     setQFlagIfAtSouthernEdgeAndZUnset();
-                    if (mightWantToGoSouth()) {
+                    if ((unvisitedCellToSouth() || couldExitHere())) {
                         jumpTargets.add(POSSIBLY_SOUTH);
                     }
                 }
@@ -150,29 +150,13 @@ public class AmazingReimplementation implements Executable {
                     jumpTargets.add(POSSIBLY_EAST);
                 }
                 setQFlagIfAtSouthernEdgeAndZUnset();
-                if (mightWantToGoSouth()) {
+                if ((unvisitedCellToSouth() || couldExitHere())) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                 }
             }
             randomJump(jumpTargets);
         } else {
             line600statement0();
-        }
-    }
-
-    private boolean mightWantToGoSouth() {
-        if (atSouthernEdge()) {
-            if (zSet()) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            if (haveVisitedCellToSouth()) {
-                return false;
-            } else {
-                return true;
-            }
         }
     }
 
@@ -187,7 +171,7 @@ public class AmazingReimplementation implements Executable {
             }
 
             setQFlagIfAtSouthernEdgeAndZUnset();
-            if (mightWantToGoSouth()) {
+            if ((unvisitedCellToSouth() || couldExitHere())) {
                 jumpTargets.add(POSSIBLY_SOUTH);
             }
             randomJump(jumpTargets);
@@ -210,7 +194,7 @@ public class AmazingReimplementation implements Executable {
             } else {
                 setQFlagIfAtSouthernEdgeAndZUnset();
 
-                if (mightWantToGoSouth()) {
+                if ((unvisitedCellToSouth() || couldExitHere())) {
                     jumpTargets.add(POSSIBLY_SOUTH);
                     randomJump(jumpTargets);
                 } else {
@@ -458,6 +442,10 @@ public class AmazingReimplementation implements Executable {
         return Ws[(((R) + (1)) - 1)][((S) - 1)];
     }
 
+    private boolean unvisitedCellToSouth() {
+        return (!(atSouthernEdge()  || haveVisitedCellToSouth()));
+    }
+
     private boolean atSouthernEdge() {
         return (S == V);
     }
@@ -468,6 +456,10 @@ public class AmazingReimplementation implements Executable {
 
     private int cellToSouth() {
         return Ws[((R) - 1)][(((S) + (1)) - 1)];
+    }
+
+    private boolean couldExitHere() {
+        return (atSouthernEdge() && !zSet());
     }
 
     private boolean currentCellIsUnvisited() {
