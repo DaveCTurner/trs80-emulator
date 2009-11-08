@@ -89,41 +89,6 @@ public class AmazingReimplementation implements Executable {
 
     private int POSSIBLY_SOUTH = 1090;
 
-    private void randomJump(List<Integer> targets) {
-        boolean didSomethingWeird = false;
-        int[] targetsArray = new int[targets.size()];
-        for (int i = 0; i < targets.size(); i++) {
-            targetsArray[i] = targets.get(i);
-        }
-        Arrays.sort(targetsArray);
-        switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
-        case 940:
-            goWest();
-            break;
-        case 980:
-            goNorth();
-            break;
-        case 1020:
-            goEast();
-            break;
-        case 1090:
-            if (_inExitMode) {
-                doSomethingWeird();
-                didSomethingWeird = true;
-            } else {
-                goSouth();
-            }
-            break;
-        default:
-            throw new Error("Unknown target in randomJump()");
-        }
-        if (!didSomethingWeird && finished()) {
-            printMaze();
-        } else {
-            line270or600();
-        }
-    }
-
     boolean _skipToLine600;
 
     private void line270or600() {
@@ -186,7 +151,38 @@ public class AmazingReimplementation implements Executable {
                 return;
             }
         }
-        randomJump(jumpTargets);
+        boolean didSomethingWeird = false;
+        int[] targetsArray = new int[jumpTargets.size()];
+        for (int i = 0; i < jumpTargets.size(); i++) {
+            targetsArray[i] = jumpTargets.get(i);
+        }
+        Arrays.sort(targetsArray);
+        switch (targetsArray[(_env.getNextRandomNumber(targetsArray.length)) - 1]) {
+        case 940:
+            goWest();
+            break;
+        case 980:
+            goNorth();
+            break;
+        case 1020:
+            goEast();
+            break;
+        case 1090:
+            if (_inExitMode) {
+                doSomethingWeird();
+                didSomethingWeird = true;
+            } else {
+                goSouth();
+            }
+            break;
+        default:
+            throw new Error("Unknown target in randomJump()");
+        }
+        if (!didSomethingWeird && finished()) {
+            printMaze();
+        } else {
+            line270or600();
+        }
     }
 
     private void goNorthWithoutMark() {
