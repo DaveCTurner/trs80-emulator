@@ -122,13 +122,25 @@ public class AmazingReimplementation implements Executable {
                 if (unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 } else {
-                    considerGoingSouth(jumpTargets);
+                    if (unvisitedCellToSouth()) {
+                        jumpTargets.add(POSSIBLY_SOUTH);
+                    }
+                    if (atSouthernEdge() && !_haveMadeExit) {
+                        jumpTargets.add(POSSIBLY_SOUTH);
+                        Q = 1;
+                    }
                 }
             } else {
                 if (unvisitedCellToEast()) {
                     jumpTargets.add(POSSIBLY_EAST);
                 }
-                considerGoingSouth(jumpTargets);
+                if (unvisitedCellToSouth()) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                }
+                if (atSouthernEdge() && !_haveMadeExit) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                    Q = 1;
+                }
             }
             randomJump(jumpTargets);
         } else {
@@ -146,7 +158,13 @@ public class AmazingReimplementation implements Executable {
                 jumpTargets.add(POSSIBLY_EAST);
             }
 
-            considerGoingSouth(jumpTargets);
+            if (unvisitedCellToSouth()) {
+                jumpTargets.add(POSSIBLY_SOUTH);
+            }
+            if (atSouthernEdge() && !_haveMadeExit) {
+                jumpTargets.add(POSSIBLY_SOUTH);
+                Q = 1;
+            }
             randomJump(jumpTargets);
         } else {
             if (unvisitedCellToEast()) {
@@ -165,7 +183,13 @@ public class AmazingReimplementation implements Executable {
                     randomJump(jumpTargets);
                 }
             } else {
-                considerGoingSouth(jumpTargets);
+                if (unvisitedCellToSouth()) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                }
+                if (atSouthernEdge() && !_haveMadeExit) {
+                    jumpTargets.add(POSSIBLY_SOUTH);
+                    Q = 1;
+                }
 
                 if ((unvisitedCellToSouth() || couldExitHere())) {
                     randomJump(jumpTargets);
@@ -176,16 +200,6 @@ public class AmazingReimplementation implements Executable {
                     line270statement0();
                 }
             }
-        }
-    }
-
-    private void considerGoingSouth(List<Integer> jumpTargets) {
-        if (unvisitedCellToSouth()) {
-            jumpTargets.add(POSSIBLY_SOUTH);
-        }
-        if (atSouthernEdge() && !_haveMadeExit) {
-            jumpTargets.add(POSSIBLY_SOUTH);
-            Q = 1;
         }
     }
 
