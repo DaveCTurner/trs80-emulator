@@ -179,15 +179,15 @@ public class AmazingReimplementation implements Executable {
                 performRandomJump = true;
             }
 
-            if (performRandomJump) {
-                randomJump(jumpTargets);
-                return;
-            } else {
+            if (!performRandomJump) {
                 do {
                     moveToNextSquare();
                 } while (currentCellIsUnvisited());
                 _skipToLine600 = false;
                 line270or600();
+                return;
+            } else {
+                randomJump(jumpTargets);
                 return;
             }
         }
