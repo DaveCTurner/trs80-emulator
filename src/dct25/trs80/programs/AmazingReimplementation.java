@@ -1,6 +1,7 @@
 package dct25.trs80.programs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import dct25.trs80.emulator.Environment;
@@ -82,6 +83,7 @@ public class AmazingReimplementation extends amazing_test_bas {
         for (int i = 0; i < targets.size(); i++) {
             targetsArray[i] = targets.get(i);
         }
+        Arrays.sort(targetsArray);
         randomJump(targetsArray);
     }
 
@@ -191,8 +193,8 @@ public class AmazingReimplementation extends amazing_test_bas {
                     jumpTargets.add(980);
                     randomJump(jumpTargets);
                 } else {
-                    jumpTargets.add(980);
                     jumpTargets.add(1090);
+                    jumpTargets.add(980);
                     randomJump(jumpTargets);
                 }
             } else {
